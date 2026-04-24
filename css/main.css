@@ -1,34 +1,89 @@
+/*
+Disclosures:
+
+This code is my own work, but I want to include the below disclosures for transparency and to preemptively disclose any potential future use of AI tools or code adapted from other sources, 
+including my previous work.
+
+Some of this code is adapted from my previous work, which is available at hwalkermerrill.github.io. 
+As that content has been developed over the course of several years, some of it may have been inspired by or adapted from various other online sources,  
+but I have not copied any code directly from other sources except from scaffolding code from various classes without attributing the original source there and here (none yet in this file).
+All the work I have written is my own, written and stylized by me, though they may be reminiscent of other works I have read and been inspired by.
+
+AI Assistance:
+I have the github copilot extension installed, which sometimes suggests code completions as I write, though the suggestions are rarely used and when they are, they are often heavily modified.
+Some of the code adapted from my previous work has been proofread by AI after writing, in order to check for errors and suggest improvements, but it was written originally and principally by me.
+While I have not yet done so with this file or class, I do intend to use AI tools for tutoring and proofreading in the future.
+I have similarly not yet used the github copilot extension's code completion for this file, but I may in the future, which is why I have included it in this disclosure and above.
+*/
+
+ /* Imports */
+@import url("https://fonts.googleapis.com/css?family=Amiri|Trade+Winds|Cabin+Sketch");
+@import url("https://fonts.cdnfonts.com/css/indiana-jonas");
+
+/* Universal */
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
+html {
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+}
+
+/* Root Data */
 :root {
-    --color-bg: #f4f6f8;
-    --color-text: #1e293b;
-    --color-primary: #006eb6;
-    --color-primary-hover: #004f7f;
-    --space-sm: 0.5rem;
-    --space-md: 1rem;
-    --space-lg: 2rem;
-    --font-body: system-ui, -apple-system, sans-serif;
+	--color-bg: #f4f6f8;
+	--color-text: #1e293b;
+	--color-primary: #006eb6;
+	--color-primary-hover: #004f7f;
+	--space-sm: 0.5rem;
+	--space-md: 1rem;
+	--space-lg: 2rem;
+	--space-height: 1.6;
+	--font-body: "Amiri", system-ui, -apple-system, sans-serif;
+	--secondary-font: "Trade Winds", serif;
+	--tertiary-font: "Indiana Jonas", "Cabin Sketch", serif;
+	--text-shadow-basic: 4px 4px 4px #aaa;
+	--text-shadow-black: 1px 1px 0px black;
+	--text-shadow-light:
+		-5px 0px 5px var(--text-light), 0px 5px 5px var(--text-light),
+		5px 0px 5px var(--text-light), 0px -5px 5px var(--text-light);
+	--text-shadow-primary:
+		-5px 0px 5px var(--primary-color), 0px 5px 5px var(--primary-color),
+		5px 0px 5px var(--primary-color), 0px -5px 5px var(--primary-color);
+	--text-shadow-secondary:
+		-5px 0px 5px var(--secondary-color), 0px 5px 5px var(--secondary-color),
+		5px 0px 5px var(--secondary-color), 0px -5px 5px var(--secondary-color);
+	--text-shadow-indiana:
+		1px 1px 2px rgba(0, 0, 0, 0.1), 2px 2px 4px rgba(0, 0, 0, 0.2);
+	--text-indiana-gradient: linear-gradient(
+		to bottom,
+		#8b2e1c 0%,
+		#c14a2e 20%,
+		#e76f31 40%,
+		#ff9f1c 60%,
+		#ffd447 80%,
+		#ffec8b 100%
+	);
 }
 
+/* Main Content */
 body {
-    font-family: var(--font-body);
-    color: var(--color-text);
-    background-color: var(--color-bg);
-    line-height: 1.6;
-    padding: var(--space-lg);
+	font-family: var(--font-body);
+	color: var(--color-text);
+	background-color: var(--color-bg);
+	line-height: var(--space-height);
+	padding: var(--space-lg);
 }
 
 a {
-    color: var(--color-primary);
+	color: var(--color-primary);
 }
 
 a:hover {
-    color: var(--color-primary-hover);
+	color: var(--color-primary-hover);
 }
