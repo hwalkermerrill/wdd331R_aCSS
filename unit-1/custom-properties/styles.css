@@ -1,128 +1,244 @@
 /* ========================================
-   TOKENS
-   Define your design decisions here.
-   Everything else in this file should
-   reference these tokens with var().
-   ======================================== */
+	TOKENS
+	Define your design decisions here.
+	Everything else in this file should
+	reference these tokens with var().
+	======================================== */
 :root {
-    /* Colors: at least primary, background, text, accent */
+	/* Colors: at least primary, background, text, accent */
+	--color-bg: #f4f6f8;
+	--color-text: #1e293b;
+	--color-primary: #12674a;
+	--color-secondary: #dc8837;
+	--color-link: #004f7f;
+	--color-accent: #c1ffff;
+	--text-shadow-basic: -3px 0px 3px var(--color-accent),
+		0px 3px 3px var(--color-accent),
+		3px 0px 3px var(--color-accent),
+		0px -3px 3px var(--color-accent);
+	--text-shadow-hover: -2px 0px 2px var(--color-link),
+		0px 2px 2px var(--color-link),
+		2px 0px 2px var(--color-link),
+		0px -2px 2px var(--color-link);
+	--text-shadow-secondary: -5px 0px 5px var(--color-secondary),
+		0px 5px 5px var(--color-secondary),
+		5px 0px 5px var(--color-secondary),
+		0px -5px 5px var(--color-secondary);
+	--text-shadow-indiana: 	1px 1px 2px rgba(0, 0, 0, 0.1), 2px 2px 4px rgba(0, 0, 0, 0.2);
+	--text-indiana-gradient: linear-gradient(
+		to bottom,
+		#8b2e1c 0%,
+		#c14a2e 20%,
+		#e76f31 40%,
+		#ff9f1c 60%,
+		#ffd447 80%,
+		#ffec8b 100%
+	);
 
-    /* Spacing: at least sm, md, lg */
+	/* Spacing: at least sm, md, lg */
+	--space-sm: 0.5rem;
+	--space-md: 1rem;
+	--space-lg: 2rem;
+	--space-height: 1.6rem;
 
-    /* Typography: font family, base size */
+	/* Typography: font family, base size */
+	--font-body: "Amiri", system-ui, -apple-system, sans-serif;
+	--font-secondary: "Trade Winds", "Amiri", serif;
+	--font-tertiary: "Indiana Jonas", "Cabin Sketch", serif;
+	--font-size-base: 16px;
+	--font-size-sm: 20px;
+	--font-size-md: 25px;
+	--font-size-lg: 50px;
+	--font-size-max: 75px;
+	--font-vw-sm: 2.5vw;
+	--font-vw-bg: 4vw;
 
-    /* Borders: radius */
+	/* Borders: radius */
+	--border-radius: 1rem
 }
 
 /* ========================================
-   RESET
-   A minimal reset so you start clean.
-   ======================================== */
+	RESET
+	A minimal reset so you start clean.
+	======================================== */
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
 /* ========================================
-   BASE STYLES
-   Style the body, links, and any raw
-   HTML elements here. Use nesting.
-   ======================================== */
+	BASE STYLES
+	Style the body, links, and any raw
+	HTML elements here. Use nesting.
+	======================================== */
 body {
-    /* font family, color, background, line-height, padding */
-    /* Use clamp() for padding to make it fluid. */
+	/* font family, color, background, line-height, padding */
+	/* Use clamp() for padding to make it fluid. */
+	font-family: var(--font-body);
+	color: var(--color-text);
+	background-color: var(--color-bg);
+	line-height: var(--space-height);
+	padding: clamp(var(--space-sm), var(--space-md), var(--space-lg));
+	font-size: var(--font-size-base);
 
-    a {
-        /* link color from tokens */
+	a {
+		color: var(--color-link);
+		text-shadow: var(--text-shadow-basic);
 
-        &:hover {
-            /* hover color from tokens */
-        }
-    }
+		&:hover {
+			color: var(--color-secondary);
+		}
+	}
 }
 
 /* ========================================
-   NAVIGATION
-   Style .site-nav so students can get
-   back to the homepage.
-   ======================================== */
+	NAVIGATION
+	Style .site-nav so students can get
+	back to the homepage.
+	======================================== */
 .site-nav {
-    /* padding, margin-bottom */
+	/* padding, margin-bottom */
+	background: var(--color-primary);
+	padding: var(--space-sm);
+	padding-left: var(--space-md);
+	margin-bottom: var(--space-height);
+	border-radius: var(--border-radius);
+
+	a {
+	
+		&:hover {
+			text-shadow: var(--text-shadow-hover);
+		}
+	
+	}
+	
 }
 
 /* ========================================
-   BOARD HEADER
-   Style the page header area.
-   ======================================== */
+	BOARD HEADER
+	Style the page header area.
+	======================================== */
 .board-header {
-    /* text alignment, margin, padding */
-    /* Use clamp() for the h1 font size. */
+	/* text alignment, margin, padding */
+	/* Use clamp() for the h1 font size. */
+	text-align: center;
+	margin: var(--space-md);
+	padding: var(--space-md);
 
-    h1 {
-        /* fluid font size */
-    }
+	h1 {
+		font-family: var(--font-secondary);
+		font-size: clamp(var(--font-size-lg), var(--font-vw-bg), var(--font-size-max));
+		margin-bottom: var(--space-height);
+		color: var(--color-secondary);
+	}
 
-    p {
-        /* muted text color, spacing */
-    }
+	p {
+		/* muted text color, spacing */
+		color: var(--color-primary);
+	}
 }
 
 /* ========================================
-   CARD GROUP
-   Each section of cards (This Week,
-   Coming Up, Announcements).
-   ======================================== */
+	CARD GROUP
+	Each section of cards (This Week,
+	Coming Up, Announcements).
+	======================================== */
 .card-group {
-    /* margin-bottom using a token */
+	/* margin-bottom using a token */
+	margin-bottom: var(--space-height);
 
-    h2 {
-        /* section heading styles */
-    }
+	h2 {
+		color: var(--color-secondary);
+		font-family: var(--font-secondary);
+		font-size: clamp(var(--font-size-md), var(--font-vw-sm), var(--font-size-lg));
+		/* margin-left: calc(var(--space-height) * 4); */
+		text-align: center;
+		margin-bottom: var(--space-sm);
+	}
 }
 
 /* ========================================
-   CARDS GRID
-   Layout the .cards container as a
-   responsive grid or flex layout.
-   ======================================== */
+	CARDS GRID
+	Layout the .cards container as a
+	responsive grid or flex layout.
+	======================================== */
 .cards {
-    /* display, gap (use calc to derive from a token), columns */
+	/* display, gap (use calc to derive from a token), columns */
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: calc(var(--space-md) / 2);
+
 }
 
 /* ========================================
-   INDIVIDUAL CARD
-   Style each .card article. This is where
-   most of your nesting will happen.
-   ======================================== */
+	INDIVIDUAL CARD
+	Style each .card article. This is where
+	most of your nesting will happen.
+	======================================== */
 .card {
-    /* background, padding, border-radius, shadow */
-    /* Use a var() with a fallback value here. */
+	/* background, padding, border-radius, shadow */
+	/* Use a var() with a fallback value here. */
+	background: var(--color-primary);
+	padding: var(--space-sm);
+	border-radius: var(--border-radius, 1rem);
+	text-shadow: var(--text-shadow-basic, 4px 4px 4px #aaa);
 
-    .card-tag {
-        /* small label: font-size, padding, background, border-radius */
-    }
+	.card-tag {
+		/* small label: font-size, padding, background, border-radius */
+		font-size: var(--font-size-sm);
+		background: var(--color-secondary);
+		padding-left: var(--space-md);
+		border-radius: var(--border-radius);
+	}
 
-    h3 {
-        /* card title styles */
-    }
+	h3 {
+		/* card title styles */
+		font-size: var(--font-size-md);
+		color: var(--color-accent);
+		text-shadow: var(--text-shadow-hover, 4px 4px 4px #aaa);
+	}
 
-    p {
-        /* card body text */
-    }
+	p {
+		/* card body text */
+		padding-top: calc(var(--space-sm)/2);
+	}
 
-    .card-meta {
-        /* bottom row: flexbox with space-between */
-        /* style the span and link inside here with nesting */
-    }
+	.card-meta {
+		/* bottom row: flexbox with space-between */
+		/* style the span and link inside here with nesting */;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: var(--space-sm);
+
+		span {
+			opacity: 0.9;
+		}
+
+		a {
+			padding: calc(var(--space-sm) / 2);
+			border-radius: calc(var(--border-radius)/2);
+			background: var(--color-secondary);
+
+			&:hover {
+				background: var(--color-link);
+				text-shadow: var(--text-shadow-hover);
+			}
+		}
+	}
 }
 
 /* ========================================
-   FOOTER
-   Style the .board-footer at the bottom.
-   ======================================== */
+	FOOTER
+	Style the .board-footer at the bottom.
+	======================================== */
 .board-footer {
-    /* text alignment, padding, muted color, top border */
+	/* text alignment, padding, muted color, top border */
+	border-top: var(--color-link);
+	color: var(--color-secondary);
+	padding: var(--font-size-md);
+	text-align: right;
 }
