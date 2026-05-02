@@ -1,0 +1,128 @@
+/* ========================================
+   TOKENS
+   Define your design decisions here.
+   Everything else in this file should
+   reference these tokens with var().
+   ======================================== */
+:root {
+    /* Colors: at least primary, background, text, accent */
+
+    /* Spacing: at least sm, md, lg */
+
+    /* Typography: font family, base size */
+
+    /* Borders: radius */
+}
+
+/* ========================================
+   RESET
+   A minimal reset so you start clean.
+   ======================================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ========================================
+   BASE STYLES
+   Style the body, links, and any raw
+   HTML elements here. Use nesting.
+   ======================================== */
+body {
+    /* font family, color, background, line-height, padding */
+    /* Use clamp() for padding to make it fluid. */
+
+    a {
+        /* link color from tokens */
+
+        &:hover {
+            /* hover color from tokens */
+        }
+    }
+}
+
+/* ========================================
+   NAVIGATION
+   Style .site-nav so students can get
+   back to the homepage.
+   ======================================== */
+.site-nav {
+    /* padding, margin-bottom */
+}
+
+/* ========================================
+   BOARD HEADER
+   Style the page header area.
+   ======================================== */
+.board-header {
+    /* text alignment, margin, padding */
+    /* Use clamp() for the h1 font size. */
+
+    h1 {
+        /* fluid font size */
+    }
+
+    p {
+        /* muted text color, spacing */
+    }
+}
+
+/* ========================================
+   CARD GROUP
+   Each section of cards (This Week,
+   Coming Up, Announcements).
+   ======================================== */
+.card-group {
+    /* margin-bottom using a token */
+
+    h2 {
+        /* section heading styles */
+    }
+}
+
+/* ========================================
+   CARDS GRID
+   Layout the .cards container as a
+   responsive grid or flex layout.
+   ======================================== */
+.cards {
+    /* display, gap (use calc to derive from a token), columns */
+}
+
+/* ========================================
+   INDIVIDUAL CARD
+   Style each .card article. This is where
+   most of your nesting will happen.
+   ======================================== */
+.card {
+    /* background, padding, border-radius, shadow */
+    /* Use a var() with a fallback value here. */
+
+    .card-tag {
+        /* small label: font-size, padding, background, border-radius */
+    }
+
+    h3 {
+        /* card title styles */
+    }
+
+    p {
+        /* card body text */
+    }
+
+    .card-meta {
+        /* bottom row: flexbox with space-between */
+        /* style the span and link inside here with nesting */
+    }
+}
+
+/* ========================================
+   FOOTER
+   Style the .board-footer at the bottom.
+   ======================================== */
+.board-footer {
+    /* text alignment, padding, muted color, top border */
+}
