@@ -1,5 +1,18 @@
 /* Non-color tokens: spacing, typography, borders, shadows.
-   These values should be referenced by every other layer. */
+	These values should be referenced by every other layer. */
 :root {
-    /* TODO: Define spacing, font, radius, and shadow tokens here */
+	/* ---Font--- */
+	--font-body: "Amiri", system-ui, -apple-system, sans-serif;
+	--font-secondary: "Trade Winds", "Amiri", serif;
+	--font-tertiary: "Indiana Jonas", "Cabin Sketch", serif;
+
+	/* ---Spacing---*/
+	--space-sm: 0.5rem;
+	--space-md: 1rem;
+	--space-lg: 2rem;
+	--space-height: 1.6rem;
+
+	/* Borders: radius */
+	--border-radius: 1rem
+    
 }
