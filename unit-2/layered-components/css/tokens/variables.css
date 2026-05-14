@@ -4,15 +4,22 @@
 	/* ---Font--- */
 	--font-body: "Amiri", system-ui, -apple-system, sans-serif;
 	--font-secondary: "Trade Winds", "Amiri", serif;
-	--font-tertiary: "Indiana Jonas", "Cabin Sketch", serif;
+	--font-tertiary: "Cabin Sketch", serif;
+	--font-size-base: 1rem;
+	--font-size-lg: 1.25rem;
 
 	/* ---Spacing---*/
 	--space-sm: 0.5rem;
 	--space-md: 1rem;
 	--space-lg: 2rem;
-	--space-height: 1.6rem;
+	--line-height: 1.6;
 
-	/* Borders: radius */
-	--border-radius: 1rem
-    
+	/* Borders */
+	--border-radius: 1rem;
+
+	/* Shadows */
+	--box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+
+	/* Opacity */
+	--opacity-disabled: 0.6;
 }

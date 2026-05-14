@@ -4,6 +4,9 @@
 :root {
 	--color-primary: #00572f;
 	--color-accent: #d48f2a;
-	--color-background: #8ec6ff;
+	--color-link: #750c9e;
+	--color-background: #c3e1ff;
+	--color-disabled: #777777;
 	--color-text: #111111;
+	--color-text-light: #ffffff;
 }
