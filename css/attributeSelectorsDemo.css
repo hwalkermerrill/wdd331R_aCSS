@@ -1,0 +1,201 @@
+/* ------------------------------
+  Tokens
+------------------------------ */
+@keyframes danger-shake {
+	0% {
+		transform: translateX(0);
+	}
+	20% {
+		transform: translateX(-4px);
+	}
+	40% {
+		transform: translateX(4px);
+	}
+	60% {
+		transform: translateX(-4px);
+	}
+	80% {
+		transform: translateX(4px);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}
+
+/* ------------------------------
+  Presence & Exact Match
+------------------------------ */
+
+/* Presence: has the attribute at all */
+[disabled] {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+/* Exact match */
+input[type="email"] {
+	border: 2px solid teal;
+}
+
+/* ------------------------------
+  Substring Matchers
+------------------------------ */
+
+/* Starts With: (External links) */
+a[href^="https://"] {
+	color: purple;
+	padding-left: 1.2em;
+	background: url("icons/external.svg") no-repeat left center;
+}
+a[href^="mailto:"]::before {
+	content: "email:";
+	background: #fce7f3;
+	color: #009900;
+}
+
+/* Ends With: (PDF links) */
+a[href$=".pdf"] {
+	color: #991b1b;
+	background: url("icons/pdf.svg") no-repeat left center;
+}
+
+/* Contains */
+[class*="grid"] {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1rem;
+	padding: 1rem;
+	background: #f3f3f3;
+	border: 2px dashed #999;
+	border-radius: 0.5rem;
+}
+
+/* Whitespace-separated word match */
+[class~="active"] {
+	font-weight: bold;
+	cursor: pointer;
+
+	&:hover {
+		color: purple;
+	}
+}
+
+/* Exact or hyphen-separated prefix (en-US, es-ES, etc.) */
+/* English language prefix selector */
+[lang|="en"] {
+	background: #e8f4ff;
+	border-left: 4px solid #0077cc;
+	padding: 0.5rem 1rem;
+	margin-bottom: 0.5rem;
+	quotes: "“" "”" "‘" "’";
+}
+
+/* French example (optional contrast) */
+[lang="fr"] {
+	background: #fff4e8;
+	border-left: 4px solid #cc7700;
+	padding: 0.5rem 1rem;
+	margin-bottom: 0.5rem;
+	quotes: "« " " »" "‹ " " ›";
+}
+
+/* Japanese example */
+[lang="ja"] {
+	background: #f0e8ff;
+	border-left: 4px solid #7a00cc;
+	padding: 0.5rem 1rem;
+	margin-bottom: 0.5rem;
+	quotes: "「" "」" "『" "』";
+}
+
+/* ------------------------------
+  Data Attributes
+------------------------------ */
+
+.card[data-theme="success"] {
+	background: #e5ffe5;
+	border-left: 4px solid #009900;
+	padding: 1rem;
+	cursor: pointer;
+}
+
+.card[data-theme="warning"] {
+	background: #ffe5e5;
+	border-left: 4px solid #cc0000;
+	padding: 1rem;
+	cursor: not-allowed;
+}
+
+.card[data-theme="info"] {
+	background: #e5f0ff;
+	border-left: 4px solid #0044cc;
+	padding: 1rem;
+	cursor: pointer;
+}
+
+/* ------------------------------
+  Case-Insensitive Matching
+------------------------------ */
+
+[data-state="open" i] {
+	background: lightgreen;
+	padding: 0.5rem;
+	border-left: 4px solid green;
+	margin-bottom: 0.5rem;
+}
+[data-state="Shut" i] {
+	opacity: 0.5;
+}
+[data-state="Shut"] {
+	background: goldenrod;
+	padding: 0.5rem;
+	border-left: 4px solid darkgoldenrod;
+	margin-bottom: 0.5rem;
+	opacity: 1;
+}
+
+/* ------------------------------
+  Specificity Demo
+------------------------------ */
+
+button[data-variant="danger"] {
+	margin-left: 2rem;
+	background: red;
+	color: white;
+	border: yellow 6px dashed;
+	box-shadow: 0 0 0 3px black;
+	padding: 0.5rem 1rem;
+	cursor:
+		url("https://icons.iconarchive.com/icons/paomedia/small-n-flat/32/sign-warning-icon.png"),
+		not-allowed;
+
+	&:hover {
+		transform: rotate(-3deg);
+		transition: transform 0.15s ease-out;
+		animation: danger-shake 0.4s ease-in-out;
+	}
+}
+/* ------------------------------
+  Regular Styling
+------------------------------ */
+section {
+	margin-bottom: 2rem;
+	a {
+		display: inline-block;
+		padding: 1rem;
+	}
+}
+.grid-item {
+	background: #ddd;
+	padding: 1rem;
+	text-align: center;
+	border-radius: 0.5rem;
+	font-weight: bold;
+}
+button {
+	margin: 1rem 0;
+	padding: 0.5rem 1rem;
+	border-radius: 0.25rem;
+	background: #eee;
+	cursor: pointer;
+}
