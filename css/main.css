@@ -16,7 +16,10 @@ While I have not yet done so with this file or class, I do intend to use AI tool
 I have similarly not yet used the github copilot extension's code completion for this file, but I may in the future, which is why I have included it in this disclosure and above.
 */
 
- /* Imports */
+/* Layer Declaration */
+@layer tokens, base, layout, components, utilities;
+
+/* Imports */
 @import url("https://fonts.googleapis.com/css?family=Amiri|Trade+Winds|Cabin+Sketch");
 @import url("https://fonts.cdnfonts.com/css/indiana-jonas");
 
