@@ -1,0 +1,20 @@
+{
+  "name": "wdd331R_aCSS",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "lightningcss --bundle --minify --targets \">= 0.25%\" css/main.css -o dist/styles.css",
+    "watch": "chokidar \"css/**/*.css\" -c \"pnpm build\" --debounce 600",
+		"start": "pnpm build && pnpm watch",
+		"refreshCSS": "npx lightningcss-cli --bundle --minify --targets \">= 0.25%\" css/main.css -o dist/styles.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.29.3",
+  "devDependencies": {
+    "chokidar-cli": "^3.0.0",
+    "lightningcss-cli": "^1.32.0"
+  }
+}
