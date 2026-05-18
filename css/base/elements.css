@@ -9,14 +9,33 @@ body {
 	background-color: var(--color-background);
 }
 
-:where(h1, h2, h3, h4, h5, h6) {
+h1 {
+	font-size: var(--font-size-header-lg);
+}
+
+h2 {
+	font-size: var(--font-size-header);
+}
+
+:where(h1, h2) {
+	margin-top: var(--space-sm);
+	margin-bottom: var(--space-sm);
+	font-weight: bold;
+	font-family: var(--font-tertiary);
+	background-image: var(--color-indiana-gradient);
+	background-clip: text;
+	color: transparent;
+	text-shadow: var(--shadows-md);
+}
+
+:where(h3, h4, h5, h6) {
 	font-family: var(--font-secondary);
 	line-height: var(--line-height);
 	color: var(--color-primary);
 }
 
 nav {
-	font-family: var(--font-tertiary);
+	font-family: var(--font-secondary);
 	text-decoration: none;
 	font-size: var(--font-size-lg);
 }

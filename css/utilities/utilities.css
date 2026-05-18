@@ -11,3 +11,10 @@
 .u-no-shadow {
 	box-shadow: none;
 }
+
+/* Clearfix */
+.clearfix::after {
+	content: "";
+	display: block;
+	clear: both;
+}
