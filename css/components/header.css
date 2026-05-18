@@ -1,0 +1,11 @@
+header {
+	padding: var(--space-md);
+	background-color: var(--color-accent);
+	color: var(--color-primary);
+}
+
+header .slogan h2 {
+	margin-bottom: var(--space-sm);
+	font-family: var(--font-secondary);
+	color: var(--color-primary);
+}

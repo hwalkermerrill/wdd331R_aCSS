@@ -2,9 +2,11 @@
 	/* ---Font--- */
 	--font-body: "Amiri", system-ui, -apple-system, sans-serif;
 	--font-secondary: "Trade Winds", "Amiri", serif;
-	--font-tertiary: "Cabin Sketch", serif;
+	--font-tertiary: "Indiana Jonas", "Cabin Sketch", serif;
 	--font-size-base: 1rem;
 	--font-size-lg: 1.25rem;
+	--font-size-header: 2rem;
+	--font-size-header-lg: 4rem;
 
 	/* Spacing */
 	--space-xs: 0.25rem;
