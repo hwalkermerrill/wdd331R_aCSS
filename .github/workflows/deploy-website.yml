@@ -15,14 +15,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10
+
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
+
       - name: Build CSS
-        run: npm run build
+        run: pnpm build
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
