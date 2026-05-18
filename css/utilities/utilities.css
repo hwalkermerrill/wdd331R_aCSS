@@ -1,0 +1,13 @@
+/* Utility classes: single-purpose helpers.
+	These live in the last layer so they override components
+	by layer order without needing !important. */
+
+/* Center Text */
+.u-text-center {
+	text-align: center;
+}
+
+/* No box shadow */
+.u-no-shadow {
+	box-shadow: none;
+}

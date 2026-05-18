@@ -34,74 +34,13 @@ layer(vendors);
 @import url("base/elements.css") layer(base);
 
 /* Layout */
+@import url("layout/primary.css") layer(layout);
+
 /* Components */
+@import url("components/buttons.css") layer(components);
+@import url("components/cards.css") layer(components);
+@import url("components/forms.css") layer(components);
+@import url("components/nav.css") layer(components);
+
 /* Utilities */
 @import url("utilities/utilities.css") layer(utilities);
-
-/* Universal */
-*,
-*::before,
-*::after {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-}
-
-html {
-	-webkit-text-size-adjust: 100%;
-	-ms-text-size-adjust: 100%;
-}
-
-/* Root Data */
-:root {
-	--color-bg: #f4f6f8;
-	--color-text: #1e293b;
-	--color-primary: #006eb6;
-	--color-primary-hover: #004f7f;
-	--space-sm: 0.5rem;
-	--space-md: 1rem;
-	--space-lg: 2rem;
-	--space-height: 1.6;
-	--font-body: "Amiri", system-ui, -apple-system, sans-serif;
-	--secondary-font: "Trade Winds", serif;
-	--tertiary-font: "Indiana Jonas", "Cabin Sketch", serif;
-	--text-shadow-basic: 4px 4px 4px #aaa;
-	--text-shadow-black: 1px 1px 0px black;
-	--text-shadow-light:
-		-5px 0px 5px var(--text-light), 0px 5px 5px var(--text-light),
-		5px 0px 5px var(--text-light), 0px -5px 5px var(--text-light);
-	--text-shadow-primary:
-		-5px 0px 5px var(--primary-color), 0px 5px 5px var(--primary-color),
-		5px 0px 5px var(--primary-color), 0px -5px 5px var(--primary-color);
-	--text-shadow-secondary:
-		-5px 0px 5px var(--secondary-color), 0px 5px 5px var(--secondary-color),
-		5px 0px 5px var(--secondary-color), 0px -5px 5px var(--secondary-color);
-	--text-shadow-indiana:
-		1px 1px 2px rgba(0, 0, 0, 0.1), 2px 2px 4px rgba(0, 0, 0, 0.2);
-	--text-indiana-gradient: linear-gradient(
-		to bottom,
-		#8b2e1c 0%,
-		#c14a2e 20%,
-		#e76f31 40%,
-		#ff9f1c 60%,
-		#ffd447 80%,
-		#ffec8b 100%
-	);
-}
-
-/* Main Content */
-body {
-	font-family: var(--font-body);
-	color: var(--color-text);
-	background-color: var(--color-bg);
-	line-height: var(--space-height);
-	padding: var(--space-lg);
-}
-
-a {
-	color: var(--color-primary);
-}
-
-a:hover {
-	color: var(--color-primary-hover);
-}
