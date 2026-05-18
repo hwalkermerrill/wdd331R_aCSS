@@ -15,8 +15,6 @@
 	--line-height: 1.6;
 
 	/* Typography */
-	--font-body: system-ui, sans-serif;
-	--font-heading: Georgia, serif;
 	--text-sm: 0.875rem;
 	--text-base: 1rem;
 	--text-lg: 1.25rem;
