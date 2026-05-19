@@ -20,6 +20,16 @@ every push to main.
 Each topic is sorted by unit, with files required for the main functioning of the
 site living in the root folder, and demonstrations held inside the demo folder.
 
+````text
+root
+├── css/
+├── demo/
+├── dist/
+├── unit-1/
+├── unit-2/
+├── ...
+└── index.html
+
 ## Pages
 
 - [Home](index.html)
@@ -33,3 +43,14 @@ CSS is organized into layers(vendor, tokens, base, layout, components, utilities
 and then processed via lightningcss-cli into a minified styles.css. This is built
 manually through a pnpm build command, which is also done automatically once the
 site is deployed via github's deploy-website.yml.
+
+```text
+css/
+├── base/
+├── components/
+├── layout/
+├── tokens/
+├── utilities/
+├── vendors/
+└── main.css
+````
