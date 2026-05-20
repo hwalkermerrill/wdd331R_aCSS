@@ -15,26 +15,68 @@
 	<link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cabin+Sketch&family=Trade+Winds" rel="stylesheet">
 	<link href="https://fonts.cdnfonts.com/css/indiana-jonas" rel="stylesheet">
 
-	<!-- Your global site CSS -->
+	<!-- Global site CSS -->
 	<link href="../../dist/styles.css" rel="stylesheet">
 
-	<!-- Demo‑specific outer styles (demonstrates ::part()) -->
+	<!-- Demo‑specific outer styles -->
 	<style>
+		body {
+			--frame-border-color: #2b0ae4;
+			--frame-bg-color: #c4e1f7;
+		}
+
+		body.alt-frame {
+			--frame-border-color: #8b2be2;
+			--frame-bg-color: #f3e8ff;
+		}
+
 		my-card::part(frame) {
-			border: 4px solid var(--primary-color);
-			border-radius: 12px;
-			padding: 1rem;
-			background: var(--text-light);
+			border: 4px solid var(--frame-border-color);
+			background: var(--frame-bg-color);
+			border-radius: 16px;
 		}
 
 		my-card::part(title) {
-			color: var(--primary-color);
 			font-family: "Trade Winds", serif;
 			font-size: 1.4rem;
+			text-shadow: 2px 2px 2px #aaa;
+		}
+
+
+		.card-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+			gap: 2rem;
+			margin-top: 2rem;
+		}
+
+		.light-demo {
+			background: #fff3cd;
+			border-left: 6px solid #e0a800;
+			padding: 1rem;
+			margin-bottom: 2rem;
+		}
+
+		.shadow-diagram {
+			background: #fff8d8;
+			border-left: 6px solid var(--secondary-color);
+			padding: 1rem;
+			margin-top: 2rem;
+			font-family: monospace;
+			white-space: pre;
 		}
 
 		main {
 			padding: 1rem 2%;
+		}
+
+		.toggle-btn {
+			cursor: pointer;
+		}
+
+		.toggle-btn:hover {
+			background: var(--text-light);
+			transform: scale(1.05);
 		}
 	</style>
 </head>
@@ -64,38 +106,76 @@
 	<!-- MAIN CONTENT -->
 	<main>
 		<h1>::part() and ::slotted() Demo</h1>
-		<p>
-			This page demonstrates a custom Web Component using both
-			<code>::part()</code> and <code>::slotted()</code>, along with an open Shadow DOM.
-		</p>
 
-		<h2>Example Cards</h2>
-
-		<!-- Card 1 -->
-		<my-card>
-			<span slot="subtitle">Friendly Merchant</span>
-			<p slot="details">Sells rare potions and magical curiosities.</p>
-		</my-card>
-
-		<!-- Card 2 -->
-		<my-card>
-			<span slot="subtitle">Hostile Raider</span>
-			<p slot="details">Ambushes travelers near the canyon.</p>
-		</my-card>
-
-		<hr>
+		<h2>Shadow Tree Diagram</h2>
+		<div class="shadow-diagram">
+			my-card
+			├── #shadow-root (open)
+			│ ├── &lt;div class="frame" part="frame"&gt;
+			│ │ ├── &lt;h3 part="title"&gt;Shadow DOM title (blue, styled by ::part for font)&lt;/h3&gt;
+			│ │ ├── &lt;img&gt;
+			│ │ ├── &lt;slot name="subtitle"&gt;fallback&lt;/slot&gt;
+			│ │ └── &lt;slot name="details"&gt;fallback&lt;/slot&gt;
+			│
+			└── Light DOM children (slotted)
+			├── &lt;span slot="subtitle"&gt;Styled by ::slotted()&lt;/span&gt;
+			└── &lt;p slot="details"&gt;Styled by ::slotted()&lt;/p&gt;
+		</div>
 
 		<h2>Component Definition</h2>
-		<p>This component uses:</p>
+		<p>This component demonstrates:</p>
 		<ul>
-			<li><strong>customElements.define()</strong></li>
-			<li><strong>open shadow root</strong></li>
-			<li><strong>&lt;template&gt;</strong> stamping</li>
-			<li><strong>part=""</strong> attributes</li>
-			<li><strong>&lt;slot&gt;</strong> with fallback content</li>
-			<li><strong>::slotted()</strong> inside the shadow</li>
-			<li><strong>::part()</strong> from the outer page</li>
+			<li><strong>Shadow DOM encapsulation</strong> (outside styles cannot reach internal elements)</li>
+			<li><strong>Slots</strong> (light DOM projected into shadow DOM)</li>
+			<li><strong>Fallback content</strong> (new cards use fallback content for undefined values)</li>
+			<li><strong>::slotted()</strong> (styling projected content like subtitles and details)</li>
+			<li><strong>part=""</strong> (exposing internal elements like the frame and title)</li>
+			<li><strong>::part()</strong> (styling those exposed parts from the outer page)</li>
 		</ul>
+
+		<div class="light-demo">
+			<h2>Light DOM Styles</h2>
+			<p><strong>All &lt;h3&gt; elements OUTSIDE the component</strong> should look like this:</p>
+			<h3> I am a normal (light-DOM) &lt;h3&gt; styled from the page </h3>
+			<p> Below, we TRY to style the internal &lt;h3&gt; inside &lt;my-card&gt; the same way using
+				<code>my-card h3 { ... }</code> — but Shadow DOM prevents it. The title inside the card stays blue, proving
+				encapsulation.
+			</p>
+		</div>
+
+		<button id="toggle-style" class="toggle-btn">
+			Click to Toggle Frame Color (demonstrates ::part())
+		</button>
+
+		<h2>Example Cards</h2>
+		<div class="card-grid">
+
+			<!-- Fallback demo -->
+			<my-card></my-card>
+
+			<my-card>
+				<span slot="title">Dakota Ravenwood</span>
+				<span slot="subtitle">Hero Character</span>
+				<p slot="details">
+					This card represents a hero. The subtitle and this paragraph are light-DOM content
+					projected into the component and styled by <code>::slotted()</code>.
+				</p>
+				<img src="https://hwalkermerrill.github.io/serpents/images/pc-dakota-ravenwood.webp" alt="Dakota Ravenwood"
+					slot="portrait">
+			</my-card>
+
+			<my-card>
+				<span slot="title">Bekyar Raider</span>
+				<span slot="subtitle">Hostile Raider</span>
+				<p slot="details">
+					This card represents a raider. The subtitle and this paragraph are light-DOM content
+					projected into the component and styled by <code>::slotted()</code>.
+				</p>
+				<img src="https://hwalkermerrill.github.io/serpents/images/tribe-bekyar.webp" alt="Bekyar Raider"
+					slot="portrait">
+			</my-card>
+		</div>
+
 	</main>
 
 	<!-- TEMPLATE -->
@@ -104,29 +184,39 @@
 			:host {
 				display: block;
 				max-width: 300px;
-				margin: 1.5rem 0;
 				font-family: var(--primary-font, sans-serif);
 			}
 
 			.frame {
 				part: frame;
-				background: white;
+				background: #e6f4ff;
+				border: 3px solid #005f99;
 				padding: 1rem;
 				box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+				border-radius: 16px;
 			}
 
 			h3 {
+				color: blue;
 				margin: 0 0 0.5rem 0;
 				part: title;
 			}
 
 			img {
 				width: 100%;
-				border-radius: 6px;
+				border-radius: 12px;
 				margin-bottom: 0.5rem;
+				object-fit: cover;
 			}
 
-			/* Demonstrate ::slotted() */
+			::slotted(img[slot="portrait"]) {
+				width: 100%;
+				height: auto;
+				border-radius: 12px;
+				object-fit: cover;
+				display: block;
+			}
+
 			::slotted([slot="subtitle"]) {
 				font-weight: bold;
 				color: var(--secondary-color);
@@ -140,14 +230,24 @@
 			}
 		</style>
 
-		<div class="frame">
-			<h3 part="title">Unnamed NPC</h3>
+		<div class="frame" part="frame">
+			<h3 part="title">
+				<slot name="title">Shadow DOM Title (blue, font styled via ::part)</slot>
+			</h3>
 
-			<!-- Always works -->
-			<img src="https://placehold.net/avatar-2.png" alt="Portrait">
+			<slot name="portrait">
+				<img src="https://placehold.net/avatar-2.png" alt="Fallback Portrait">
+			</slot>
 
-			<slot name="subtitle">No subtitle provided</slot>
-			<slot name="details">No details available.</slot>
+			<slot name="subtitle">
+				<strong>Fallback subtitle: this card has no slotted subtitle, so you are seeing the fallback text. This subtitle
+					is styled by ::slotted()</strong>
+			</slot>
+
+			<slot name="details">
+				Fallback details: This text lives inside the shadow tree. It demonstrates that when no light-DOM content is
+				provided for a slot, the component's own content is used instead.
+			</slot>
 		</div>
 	</template>
 
@@ -164,6 +264,13 @@
 
 		customElements.define("my-card", MyCard);
 	</script>
+	<script>
+		document.getElementById("toggle-style").addEventListener("click", () => {
+			document.body.classList.toggle("alt-frame");
+		});
+	</script>
+
+
 
 </body>
 
