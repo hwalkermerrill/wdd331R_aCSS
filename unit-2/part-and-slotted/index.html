@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="Practice site for WDD331R - Advanced CSS.">
+	<meta name="author" content="Harrison Merrill">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>::part() and ::slotted() Demo — Harrison Merrill</title>
+
+	<!-- Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cabin+Sketch&family=Trade+Winds" rel="stylesheet">
+	<link href="https://fonts.cdnfonts.com/css/indiana-jonas" rel="stylesheet">
+
+	<!-- Your global site CSS -->
+	<link href="../../dist/styles.css" rel="stylesheet">
+
+	<!-- Demo‑specific outer styles (demonstrates ::part()) -->
+	<style>
+		my-card::part(frame) {
+			border: 4px solid var(--primary-color);
+			border-radius: 12px;
+			padding: 1rem;
+			background: var(--text-light);
+		}
+
+		my-card::part(title) {
+			color: var(--primary-color);
+			font-family: "Trade Winds", serif;
+			font-size: 1.4rem;
+		}
+
+		main {
+			padding: 1rem 2%;
+		}
+	</style>
+</head>
+
+<body>
+
+	<!-- HEADER -->
+	<header>
+		<div class="slogan">
+			<h2>Harrison Merrill - Practice Site</h2>
+			<strong>WDD 331R Advanced CSS - Postprocessing the Cascade</strong>
+		</div>
+	</header>
+
+	<!-- NAV -->
+	<nav class="site-nav">
+		<h2>Assignments:</h2>
+		<ul>
+			<li><a href="../../index.html">Home</a></li>
+			<li><a href="../../unit-1/custom-properties/index.html">Custom Properties & Nesting</a></li>
+			<li><a href="../layered-components/index.html">Layered Components</a></li>
+			<li><a href="../part-and-slotted/index.html" class="active">::part() & ::slotted() Demo</a></li>
+			<li><a href="../../demo/attributeSelectors.html">Attribute Selectors</a></li>
+		</ul>
+	</nav>
+
+	<!-- MAIN CONTENT -->
+	<main>
+		<h1>::part() and ::slotted() Demo</h1>
+		<p>
+			This page demonstrates a custom Web Component using both
+			<code>::part()</code> and <code>::slotted()</code>, along with an open Shadow DOM.
+		</p>
+
+		<h2>Example Cards</h2>
+
+		<!-- Card 1 -->
+		<my-card>
+			<span slot="subtitle">Friendly Merchant</span>
+			<p slot="details">Sells rare potions and magical curiosities.</p>
+		</my-card>
+
+		<!-- Card 2 -->
+		<my-card>
+			<span slot="subtitle">Hostile Raider</span>
+			<p slot="details">Ambushes travelers near the canyon.</p>
+		</my-card>
+
+		<hr>
+
+		<h2>Component Definition</h2>
+		<p>This component uses:</p>
+		<ul>
+			<li><strong>customElements.define()</strong></li>
+			<li><strong>open shadow root</strong></li>
+			<li><strong>&lt;template&gt;</strong> stamping</li>
+			<li><strong>part=""</strong> attributes</li>
+			<li><strong>&lt;slot&gt;</strong> with fallback content</li>
+			<li><strong>::slotted()</strong> inside the shadow</li>
+			<li><strong>::part()</strong> from the outer page</li>
+		</ul>
+	</main>
+
+	<!-- TEMPLATE -->
+	<template id="my-card-template">
+		<style>
+			:host {
+				display: block;
+				max-width: 300px;
+				margin: 1.5rem 0;
+				font-family: var(--primary-font, sans-serif);
+			}
+
+			.frame {
+				part: frame;
+				background: white;
+				padding: 1rem;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+			}
+
+			h3 {
+				margin: 0 0 0.5rem 0;
+				part: title;
+			}
+
+			img {
+				width: 100%;
+				border-radius: 6px;
+				margin-bottom: 0.5rem;
+			}
+
+			/* Demonstrate ::slotted() */
+			::slotted([slot="subtitle"]) {
+				font-weight: bold;
+				color: var(--secondary-color);
+				display: block;
+				margin-bottom: 0.5rem;
+			}
+
+			::slotted([slot="details"]) {
+				font-size: 0.9rem;
+				color: #333;
+			}
+		</style>
+
+		<div class="frame">
+			<h3 part="title">Unnamed NPC</h3>
+
+			<!-- Always works -->
+			<img src="https://placehold.net/avatar-2.png" alt="Portrait">
+
+			<slot name="subtitle">No subtitle provided</slot>
+			<slot name="details">No details available.</slot>
+		</div>
+	</template>
+
+	<!-- COMPONENT SCRIPT -->
+	<script>
+		class MyCard extends HTMLElement {
+			constructor() {
+				super();
+				const root = this.attachShadow({ mode: "open" });
+				const template = document.getElementById("my-card-template");
+				root.appendChild(template.content.cloneNode(true));
+			}
+		}
+
+		customElements.define("my-card", MyCard);
+	</script>
+
+</body>
+
+</html>
