@@ -20,8 +20,8 @@ every push to main.
 Each topic is sorted by unit, with files required for the main functioning of the
 site living in the root folder, and demonstrations held inside the demo folder.
 
-````text
-root
+```text
+wdd331R_aCSS
 ├── css/
 ├── demo/
 ├── dist/
@@ -29,6 +29,7 @@ root
 ├── unit-2/
 ├── ...
 └── index.html
+```
 
 ## Pages
 
@@ -53,4 +54,4 @@ css/
 ├── utilities/
 ├── vendors/
 └── main.css
-````
+```
