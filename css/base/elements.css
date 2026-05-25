@@ -18,8 +18,8 @@ h2 {
 }
 
 :where(h1, h2) {
-	margin-top: var(--space-sm);
-	margin-bottom: var(--space-sm);
+	margin-top: var(--spacing-sm);
+	margin-bottom: var(--spacing-sm);
 	font-weight: bold;
 	font-family: var(--font-tertiary);
 	background-image: var(--color-indiana-gradient);
@@ -48,5 +48,5 @@ a {
 }
 
 p {
-	padding: var(--space-sm);
+	padding: var(--spacing-sm);
 }
