@@ -129,6 +129,6 @@ html {
 	html {
 		--header-text: contrast-color(var(--header-bg));
 		--theme-toggle-text: contrast-color(var(--theme-toggle-bg));
-		--color-text: contract-color(var(--seed-text));
+		/* --color-text: contrast-color(var(--seed-text)); */
 	}
 }

@@ -18,6 +18,9 @@
 	<!-- Global site CSS -->
 	<link href="../../dist/styles.css" rel="stylesheet">
 
+	<!-- SCRIPT HERE -->
+	<script src="../../js/theme-preference.js"></script>
+
 	<!-- Demo‑specific outer styles -->
 	<style>
 		body {
@@ -50,19 +53,17 @@
 			margin-top: 2rem;
 		}
 
-		.light-demo {
-			background: #fff3cd;
-			border-left: 6px solid #e0a800;
+		.light-demo,
+		.shadow-diagram {
+			background: var(--color-surface);
+			border-left: 6px solid var(--color-accent);
+			color: var(--color-text);
 			padding: 1rem;
 			margin-bottom: 2rem;
 		}
 
 		.shadow-diagram {
-			background: #fff8d8;
-			border-left: 6px solid var(--secondary-color);
-			padding: 1rem;
-			margin-top: 2rem;
-			font-family: monospace;
+			font-family: var(--font-family-mono);
 			white-space: pre;
 		}
 
@@ -85,6 +86,28 @@
 
 	<!-- HEADER -->
 	<header>
+		<details class="theme-menu">
+			<summary class="theme-control">
+				<span class="visually-hidden">Color scheme</span>
+			</summary>
+			<div class="theme-extra" role="group" aria-label="Choose color scheme">
+				<label class="theme-control theme-pick" data-theme-pick="light">
+					<input name="theme-preference" type="radio" value="light">
+					<span aria-hidden="true">&#9788;&#65039;</span>
+					<span class="visually-hidden">Light</span>
+				</label>
+				<label class="theme-control theme-pick" data-theme-pick="system">
+					<input name="theme-preference" type="radio" value="system" checked>
+					<span aria-hidden="true">&#9881;&#65039;</span>
+					<span class="visually-hidden">System default</span>
+				</label>
+				<label class="theme-control theme-pick" data-theme-pick="dark">
+					<input name="theme-preference" type="radio" value="dark">
+					<span aria-hidden="true">&#127766;</span>
+					<span class="visually-hidden">Dark</span>
+				</label>
+			</div>
+		</details>
 		<div class="slogan">
 			<h2>Harrison Merrill - Practice Site</h2>
 			<strong>WDD 331R Advanced CSS - Postprocessing the Cascade</strong>
@@ -112,7 +135,7 @@
 			my-card
 			├── #shadow-root (open)
 			│ ├── &lt;div class="frame" part="frame"&gt;
-			│ │ ├── &lt;h3 part="title"&gt;Shadow DOM title (blue, styled by ::part for font)&lt;/h3&gt;
+			│ │ ├── &lt;h3 part="title"&gt;Shadow DOM title&lt;/h3&gt;
 			│ │ ├── &lt;img&gt;
 			│ │ ├── &lt;slot name="subtitle"&gt;fallback&lt;/slot&gt;
 			│ │ └── &lt;slot name="details"&gt;fallback&lt;/slot&gt;
@@ -225,7 +248,7 @@
 
 			::slotted([slot="subtitle"]) {
 				font-weight: bold;
-				color: var(--secondary-color);
+				color: #222;
 				display: block;
 				margin-bottom: 0.5rem;
 			}

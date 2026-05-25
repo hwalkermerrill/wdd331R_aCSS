@@ -67,6 +67,7 @@ a[href$=".pdf"] {
 	padding: 1rem;
 	background: #f3f3f3;
 	border: 2px dashed #999;
+	color: #1e293b;
 	border-radius: 0.5rem;
 }
 
@@ -88,6 +89,7 @@ a[href$=".pdf"] {
 	padding: 0.5rem 1rem;
 	margin-bottom: 0.5rem;
 	quotes: "“" "”" "‘" "’";
+	color: #1e293b;
 }
 
 /* French example (optional contrast) */
@@ -97,6 +99,7 @@ a[href$=".pdf"] {
 	padding: 0.5rem 1rem;
 	margin-bottom: 0.5rem;
 	quotes: "« " " »" "‹ " " ›";
+	color: #1e293b;
 }
 
 /* Japanese example */
@@ -106,6 +109,7 @@ a[href$=".pdf"] {
 	padding: 0.5rem 1rem;
 	margin-bottom: 0.5rem;
 	quotes: "「" "」" "『" "』";
+	color: #1e293b;
 }
 
 /* ------------------------------
@@ -117,6 +121,7 @@ a[href$=".pdf"] {
 	border-left: 4px solid #009900;
 	padding: 1rem;
 	cursor: pointer;
+	color: #1e293b;
 }
 
 .card[data-theme="warning"] {
@@ -124,6 +129,7 @@ a[href$=".pdf"] {
 	border-left: 4px solid #cc0000;
 	padding: 1rem;
 	cursor: not-allowed;
+	color: #1e293b;
 }
 
 .card[data-theme="info"] {
@@ -131,6 +137,7 @@ a[href$=".pdf"] {
 	border-left: 4px solid #0044cc;
 	padding: 1rem;
 	cursor: pointer;
+	color: #1e293b;
 }
 
 /* ------------------------------
@@ -142,9 +149,11 @@ a[href$=".pdf"] {
 	padding: 0.5rem;
 	border-left: 4px solid green;
 	margin-bottom: 0.5rem;
+	color: #1e293b;
 }
 [data-state="Shut" i] {
 	opacity: 0.5;
+	color: #1e293b;
 }
 [data-state="Shut"] {
 	background: goldenrod;
@@ -152,6 +161,7 @@ a[href$=".pdf"] {
 	border-left: 4px solid darkgoldenrod;
 	margin-bottom: 0.5rem;
 	opacity: 1;
+	color: #1e293b;
 }
 
 /* ------------------------------
@@ -187,6 +197,7 @@ section {
 }
 .grid-item {
 	background: #ddd;
+	color: #1e293b;
 	padding: 1rem;
 	text-align: center;
 	border-radius: 0.5rem;
@@ -197,5 +208,6 @@ button {
 	padding: 0.5rem 1rem;
 	border-radius: 0.25rem;
 	background: #eee;
+	color: #1e293b;
 	cursor: pointer;
 }
