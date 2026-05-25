@@ -2,6 +2,7 @@ details.theme-menu {
 	position: relative;
 	display: inline-block;
 	width: max-content;
+	float: right;
 	margin: 0;
 	padding: 0;
 	border: none;
@@ -54,8 +55,8 @@ details.theme-menu {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		min-width: calc(var(--icon-size-md) + var(--spacing-md));
-		min-height: calc(var(--icon-size-md) + var(--spacing-md));
+		min-width: calc(var(--icon-size-md) + var(--spacing-sm));
+		min-height: calc(var(--icon-size-md) + var(--spacing-sm));
 		margin: 0;
 		padding: 0;
 		font-size: var(--icon-size-sm);
