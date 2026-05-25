@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<!-- META DATA -->
+	<meta charset="utf-8">
+	<meta name="description" content="Contrast Color Demo">
+	<meta name="author" content="Harrison Merrill">
+	<meta name="slogan" content="Postprocessing the Cascade">
+	<meta name="theme-color" content="#005633">
+	<!-- <meta http-equiv="refresh" content="300"> -->
+
+	<title>Harrison Merrill - Practice Site</title>
+
+	<!-- This tells MS Edge users to use Edge instead of IE -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<!-- TELLS PHONES NOT TO LIE ABOUT THEIR WIDTH-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- This loads the "Amiri", "Cabin Sketch", "Trade Winds", and "Indiana Jones" fonts while browsing this HTML-->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cabin+Sketch&family=Trade+Winds" rel="stylesheet">
+	<link href="https://fonts.cdnfonts.com/css/indiana-jonas" rel="stylesheet">
+
+	<!-- STYLE SHEETS -->
+	<link href="../dist/styles.css" rel="stylesheet">
+
+	<!-- SCRIPT HERE -->
+	<script src="../js/theme-preference.js"></script>
+</head>
+
+<body>
+	<!-- HEADER HERE -->
+	<header>
+		<details class="theme-menu">
+			<summary class="theme-control">
+				<span class="visually-hidden">Color scheme</span>
+			</summary>
+			<div class="theme-extra" role="group" aria-label="Choose color scheme">
+				<label class="theme-control theme-pick" data-theme-pick="light">
+					<input name="theme-preference" type="radio" value="light">
+					<span aria-hidden="true">&#9788;&#65039;</span>
+					<span class="visually-hidden">Light</span>
+				</label>
+				<label class="theme-control theme-pick" data-theme-pick="system">
+					<input name="theme-preference" type="radio" value="system" checked>
+					<span aria-hidden="true">&#9881;&#65039;</span>
+					<span class="visually-hidden">System default</span>
+				</label>
+				<label class="theme-control theme-pick" data-theme-pick="dark">
+					<input name="theme-preference" type="radio" value="dark">
+					<span aria-hidden="true">&#127766;</span>
+					<span class="visually-hidden">Dark</span>
+				</label>
+			</div>
+		</details>
+		<div class="slogan">
+			<h2>Harrison Merrill - Practice Site</h2>
+			<strong>Postprocessing the Cascade</strong>
+		</div>
+	</header>
+
+	<!-- NAV HERE -->
+	<nav class="site-nav">
+		<h2>Assignments:</h2>
+		<ul>
+			<li><a href="../index.html">Home</a></li>
+			<li><a href="../unit-1/custom-properties/index.html"> Custom Properties and Nesting</a></li>
+			<li><a href="../unit-2/layered-components/index.html"> Layered Components</a></li>
+			<li><a href="../unit-2/part-and-slotted/index.html"> ::part() and ::slotted()</a></li>
+			<li><a href="demo/attributeSelectors.html" class="active"> Attribute Selectors</a></li>
+		</ul>
+	</nav>
+
+	<!-- CONTENT HERE -->
+	<main class="clearfix" id="maincontent">
+		<h1>contrast-Color()</h1>
+		<section>
+			<h2>How It Works</h2>
+			<p> The <code>contrast-color()</code> function analyzes the background color and determines whether black or white
+				text would provide better contrast. It uses the WCAG contrast ratio formula to target a contrast ratio of 4.5:1,
+				which makes it always try to meet accessibility standards for readability (but it has some limitations).</p>
+			<p> This is particularly useful for dynamic content, user-generated themes, or any situation where you can't
+				predict the background color in advance. By using <code>contrast-color()</code>, you can ensure that your text
+				remains legible and accessible regardless of the background. </p>
+		</section>
+		<section>
+			<h2>Live Demo</h2>
+			<p><em>- Copied from BYU-I Live Demo</em></p>
+			<p> Pick a background color with the color input below and watch <code>contrast-color()</code> decide whether the
+				text should be black or white. Pay attention to mid-tone colors where the result may look questionable. Use the
+				theme toggle to see how the demo container responds in both light and dark mode:
+			</p>
+			<button id="cc-midtone-btn">Mid-tone Demo</button> <button id="cc-navy-btn">Bad Navy Demo</button>
+			<style>
+				#cc-demo {
+					--cc-bg: light-dark(#ffffff, #1e1e2e);
+					--cc-text: light-dark(#1e293b, #e2e8f0);
+					--cc-border: light-dark(#e2e8f0, #3b3b52);
+					--cc-label: light-dark(#64748b, #94a3b8);
+					--cc-chosen: #6633cc;
+					background: var(--cc-bg);
+					color: var(--cc-text);
+					border: 1px solid var(--cc-border);
+					border-radius: 8px;
+					padding: 2rem;
+					margin-bottom: 2rem;
+					font-size: 1.8rem;
+				}
+
+				#cc-demo .cc-controls {
+					display: flex;
+					align-items: center;
+					gap: 1.2rem;
+					margin-bottom: 1.6rem;
+					flex-wrap: wrap;
+				}
+
+				#cc-demo .cc-controls label {
+					font-size: 1.6rem;
+					color: var(--cc-label);
+				}
+
+				#cc-demo .cc-controls input[type="color"] {
+					width: 48px;
+					height: 36px;
+					border: 1px solid var(--cc-border);
+					border-radius: 4px;
+					cursor: pointer;
+					padding: 2px;
+				}
+
+				#cc-demo .cc-controls .cc-theme-toggle {
+					margin-left: auto;
+				}
+
+				#cc-demo .cc-hex {
+					font-size: 1.4rem;
+					color: var(--cc-label);
+					font-family: monospace;
+				}
+
+				#cc-demo .cc-swatches {
+					display: grid;
+					grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+					gap: 1rem;
+				}
+
+				#cc-demo .cc-swatch {
+					background-color: var(--cc-chosen);
+					color: contrast-color(var(--cc-chosen));
+					padding: 1.6rem;
+					border-radius: 6px;
+					text-align: center;
+					font-size: 1.8rem;
+					font-weight: 600;
+					border: 1px solid var(--cc-border);
+				}
+
+				#cc-demo .cc-swatch-light {
+					background-color: color-mix(in oklch, var(--cc-chosen) 40%, white);
+					color: contrast-color(color-mix(in oklch, var(--cc-chosen) 40%, white));
+				}
+
+				#cc-demo .cc-swatch-dark {
+					background-color: color-mix(in oklch, var(--cc-chosen) 60%, black);
+					color: contrast-color(color-mix(in oklch, var(--cc-chosen) 60%, black));
+				}
+
+				#cc-demo .cc-swatch-label {
+					display: block;
+					font-size: 1.2rem;
+					font-weight: 400;
+					margin-top: 0.4rem;
+					opacity: 0.8;
+				}
+
+				@supports not (color: contrast-color(red)) {
+					#cc-demo .cc-fallback-msg {
+						display: block;
+					}
+
+					#cc-demo .cc-swatches {
+						display: none;
+					}
+
+				}
+
+				#cc-demo .cc-fallback-msg {
+					display: none;
+					padding: 1.2rem;
+					background: light-dark(#fef3c7, #422006);
+					color: light-dark(#92400e, #fde68a);
+					border-radius: 6px;
+					font-size: 1.6rem;
+					text-align: center;
+				}
+			</style>
+			<div id="cc-demo" style="--cc-chosen: #8464c4;">
+				<div class="cc-controls">
+					<label for="cc-picker">Background</label>
+					<input type="color" id="cc-picker" value="#6633cc">
+					<span class="cc-hex" id="cc-hex-readout" aria-live="polite">#8464c4</span>
+				</div>
+				<div class="cc-fallback-msg">
+					Your browser does not support <code>contrast-color()</code>. Try Chrome 133+, Firefox 146+, or Safari 18.4+.
+				</div>
+				<div class="cc-swatches">
+					<div class="cc-swatch cc-swatch-light">
+						Text
+						<span class="cc-swatch-label">Tint (lighter)</span>
+					</div>
+					<div class="cc-swatch">
+						Text
+						<span class="cc-swatch-label">Base color</span>
+					</div>
+					<div class="cc-swatch cc-swatch-dark">
+						Text
+						<span class="cc-swatch-label">Shade (darker)</span>
+					</div>
+				</div>
+			</div>
+
+			<script type="text/javascript">
+				(() => {
+					const picker = document.getElementById('cc-picker');
+					const readout = document.getElementById('cc-hex-readout');
+					const demo = document.getElementById('cc-demo');
+
+					const updateColor = () => {
+						demo.style.setProperty('--cc-chosen', picker.value);
+						readout.textContent = picker.value;
+					};
+
+					picker.addEventListener('input', updateColor);
+
+					document.getElementById('cc-midtone-btn').addEventListener('click', () => {
+						picker.value = '#7a7a7a';
+						updateColor();
+					});
+
+					document.getElementById('cc-navy-btn').addEventListener('click', () => {
+						picker.value = '#002b7f';
+						updateColor();
+					});
+				})();
+			</script>
+		</section>
+		<section>
+			<h2>How to Write the Code</h2>
+			<p> Using <code>contrast-color()</code> is easy, and can be used anywhere where you'd use a color value. For
+				example: </p>
+			<pre><code>
+				.element {
+					background-color: var(--some-bg-color);
+					color: contrast-color(var(--some-bg-color));
+				}</code></pre>
+			<p> In this example, the text color will automatically adjust to either black or white based on the value of
+				<code>--some-bg-color</code>. If your using a token system that adjusts the background color of an object based
+				on content, highlight or hover state, whether it has been clicked or not, or based on light and dark modes, it
+				will dynamically decide whether to appear in white or black based purely on the contrast ratio - no javascript
+				required.
+			</p>
+			<p>While browser support is strong, its a good idea to wrap your contrast-color() in an @supports block for safe
+				fallbacks. This may look something like this:</p>
+			<pre><code>
+					.element {
+						background-color: var(--some-bg-color);
+						color: #000; /* Fallback color */
+					}
+
+					@supports (color: contrast-color(red)) {
+						.element {
+							color: contrast-color(var(--some-bg-color));
+						}
+					}</code></pre>
+			<p>While this is a little bit of extra work, it ensures that if the browser does not support contrast-color (in
+				this case by testing it with the simple red color), it will fail gracefully to your specified fallback.
+				@supports should be placed at the top level, not inside a nested block, but may be placed near the bottom of the
+				cascade, with all your @supports rules nested together, or in a separate stylesheet if you're trying to juggle
+				support for many types of things.</p>
+		</section>
+		<section>
+			<h2>Limitations</h2>
+			<p> While <code>contrast-color()</code> is a powerful tool for ensuring text legibility, it does have some major
+				limitations: </p>
+			<ul>
+				<li>It only chooses between black and white, which may not be the nicest looking option. If you need to use
+					branded colors, you will need to define them manually. </li>
+				<li>It does not account for font size or weight, which can affect readability. It always targets the 4.5:1
+					normal text-threshold.</li>
+				<li>It uses the WCAG 2 luminance algorithm, which is known to produce poor results on mid-tone backgrounds and
+					saturated blues. Sometimes this may mean choosing to be black when white would be more visible or vice-versa,
+					and sometimes neither color is particularly visible (such as on a saturated gray). An improvement is in the
+					pipeline, but is not yet complete. </li>
+				<li>It does not work with gradient colors or background images, and it evaluates the background as though it
+					were against an invisible black, not the actual visible color on he page's background. This hiccups mean it
+					may occasionally make incorrect calculations, which may require setting colors manually.</li>
+			</ul>
+			<p>Solutions: While a great convenience tool, any time the background is going to be a blue or a color with
+				between 40-60% luminance, you must visually check the result and see how it actually looks. And if you need text
+				to appear over images or gradient colors, or if you need colored text, you must still set those manually. None
+				of these limitations make the function useless, but instead means this is a great tool for your toolkit - a tool
+				that will get better over time - but it not a complete solution.</p>
+		</section>
+	</main>
+</body>
