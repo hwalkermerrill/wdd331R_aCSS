@@ -121,10 +121,14 @@ html {
 	--shadow-color: light-dark(rgb(0 0 0 / 0.09), rgb(0 0 0 / 0.28));
 	--shadow-sm: 0 1px 2px 0 var(--shadow-color);
 	--shadow-md: 0 1px 3px 0 var(--shadow-color);
+}
 
-	/* --- @Support contrast-color() --- */
-	@supports (color: contrast-color(red)) {
+/* --- @Support contrast-color() --- */
+@supports (color: contrast-color(red)) {
+	:root,
+	html {
 		--header-text: contrast-color(var(--header-bg));
 		--theme-toggle-text: contrast-color(var(--theme-toggle-bg));
+		--color-text: contract-color(var(--seed-text));
 	}
 }
