@@ -5,27 +5,18 @@
 	--font-family-mono: "Courier New", Courier, monospace;
 	--font-family-head: "Indiana Jonas", "Cabin Sketch", serif;
 	--font-size-base: 1rem;
-	--font-size-sm: 1.4rem;
-	--font-size-md: 1.6rem;
+	--font-size-sm: 1.2rem;
+	--font-size-md: 1.4rem;
 	--font-size-lg: 1.8rem;
 	--font-size-header: 2.4rem;
-	--font-size-header-lg: 3.6rem;
-	--text-sm: 0.875rem;
-	--text-base: 1rem;
-	--text-lg: 1.25rem;
-	--text-xl: 1.5rem;
-
-	/* Legacy names for backwards compatibility */
-	--font-body: var(--font-family-sans);
-	--font-secondary: var(--font-family-serif);
-	--font-tertiary: var(--font-family-head);
+	--font-size-header-lg: 4.8rem;
 
 	/* Spacing */
-	--space-xs: 0.25rem;
-	--space-sm: 0.5rem;
-	--space-md: 1rem;
-	--space-lg: 2rem;
-	--space-xl: 4rem;
+	--spacing-xs: 0.25rem;
+	--spacing-sm: 0.5rem;
+	--spacing-md: 1rem;
+	--spacing-lg: 2rem;
+	--spacing-xl: 4rem;
 	--line-height: 1.6;
 
 	/* Radii */
@@ -51,4 +42,18 @@
 
 	/* Focus */
 	--outline-width: 2px;
+
+	/* Legacy names for backwards compatibility */
+	--font-body: var(--font-family-sans);
+	--font-secondary: var(--font-family-serif);
+	--font-tertiary: var(--font-family-head);
+	--text-sm: var(--font-size-base);
+	--text-base: var(--font-size-base);
+	--text-lg: var(--font-size-md);
+	--text-xl: var(--font-size-lg);
+	--space-xs: var(--spacing-xs);
+	--space-sm: var(--spacing-sm);
+	--space-md: var(--spacing-md);
+	--space-lg: var(--spacing-lg);
+	--space-xl: var(--spacing-xl);
 }
