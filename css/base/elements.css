@@ -26,6 +26,17 @@ h2 {
 	background-clip: text;
 	color: transparent;
 	text-shadow: var(--shadow-indiana);
+	stroke: 2px var(--indy-stroke);
+}
+
+:where(h1, h2)::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: var(--color-metallic-highlight);
+	background-clip: text;
+	color: transparent;
+	pointer-events: none;
 }
 
 :where(h3, h4, h5, h6) {
@@ -50,3 +61,8 @@ a {
 p {
 	padding: var(--spacing-sm);
 }
+
+/* Add faint outline to images, even transparent images */
+/* img {
+	filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.9));
+} */
