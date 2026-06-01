@@ -85,3 +85,12 @@
 		}
 	}
 }
+.card--disabled {
+	filter: grayscale(0.8) opacity(0.6);
+	pointer-events: none;
+}
+.card--hidden {
+	filter: blur(8px) brightness(1.2);
+	/* backdrop-filter: blur(12px) saturate(1.4); */
+	pointer-events: none;
+}

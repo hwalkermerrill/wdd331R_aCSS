@@ -40,6 +40,7 @@ I have similarly not yet used the github copilot extension's code completion for
 @import url("components/forms.css") layer(components);
 @import url("components/header.css") layer(components);
 @import url("components/nav.css") layer(components);
+@import url("components/effects.css") layer(components);
 
 /* Utilities */
 @import url("utilities/utilities.css") layer(utilities);
