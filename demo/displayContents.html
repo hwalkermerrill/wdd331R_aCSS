@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>display: contents demo</title>
+	<style>
+		/* Normal wrapper: takes up space, has background & border */
+		.wrapper-box {
+			display: block;
+			background: #ffe4b5;
+			border: 2px solid #cc8b3f;
+			padding: 8px;
+			margin-bottom: 16px;
+		}
+
+		/* Wrapper that "disappears" visually/layout-wise */
+		.wrapper-contents {
+			display: contents;
+		}
+
+		.item {
+			padding: 4px 8px;
+			margin: 4px;
+			background: #e0f0ff;
+			border: 1px solid #4a90e2;
+		}
+
+		/* Safe example */
+		.safe-wrapper {
+			display: contents;
+		}
+
+		.item {
+			padding: 6px 10px;
+			margin: 4px;
+			background: #e0f0ff;
+			border: 1px solid #4a90e2;
+		}
+
+		/* Unsafe examples */
+		.bad-button,
+		.bad-nav,
+		.bad-role {
+			display: contents;
+			margin-top: 12px;
+			padding: 8px;
+			border: 2px dashed red;
+			background: #ffe5e5;
+		}
+
+		.label {
+			font-weight: bold;
+			margin-top: 20px;
+		}
+
+		/* Parent grid */
+		.parent {
+			display: grid;
+			grid-template-columns: 150px 1fr 1fr;
+			gap: 8px;
+			background: #f0f0f0;
+			padding: 12px;
+			margin-top: 20px;
+		}
+
+		/* Child grid inherits the parent’s columns */
+		.child {
+			display: grid;
+			grid-template-columns: subgrid;
+			grid-column: 1 / -1;
+			/* gap: 8px; */
+			background: #e8f6ff;
+			/* padding: 10px; */
+		}
+
+		.box {
+			background: #cce4ff;
+			padding: 6px;
+			border: 1px solid #4a90e2;
+		}
+	</style>
+</head>
+
+<body>
+	<h2>Normal wrapper (display: block)</h2>
+	<div class="wrapper-box">
+		<div class="item">Item A</div>
+		<div class="item">Item B</div>
+	</div>
+
+	<h2>Wrapper with display: contents</h2>
+	<!-- This wrapper won't create its own box;
+		children behave as if they were direct siblings -->
+	<div class="wrapper-contents">
+		<div class="item">Item C</div>
+		<div class="item">Item D</div>
+	</div>
+
+	<h2>Safe use of display: contents</h2>
+	<p>The wrapper disappears, but its children still lay out normally.</p>
+
+	<div class="safe-wrapper">
+		<div class="item">Item A</div>
+		<div class="item">Item B</div>
+	</div>
+
+	<hr>
+
+	<h2>Unsafe: interactive element</h2>
+	<p>Buttons lose their focus box and accessibility tree position.</p>
+
+	<button class="bad-button">
+		<span>Click Me</span>
+	</button>
+
+	<hr>
+
+	<h2>Unsafe: landmark element</h2>
+	<p>Landmarks like &lt;nav&gt; vanish from the accessibility tree.</p>
+
+	<nav class="bad-nav">
+		<a href="#">Home</a> |
+		<a href="#">About</a>
+	</nav>
+
+	<hr>
+
+	<h2>Unsafe: ARIA role or label</h2>
+	<p>ARIA roles break because the element no longer generates a box.</p>
+
+	<div class="bad-role" role="region" aria-label="Important Section">
+		<p>This region becomes inaccessible.</p>
+	</div>
+
+	<h2>Subgrid Example</h2>
+	<p>The child grid inherits the parent's column structure.</p>
+
+	<div class="parent">
+		<div class="box">Parent Col 1</div>
+		<div class="box">Parent Col 2</div>
+		<div class="box">Parent Col 3</div>
+
+		<div class="child">
+			<div class="box">Child aligns to Col 1</div>
+			<div class="box">Child aligns to Col 2</div>
+			<div class="box">Child aligns to Col 3</div>
+		</div>
+	</div>
+</body>
+
+</html>
