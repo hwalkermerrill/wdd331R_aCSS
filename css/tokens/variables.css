@@ -45,6 +45,11 @@
 	/* Transitions */
 	--transition-base: 0.2s ease;
 
+	/* Layout */
+	--layout-container-small: 24rem;
+	--layout-container-medium: 48rem;
+	--layout-container-large: 72rem;
+
 	/* Opacity */
 	--opacity-disabled: 0.6;
 

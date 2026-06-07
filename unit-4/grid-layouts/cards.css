@@ -1,0 +1,60 @@
+/* Fix weird interaction with text not having access to my fun indiana jones font */
+:where(h1) {
+	margin-top: var(--spacing-sm);
+	margin-bottom: var(--spacing-sm);
+}
+
+:where(h1, h2) {
+	text-shadow: var(--shadow-lg);
+	color: var(--color-primary);
+}
+
+/* Card Assignment CSS */
+.articles-page .card-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+	gap: var(--spacing-lg);
+	max-width: var(--layout-container-large);
+	margin-inline: auto;
+	padding-inline: var(--spacing-md);
+	padding-block: var(--spacing-lg);
+}
+
+.articles-page .card {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-md);
+	background: var(--color-surface, white);
+	padding: var(--spacing-lg);
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-md);
+	height: 100%;
+	cursor: pointer;
+}
+
+.articles-page .card > div[aria-hidden="true"] {
+	background: linear-gradient(
+		to bottom right,
+		var(--accent-300),
+		var(--accent-600)
+	);
+	height: 12rem;
+	border-radius: var(--radius-sm);
+}
+
+.articles-page .card a {
+	margin-top: auto;
+	font-weight: bold;
+	color: var(--color-link);
+	text-decoration: none;
+}
+
+.articles-page .card a:hover {
+	color: var(--color-link-hover);
+	text-decoration: underline;
+}
+
+/* display contents forced inclusion */
+.articles-page .card > div:not([aria-hidden]) {
+	display: contents;
+}
