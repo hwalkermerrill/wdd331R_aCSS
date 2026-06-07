@@ -31,12 +31,21 @@ wdd331R_aCSS
 └── index.html
 ```
 
-## Pages
+## Main Pages
 
 - [Home](index.html)
 - [Custom Properties and Nesting](unit-1/custom-properties/index.html)
 - [Layered Components](unit-2/layered-components/index.html)
+- [Visual Effects](unit-3/visual-effects/index.html)
+- [Editorial Layout](unit-4/grid-layouts/editorial.html)
+- [Grid Layouts](unit-4/grid-layouts/cards.html)
+
+## Demo Pages
+
 - [Attribute Selectors](demo/attributeSelectors.html)
+- [::Part and ::Slotted](unit-2/part-and-slotted/index.html)
+- [Contrast Color](demo/contrastColor.html)
+- [Display: Contents](demo/displayContents.html)
 
 ## CSS
 
