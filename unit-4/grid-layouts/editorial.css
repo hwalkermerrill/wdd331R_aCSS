@@ -1,0 +1,55 @@
+/* Fix weird interaction with text not having access to my fun indiana jones font */
+:where(h1, h2) {
+	text-shadow: var(--shadow-lg);
+	color: var(--color-primary);
+}
+
+/* Header and Footer */
+.editorial-page header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-inline: var(--spacing-lg);
+	padding-block: var(--spacing-md);
+	gap: var(--spacing-md);
+}
+
+.editorial-page header nav {
+	display: flex;
+	gap: var(--spacing-md);
+	white-space: nowrap;
+}
+
+.editorial-page footer {
+	text-align: center;
+	padding-block: var(--spacing-md);
+	padding-inline: var(--spacing-lg);
+}
+
+/* Grid Layout CSS */
+.editorial-page .layout {
+	display: grid;
+	grid-template-columns: minmax(min(16rem, 100%), 1fr);
+	grid-template-areas:
+		"main"
+		"sidebar";
+	gap: var(--spacing-lg);
+	max-width: var(--layout-container-large);
+	margin-inline: auto;
+	padding-inline: var(--spacing-lg);
+}
+
+.editorial-page .layout main {
+	grid-area: main;
+}
+
+.editorial-page .layout aside {
+	grid-area: sidebar;
+}
+
+@media (min-width: 48rem) {
+	.editorial-page .layout {
+		grid-template-columns: minmax(0, 1fr) minmax(min(20rem, 100%), 0.4fr);
+		grid-template-areas: "main sidebar";
+	}
+}
