@@ -64,7 +64,7 @@
 
 	<!-- NAV HERE -->
 	<nav class="site-nav">
-		<h2>Assignments:</h2>
+		<h2>Demo Links:</h2>
 		<ul>
 			<li><a href="../index.html">Home</a></li>
 			<li><a href="demo/attributeSelectors.html"> Attribute Selectors</a></li>
@@ -78,7 +78,143 @@
 	<main class="clearfix" id="maincontent">
 		<h1>Container Queries</h1>
 		<section>
-			<h2>How They Work</h2>
+			<h2>Why Should I?</h2>
+			<ul>
+				<li>Viewports versus Containers</li>
+				<li>Reusability of component code</li>
+				<li>Typographic Advantages</li>
+				<li>Style Function</li>
+			</ul>
+		</section>
+		<section>
+			<h2>How to Write Query Units</h2>
+			<p>Container queries use the same syntax as media queries, but with a different unit (all starting with cq): </p>
+			<ul>
+				<li><code>cqi</code> - Container Query Inline Size (Width, 90%+ of the usage)</li>
+				<li><code>cqb</code> - Container Query Block Size (Height, USE WITH CAUTION, SEE BELOW)</li>
+				<li><code>cqw</code> - Container Query Width (Ignore writing mode)</li>
+				<li><code>cqh</code> - Container Query Height (Ignore writing mode)</li>
+				<li><code>cqmin</code> - Container Query Min (Uses the smaller of cqi and cqb)</li>
+				<li><code>cqmax</code> - Container Query Min/Max (Uses the larger of cqi and cqb)</li>
+			</ul>
+			<p>We can implement this simply in any place where we would use vw, such as: </p>
+			<figure>
+				<pre><code>
+					.card {
+						container-type: inline-size; // This sets the .card as a container that responds to its inline size (width).
+						font-size: 1.5cqi; // This is in place of 1.5vw, responding to the container instead of the entire viewport.
+						padding: 1cqi; // Same idea, using the container to determine padding instead of viewport or a fixed rem value.
+					}
+				</code></pre>
+			</figure>
+			<p>Since this scales with the container, this may produce text that is too small narrow containers, or too wide in
+				large containers. Just like using clamp with media queries for responsive layout,s, we can use clamp to solve
+				this problem here too:
+			</p>
+			<figure>
+				<pre><code>
+					.card {
+						container-type: inline-size; // This is still needed to make the .card a container.
+						font-size: clamp(1rem, 1.5cqi, 2rem); // This sets a minimum and maximum font size to prevent it from getting too small or too large.
+						padding: clamp(0.5rem, 1cqi, 2rem); // Same idea for padding, ensuring it doesn't get too small or too large.
+					}
+				</code></pre>
+			</figure>
+			<p>A warning about <code>cqb</code>, <code>cqh</code>, and <code>cqmax</code>: If you use these for height, you
+				must manually set the container to container-type:size, not inline-size. This also means the height of the
+				object will not be determined by its contents, so you must give it an explicit height or it will collapse to a
+				height of 0. This means you should only use these with an object with an explicit, fixed height such as a
+				viewport-spanning hero image.
+			</p>
+			<figure>
+				<pre><code>
+					.hero-image {
+						container-type: size; // If this was set to inline-size or left blank (defaults to inline-size) this will not work.
+						height: 400px; // This is necessary to prevent the container from collapsing to a height of 0.
+						background-image: url('hero.jpg');
+						background-size: cover;
+						background-position: center;
+					}
+				</code></pre>
+			</figure>
+		</section>
+		<section>
+			<h2>Giving Container Style</h2>
+			<p>Size queries ask "How wide is my container?" but style queries ask "What custom properties should my container
+				have?" By writing a style query, we can make content that is reactive not just to screen size, but also to
+				custom properties. Heres an example from the reading:
+			</p>
+			<figure>
+				<pre><code>
+					/* The wrapper declares a theme signal */
+					.promo-section {
+							--variant: featured;
+					}
+
+					/* The component reads the signal from its container */
+					@container style(--variant: featured) {
+							.card {
+									background: var(--color-status-notice-bg);
+									border-color: var(--color-status-notice-fg);
+							}
+
+							.card-title {
+									color: var(--color-status-notice-fg);
+							}
+					}
+				</code></pre>
+			</figure>
+			<br>
+			<p>In this example, the .card does not need to know its in a promo section, it just reads the --variant its
+				nearest container ancestor has and adjusts accordingly, making the component genuinely context aware without
+				javascript or stacking classes (I.E. You don't need to have .card, .card .promo, .card .promo .light, .card
+				.product, .card .product .light, .card .product .sale, .card .product .sale .light etc. just to make everything
+				styled correctly.)
+			</p>
+			<p>You can combine these with theme broadcasters, and with any container type (such as container-type:
+				inline-size) to create containers whose content adapt both size and styling based on their content. Here's
+				another sample from the lessons reading:
+			</p>
+			<figure>
+				<pre><code>
+					/* Any wrapper can broadcast a variant signal */
+					.section-dark    { --surface: dark; }
+					.section-warning { --surface: warning; }
+					.section-success { --surface: success; }
+
+					/* All these wrappers are also size containers */
+					.section-dark,
+					.section-warning,
+					.section-success {
+							container-type: inline-size;
+					}
+
+					/* Components inside respond to the signal */
+					@container style(--surface: dark) {
+							.card { background: var(--color-surface-inverted); }
+							.btn  { border-color: white; color: white; }
+					}
+
+					@container style(--surface: warning) {
+							.card { background: var(--color-status-warning-bg); }
+							.btn  { background: var(--color-status-warning-fg); }
+					}
+				</code></pre>
+			</figure>
+		</section>
+		<section>
+			<h2>Limitations</h2>
+			<p>Container Queries have an 87.6% adoption rate across all browsers, and are implemented in all modern major
+				browsers with a small caveat: while fully rolled out across chromium and safari, some versions of firefox are
+				still rolling out support for container styles, and have planned to complete rollout by the end 2026.
+				Practically, this means you can expect every modern and major browser to support it in the near future, but for
+				critical components, you may want to consider hardcoding values or wrapping them in an @supports block.</p>
+			<p>Also, style readings cannot read computed values, only custom properties. For example, you cannot write
+				<code>@container style(background-color: red)</code> to detect a red background and style it accordingly. This
+				is to prevent circular dependencies and unpredictable behavior in the cascade. This should really be a problem,
+				but its important to know. The solution is to remember that this is a design tool to style content according to
+				signals from your system, and not an inspection tool to react to content that appears on the page.
+			</p>
 		</section>
 	</main>
 </body>
