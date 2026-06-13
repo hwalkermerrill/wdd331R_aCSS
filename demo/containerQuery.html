@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<!-- META DATA -->
+	<meta charset="utf-8">
+	<meta name="description" content="Container Queries Demo">
+	<meta name="author" content="Harrison Merrill">
+	<meta name="slogan" content="Postprocessing the Cascade">
+	<meta name="theme-color" content="#005633">
+	<!-- <meta http-equiv="refresh" content="300"> -->
+
+	<title>Harrison Merrill - Practice Site</title>
+
+	<!-- This tells MS Edge users to use Edge instead of IE -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<!-- TELLS PHONES NOT TO LIE ABOUT THEIR WIDTH-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- This loads the "Amiri", "Cabin Sketch", "Trade Winds", and "Indiana Jones" fonts while browsing this HTML-->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cabin+Sketch&family=Trade+Winds" rel="stylesheet">
+	<link href="https://fonts.cdnfonts.com/css/indiana-jonas" rel="stylesheet">
+
+	<!-- STYLE SHEETS -->
+	<link href="../dist/styles.css" rel="stylesheet">
+
+	<!-- SCRIPT HERE -->
+	<script src="../js/theme-preference.js"></script>
+</head>
+
+<body>
+	<!-- HEADER HERE -->
+	<header>
+		<details class="theme-menu">
+			<summary class="theme-control">
+				<span class="visually-hidden">Color scheme</span>
+			</summary>
+			<div class="theme-extra" role="group" aria-label="Choose color scheme">
+				<label class="theme-control theme-pick" data-theme-pick="light">
+					<input name="theme-preference" type="radio" value="light">
+					<span aria-hidden="true">&#9788;&#65039;</span>
+					<span class="visually-hidden">Light</span>
+				</label>
+				<label class="theme-control theme-pick" data-theme-pick="system">
+					<input name="theme-preference" type="radio" value="system" checked>
+					<span aria-hidden="true">&#9881;&#65039;</span>
+					<span class="visually-hidden">System default</span>
+				</label>
+				<label class="theme-control theme-pick" data-theme-pick="dark">
+					<input name="theme-preference" type="radio" value="dark">
+					<span aria-hidden="true">&#127766;</span>
+					<span class="visually-hidden">Dark</span>
+				</label>
+			</div>
+		</details>
+		<div class="slogan">
+			<h2>Harrison Merrill - Practice Site</h2>
+			<strong>Postprocessing the Cascade</strong>
+		</div>
+	</header>
+
+	<!-- NAV HERE -->
+	<nav class="site-nav">
+		<h2>Assignments:</h2>
+		<ul>
+			<li><a href="../index.html">Home</a></li>
+			<li><a href="demo/attributeSelectors.html"> Attribute Selectors</a></li>
+			<li><a href="demo/contrastColor.html"> contrast-color()</a></li>
+			<li><a href="demo/containerQuery.html" class="active"> Container Queries</a></li>
+			<li><a href="demo/displayContents.html"> display: contents</a></li>
+		</ul>
+	</nav>
+
+	<!-- CONTENT HERE -->
+	<main class="clearfix" id="maincontent">
+		<h1>Container Queries</h1>
+		<section>
+			<h2>How They Work</h2>
+		</section>
+	</main>
+</body>
