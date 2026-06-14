@@ -13,6 +13,8 @@
 .articles-page .card-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+	grid-template-rows: auto 1fr auto;
+	align-items: start;
 	gap: var(--spacing-lg);
 	max-width: var(--layout-container-large);
 	margin-inline: auto;
@@ -57,4 +59,13 @@
 /* display contents forced inclusion */
 .articles-page .card > div:not([aria-hidden]) {
 	display: contents;
+}
+
+@supports (grid-template-rows: subgrid) {
+	.articles-page .card {
+		display: grid;
+		grid-template-rows: subgrid;
+		grid-template-columns: subgrid;
+		grid-row: span 3;
+	}
 }
