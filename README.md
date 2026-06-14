@@ -46,6 +46,7 @@ wdd331R_aCSS
 - [::Part and ::Slotted](unit-2/part-and-slotted/index.html)
 - [Contrast Color](demo/contrastColor.html)
 - [Display: Contents](demo/displayContents.html)
+- [Container Queries](demo/containerQuery.html)
 
 ## CSS
 
