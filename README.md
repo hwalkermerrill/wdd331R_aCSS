@@ -40,6 +40,7 @@ wdd331R_aCSS
 - [Editorial Layout](unit-4/grid-layouts/editorial.html)
 - [Grid Layouts](unit-4/grid-layouts/cards.html)
 - [Container Demo](unit-4/advanced/container-demo.html)
+- [Sticky Demo](unit-4/advanced/sticky-demo.html)
 
 ## Demo Pages
 
