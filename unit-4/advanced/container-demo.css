@@ -1,0 +1,101 @@
+/* Fix weird interaction with text not having access to my fun indiana jones font */
+:where(h1) {
+	margin-top: var(--spacing-sm);
+	margin-bottom: var(--spacing-sm);
+}
+
+:where(h1, h2) {
+	text-shadow: var(--shadow-lg);
+	color: var(--color-primary);
+}
+
+/* Demo */
+.demo-layout {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--spacing-md);
+	align-items: flex-start;
+	max-width: 1200px;
+	margin-inline: auto;
+}
+
+.demo-container {
+	/* border: 2px solid var(--accent-500); */
+	padding: var(--spacing-md);
+	margin-block: var(--spacing-md);
+	container-type: inline-size;
+	container-name: card-demo;
+	--surface: default;
+	cursor: pointer;
+	transition:
+		transform 0.2s ease,
+		box-shadow 0.2s ease,
+		background var(--transition-base);
+}
+
+.demo-container.narrow {
+	width: clamp(240px, 15vw, 320px);
+}
+
+.demo-container.wide {
+	width: clamp(460px, 30vw, 720px);
+}
+
+.demo-container:hover {
+	transform: translateY(-4px);
+	box-shadow: var(--shadow-lg);
+}
+
+/* Container Queries */
+.cq-card {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-md);
+	background: var(--color-surface);
+	padding: var(--spacing-lg);
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-md);
+}
+
+.cq-card h2 {
+	font-size: clamp(1.1rem, 4cqi, 1.8rem);
+}
+
+.cq-card p {
+	font-size: clamp(0.9rem, 3cqi, 1.2rem);
+	line-height: 1.5;
+}
+
+.cq-card .media {
+	background: linear-gradient(
+		to bottom right,
+		var(--accent-300),
+		var(--accent-600)
+	);
+	height: clamp(8rem, 25cqi, 12rem);
+	border-radius: var(--radius-sm);
+}
+
+@container card-demo (min-width: 500px) {
+	.cq-card {
+		flex-direction: row;
+		align-items: center;
+	}
+
+	.cq-card .media {
+		width: 40%;
+		height: 100%;
+	}
+}
+
+@container card-demo (min-width: 800px) {
+	.cq-card {
+		flex-direction: row;
+		gap: clamp(1rem, 5cqi, 3rem);
+		padding: clamp(2rem, 6cqi, 4rem);
+	}
+
+	.cq-card h2 {
+		font-size: clamp(1.5rem, 6cqi, 2.5rem);
+	}
+}

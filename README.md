@@ -39,6 +39,8 @@ wdd331R_aCSS
 - [Visual Effects](unit-3/visual-effects/index.html)
 - [Editorial Layout](unit-4/grid-layouts/editorial.html)
 - [Grid Layouts](unit-4/grid-layouts/cards.html)
+- [Container Demo](unit-4/advanced/container-demo.html)
+- [Sticky Demo](unit-4/advanced/sticky-demo.html)
 
 ## Demo Pages
 
