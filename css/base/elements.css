@@ -79,6 +79,6 @@ pre code {
 	border-radius: 0.5rem;
 	white-space: pre;
 	overflow-x: auto;
-	font-family: var(--font-family-sans);
+	font-family: var(--font-family-mono);
 	font-size: 0.9em;
 }
