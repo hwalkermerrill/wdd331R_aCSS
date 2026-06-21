@@ -47,12 +47,10 @@ h3 {
 
 /* drop cap */
 .dropcap::first-letter {
-	/* Safari */
 	-webkit-initial-letter: 3;
-	/* Standard */
 	initial-letter: 3;
 	font-weight: 700;
-	color: var(--accent, #005633);
+	color: var(--color-accent, #005633);
 }
 
 /* clamp */
