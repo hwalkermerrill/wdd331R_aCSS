@@ -49,6 +49,7 @@ wdd331R_aCSS
 - [Contrast Color](demo/contrastColor.html)
 - [Display: Contents](demo/displayContents.html)
 - [Container Queries](demo/containerQuery.html)
+- [Text Properties](demo/textProperties.html)
 
 ## CSS
 

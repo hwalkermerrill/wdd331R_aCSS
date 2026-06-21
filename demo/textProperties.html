@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<!-- META DATA -->
+	<meta charset="utf-8">
+	<meta name="description" content="Text Properties Demo">
+	<meta name="author" content="Harrison Merrill">
+	<meta name="slogan" content="Postprocessing the Cascade">
+	<meta name="theme-color" content="#005633">
+	<!-- <meta http-equiv="refresh" content="300"> -->
+
+	<title>Harrison Merrill - Practice Site</title>
+
+	<!-- This tells MS Edge users to use Edge instead of IE -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<!-- TELLS PHONES NOT TO LIE ABOUT THEIR WIDTH-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- This loads the "Amiri", "Cabin Sketch", "Trade Winds", and "Indiana Jones" fonts while browsing this HTML-->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cabin+Sketch&family=Trade+Winds" rel="stylesheet">
+	<link href="https://fonts.cdnfonts.com/css/indiana-jonas" rel="stylesheet">
+
+	<!-- STYLE SHEETS -->
+	<link href="../dist/styles.css" rel="stylesheet">
+	<link href="css/textProp.css" rel="stylesheet">
+
+	<!-- SCRIPT HERE -->
+	<script src="../js/theme-preference.js"></script>
+</head>
+
+<body>
+	<!-- HEADER HERE -->
+	<header>
+		<details class="theme-menu">
+			<summary class="theme-control">
+				<span class="visually-hidden">Color scheme</span>
+			</summary>
+			<div class="theme-extra" role="group" aria-label="Choose color scheme">
+				<label class="theme-control theme-pick" data-theme-pick="light">
+					<input name="theme-preference" type="radio" value="light">
+					<span aria-hidden="true">&#9788;&#65039;</span>
+					<span class="visually-hidden">Light</span>
+				</label>
+				<label class="theme-control theme-pick" data-theme-pick="system">
+					<input name="theme-preference" type="radio" value="system" checked>
+					<span aria-hidden="true">&#9881;&#65039;</span>
+					<span class="visually-hidden">System default</span>
+				</label>
+				<label class="theme-control theme-pick" data-theme-pick="dark">
+					<input name="theme-preference" type="radio" value="dark">
+					<span aria-hidden="true">&#127766;</span>
+					<span class="visually-hidden">Dark</span>
+				</label>
+			</div>
+		</details>
+		<div class="slogan">
+			<h2>Harrison Merrill - Practice Site</h2>
+			<strong>Postprocessing the Cascade</strong>
+		</div>
+	</header>
+
+	<!-- NAV HERE -->
+	<nav class="site-nav">
+		<h2>Assignments:</h2>
+		<ul>
+			<li><a href="../index.html">Home</a></li>
+			<li><a href="./attributeSelectors.html">Attribute Selectors</a></li>
+			<li><a href="../unit-2/part-and-slotted/index.html">::part() and ::slotted()</a></li>
+			<li><a href="./contrastColor.html">Contrast Color</a></li>
+			<li><a href="./displayContents.html">Display Contents</a></li>
+			<li><a href="./containerQuery.html">Container Queries</a></li>
+			<li><a href="./textProperties.html" class="active">Text Properties</a></li>
+		</ul>
+	</nav>
+
+	<!-- CONTENT HERE -->
+	<main class="clearfix" id="maincontent">
+		<h1>Attribute Selectors - Live Demo</h1>
+		<ul>
+			<li>
+				<strong>Presence selector:</strong>
+				<code>[attribute]</code>
+				— matches any element that simply has the attribute, regardless of value.
+				Useful for styling disabled buttons, required fields, or anything with a boolean attribute.
+			</li>
+
+			<li>
+				<strong>Exact match selector:</strong>
+				<code>[attribute="value"]</code>
+				— matches elements whose attribute value matches exactly.
+				Great for targeting specific input types, file formats, or custom data attributes.
+			</li>
+
+			<li>
+				<strong>Substring matchers:</strong>
+				<ul>
+					<li><code>[^="prefix"]</code> — starts with (protocols, external links)</li>
+					<li><code>[$="suffix"]</code> — ends with (file extensions)</li>
+					<li><code>[*="content"]</code> — contains (naming patterns, utility classes)</li>
+				</ul>
+				These allow you to match partial attribute values, which is extremely useful for links, file types,
+				icon systems, and naming conventions.
+			</li>
+		</ul>
+
+		<p>
+			<br> Below are live examples of each selector type in action, styling without using classes or javascript.<br>
+		</p>
+
+		<section>
+			<h2>Presence & Exact Match</h2>
+			<p>
+				<strong>Presence selector:</strong> <code>[disabled]</code> matches any element that simply has the
+				attribute.<br>
+				<strong>Exact match:</strong> <code>[type="email"]</code> matches elements whose attribute value matches
+				exactly.
+			</p>
+
+			<input type="text" placeholder="Normal text input">
+			<input type="email" placeholder="Email input">
+			<br>
+			<button>Normal Button</button>
+			<button disabled>Disabled Button</button>
+		</section>
+
+		<section>
+			<h2>Substring Matchers</h2>
+			<p>
+				These selectors match parts of attribute values:<br>
+				<code>^=</code> starts with • <code>$=</code> ends with • <code>*=</code> contains •
+				<code>starts with::before</code>
+			</p>
+
+			<a href="https://google.com">External Link</a>
+			<a href="/local/page.html">Internal Link</a>
+			<a href="files/report.pdf">PDF File</a>
+			<a href="mailto:test@example.com">Email Me</a>
+		</section>
+
+		<section>
+			<h2>Contains Selector (*=)</h2>
+			<p>
+				The <code>[class*="grid"]</code> selector matches any element whose class attribute contains the substring
+				"grid". This allows styling based on naming patterns.
+			</p>
+
+			<div class="demo-grid-container">
+				<div class="grid-item">Item 1</div>
+				<div class="grid-item">Item 2</div>
+				<div class="grid-item">Item 3</div>
+			</div>
+		</section>
+
+		<section>
+			<h2>Whitespace Word Match (~=)</h2>
+			<p>
+				The <code>[class~="active"]</code> selector matches when the class attribute contains the word "active" as a
+				space‑separated token.
+			</p>
+
+			<p class="note active">This paragraph has the word "active" in its class list.</p>
+			<p class="note inactive">This paragraph does not.</p>
+		</section>
+
+		<section>
+			<h2>Language Prefix Selector (|=)</h2>
+			<p>
+				The <code>[|=]</code> selector matches exact values or values followed by a hyphen. This can be used anywhere,
+				but is most often used for languages. <code>[lang|="en"]</code> selector matches <code>lang="en"</code> and
+				<code>lang="en-US"</code>. This is useful for localization, language‑specific styling, or adjusting typographic
+				conventions. The following three paragraphs use lang="en-US", lang="fr", and lang="ja" respectively:
+			</p><br>
+			<p lang="en-US">This text should use <q>English-style quotes</q>.</p>
+			<p lang="fr">Ce texte devrait utiliser <q>des guillemets français</q>.</p>
+			<p lang="ja">このテキストは <q>日本語の引用符</q> を使用します。</p>
+		</section>
+
+		<section>
+			<h2>Data Attributes</h2>
+			<p>
+				Data attributes allow you to store custom information on elements. CSS can style based on these values using
+				selectors like <code>[data-theme="warning"]</code> — no JavaScript required.
+			</p>
+
+			<div class="card" data-theme="success">Success Card</div>
+			<div class="card" data-theme="warning">Warning Card</div>
+			<div class="card" data-theme="info">Info Card</div>
+		</section>
+
+		<section>
+			<h2>Case-Insensitive Matching</h2>
+			<p>
+				Adding the <code>i</code> flag makes the match case‑insensitive:
+				<code>[data-state="open" i]</code> matches "open", "OPEN", "Open", etc.
+			</p>
+
+			<strong>Case-Insensitive (i)</strong>
+			<div data-state="OPEN">OPEN</div>
+			<div data-state="open">open</div>
+			<div data-state="Open">Open</div>
+			<br>
+			<strong>Case-Sensitive (default)</strong>
+			<div data-state="SHUT">SHUT (no match)</div>
+			<div data-state="shut">shut (no match)</div>
+			<div data-state="Shut">Shut (matches)</div>
+		</section>
+
+		<section>
+			<h2>Specificity</h2>
+			<p>
+				Attribute selectors have the same specificity as classes. For example,
+				<code>button[data-variant="danger"]</code> can override a base button style.
+			</p>
+
+			<button class="btn" data-variant="danger">Danger Button</button>
+		</section>
+	</main>
+
+</body>
