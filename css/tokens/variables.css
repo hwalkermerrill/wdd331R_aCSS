@@ -4,9 +4,9 @@
 :root {
 	/* Typography */
 	--font-family-sans: "Amiri", system-ui, -apple-system, sans-serif;
-	--font-family-serif: "Trade Winds", "Amiri", serif;
+	--font-family-serif: "Trade Winds", "Cabin Sketch", "Amiri", serif;
 	--font-family-mono: "Courier New", Courier, monospace;
-	--font-family-head: "Indiana Jonas", "Cabin Sketch", serif;
+	--font-family-head: "Indiana Jonas", serif;
 	--font-size-xs: clamp(1rem, 0.028vw + 0.9rem, 1.125rem);
 	--font-size-sm: clamp(1.25rem, 0.034vw + 1.13rem, 1.5rem);
 	--font-size-md: clamp(1.5rem, 0.043vw + 1.32rem, 1.875rem);
