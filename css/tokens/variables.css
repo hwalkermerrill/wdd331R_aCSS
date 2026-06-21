@@ -1,5 +1,6 @@
 /* slope = (max-size - min-size) / (max-vw - min-vw) */
 /* intercept = min-size - (slope × min-vw) */
+/* min-vw: 360, max-vw: 1280 */
 :root {
 	/* Typography */
 	--font-family-sans: "Amiri", system-ui, -apple-system, sans-serif;

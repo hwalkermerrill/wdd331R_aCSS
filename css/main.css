@@ -20,6 +20,7 @@ I have similarly not yet used the github copilot extension's code completion for
 @layer vendors, tokens, base, layout, components, utilities;
 
 /* Vendor Imports */
+@import url("vendors/fonts.css") layer(vendors);
 
 /* Tokens */
 @import url("tokens/colors.css") layer(tokens);
