@@ -1,0 +1,98 @@
+:root {
+	font-size: 18px;
+	line-height: 1.5;
+}
+
+/* Fix weird interaction with text not having access to my fun indiana jones font */
+:where(h1) {
+	margin-top: var(--spacing-sm);
+	margin-bottom: var(--spacing-sm);
+}
+
+/* :where(h1, h2) {
+	text-shadow: var(--shadow-lg);
+	color: var(--color-primary);
+} */
+
+/* reinput code blocks */
+pre code {
+	display: block;
+	padding: 1em;
+	background: var(--color-surface);
+	border-radius: 0.5rem;
+	white-space: pre;
+	overflow-x: auto;
+	font-family: "Courier New", monospace;
+	font-size: 0.9em;
+}
+
+/* text wrap*/
+h1,
+h2,
+h3 {
+	text-wrap: balance;
+}
+
+.balanced-heading {
+	text-wrap: balance;
+	max-width: 40ch;
+	margin-block: 1lh;
+}
+
+.pretty-body {
+	text-wrap: pretty;
+	max-width: 65ch;
+	margin-block: 1lh;
+}
+
+/* drop cap */
+.dropcap::first-letter {
+	/* Safari */
+	-webkit-initial-letter: 3;
+	/* Standard */
+	initial-letter: 3;
+	font-weight: 700;
+	color: var(--accent, #005633);
+}
+
+/* clamp */
+.clamp {
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	max-width: 65ch;
+	line-height: 2;
+}
+
+/* units*/
+.measure-demo {
+	max-width: 65ch;
+	margin-block: 1lh;
+}
+
+.ex-box {
+	padding: 2ex;
+	background: var(--surface-2);
+	border-radius: 0.5rem;
+	margin-block: 1lh;
+}
+
+/* rhythm */
+.rhythm-demo p {
+	margin-block: 1lh;
+}
+
+.rhythm-heading {
+	margin-block-start: 2rlh;
+}
+
+/* Font Slider */
+#font-size-control {
+	margin-block: 2lh;
+}
+
+#fontSizeSlider {
+	width: 100%;
+	max-width: 40ch;
+}
