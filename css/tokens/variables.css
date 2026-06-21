@@ -1,15 +1,27 @@
+/* slope = (max-size - min-size) / (max-vw - min-vw) */
+/* intercept = min-size - (slope × min-vw) */
 :root {
 	/* Typography */
 	--font-family-sans: "Amiri", system-ui, -apple-system, sans-serif;
 	--font-family-serif: "Trade Winds", "Amiri", serif;
 	--font-family-mono: "Courier New", Courier, monospace;
 	--font-family-head: "Indiana Jonas", "Cabin Sketch", serif;
-	--font-size-base: 1rem;
-	--font-size-sm: 1.2rem;
-	--font-size-md: 1.4rem;
-	--font-size-lg: 1.8rem;
-	--font-size-header: 2.4rem;
-	--font-size-header-lg: 4.8rem;
+	--font-size-xs: clamp(1rem, 0.028vw + 0.9rem, 1.125rem);
+	--font-size-sm: clamp(1.25rem, 0.034vw + 1.13rem, 1.5rem);
+	--font-size-md: clamp(1.5rem, 0.043vw + 1.32rem, 1.875rem);
+	--font-size-lg: clamp(1.875rem, 0.054vw + 1.63rem, 2.35rem);
+	--font-size-xl: clamp(2.35rem, 0.067vw + 2.03rem, 2.95rem);
+	--font-size-2xl: clamp(2.95rem, 0.084vw + 2.55rem, 3.7rem);
+	--font-size-3xl: clamp(3.7rem, 0.105vw + 3.2rem, 4.6rem);
+
+	/* Semantic Font Sizes */
+	--font-size-body: var(--font-size-md);
+	--font-size-body-sm: var(--font-size-sm);
+	--font-size-caption: var(--font-size-xs);
+	--font-size-heading-sm: var(--font-size-lg);
+	--font-size-heading-md: var(--font-size-xl);
+	--font-size-heading-lg: var(--font-size-2xl);
+	--font-size-display: var(--font-size-3xl);
 
 	/* Spacing */
 	--spacing-xs: 0.25rem;
@@ -17,7 +29,7 @@
 	--spacing-md: 1rem;
 	--spacing-lg: 2rem;
 	--spacing-xl: 4rem;
-	--line-height: 1.6;
+	--line-height: 1.5;
 
 	/* Radii */
 	--radius-sm: 0.25rem;
@@ -34,8 +46,7 @@
 		0 4px 8px var(--shadow-color), 0 12px 24px var(--shadow-color-soft),
 		0 24px 48px var(--shadow-color-softer);
 	--shadow-indiana:
-		2px 2px 0 var(--shadow-indy-warm), 4px 4px 6px var(--shadow-color-soft),
-		8px 8px 16px var(--shadow-color-softer);
+		2px 2px 0 var(--shadow-indy-warm), 4px 4px 4px var(--shadow-color-soft);
 	--shadow-legible: 0 1px 3px var(--shadow-color-text);
 	--shadow-neon:
 		0 0 4px color-mix(in oklch, var(--color-accent) 80%, white),
@@ -71,7 +82,10 @@
 	--font-body: var(--font-family-sans);
 	--font-secondary: var(--font-family-serif);
 	--font-tertiary: var(--font-family-head);
-	--text-sm: var(--font-size-base);
+	--font-size-base: var(--font-size-md);
+	--font-size-header: var(--font-size-heading-md);
+	--font-size-header-lg: var(--font-size-heading-lg);
+	--text-sm: var(--font-size-sm);
 	--text-base: var(--font-size-base);
 	--text-lg: var(--font-size-md);
 	--text-xl: var(--font-size-lg);

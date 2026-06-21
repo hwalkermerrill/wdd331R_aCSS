@@ -52,7 +52,7 @@
 	);
 	--color-metallic-highlight: linear-gradient(
 		to bottom,
-		oklch(0.95 0.05 95 / 0.6) 0%,
+		oklch(0.95 0.05 95 / 0.35) 0%,
 		oklch(0.9 0.04 95 / 0) 40%
 	);
 
@@ -112,7 +112,7 @@ html {
 	--header-text: light-dark(#ffffff, #f0f4f8);
 
 	/* ---- Indiana Light-Dark ---- */
-	--indy-stroke: light-dark(oklch(0.18 0.02 40), oklch(0.85 0.02 40));
+	--indy-stroke: light-dark(oklch(0.22 0.03 40), oklch(0.3 0.02 40));
 	--color-indiana-gradient: light-dark(
 		var(--color-indiana-gradient-light),
 		var(--color-indiana-gradient-dark)

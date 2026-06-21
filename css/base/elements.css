@@ -3,30 +3,34 @@
    Reference tokens with var(). */
 
 body {
-	font-family: var(--font-body);
+	font-family: var(--font-family-sans);
+	font-size: var(--font-size-body);
 	line-height: var(--line-height);
 	color: var(--color-text);
 	background-color: var(--color-background);
 }
 
 h1 {
-	font-size: var(--font-size-header-lg);
+	font-size: var(--font-size-display);
 }
 
 h2 {
-	font-size: var(--font-size-header);
+	font-size: var(--font-size-heading-lg);
 }
 
 :where(h1, h2) {
+	position: relative;
 	margin-top: var(--spacing-sm);
 	margin-bottom: var(--spacing-sm);
-	font-weight: bold;
-	font-family: var(--font-tertiary);
+	padding-block: var(--spacing-xs);
+	font-family: var(--font-family-head);
 	background-image: var(--color-indiana-gradient);
 	background-clip: text;
 	color: transparent;
-	text-shadow: var(--shadow-indiana);
-	stroke: 2px var(--indy-stroke);
+	filter: drop-shadow(2px 2px 0 var(--shadow-indy-warm));
+	-webkit-text-stroke: 0.25px var(--indy-stroke);
+	text-wrap: balance;
+	line-height: 0.9;
 }
 
 :where(h1, h2)::after {
@@ -40,13 +44,14 @@ h2 {
 }
 
 :where(h3, h4, h5, h6) {
-	font-family: var(--font-secondary);
+	font-family: var(--font-family-serif);
 	line-height: var(--line-height);
 	color: var(--color-primary);
+	text-wrap: balance;
 }
 
 nav {
-	font-family: var(--font-secondary);
+	font-family: var(--font-family-serif);
 	text-decoration: none;
 	font-size: var(--font-size-lg);
 }
@@ -66,3 +71,14 @@ p {
 /* img {
 	filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.9));
 } */
+
+pre code {
+	display: block;
+	padding: 1em;
+	background: var(--color-surface);
+	border-radius: 0.5rem;
+	white-space: pre;
+	overflow-x: auto;
+	font-family: var(--font-family-sans);
+	font-size: 0.9em;
+}

@@ -18,3 +18,21 @@ main {
 main > section {
 	margin-bottom: var(--spacing-xl, 3rem);
 }
+
+/* drop cap */
+.dropcap::first-letter {
+	-webkit-initial-letter: 3;
+	initial-letter: 3;
+	font-weight: 700;
+	color: var(--color-accent, #005633);
+}
+
+/* clamp */
+.clamp {
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	max-width: 65ch;
+	line-height: 2;
+}
