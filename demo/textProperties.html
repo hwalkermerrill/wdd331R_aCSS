@@ -30,6 +30,23 @@
 
 	<!-- SCRIPT HERE -->
 	<script src="../js/theme-preference.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			const slider = document.getElementById('fontSizeSlider');
+			const valueLabel = document.getElementById('fontSizeValue');
+			const root = document.documentElement;
+
+			const update = () => {
+				const size = slider.value + 'px';
+				root.style.fontSize = size;
+				valueLabel.textContent = size;
+			};
+
+			update();
+			slider.addEventListener('input', update);
+		});
+	</script>
+
 </head>
 
 <body>
@@ -79,145 +96,156 @@
 
 	<!-- CONTENT HERE -->
 	<main class="clearfix" id="maincontent">
-		<h1>Attribute Selectors - Live Demo</h1>
-		<ul>
-			<li>
-				<strong>Presence selector:</strong>
-				<code>[attribute]</code>
-				— matches any element that simply has the attribute, regardless of value.
-				Useful for styling disabled buttons, required fields, or anything with a boolean attribute.
-			</li>
-
-			<li>
-				<strong>Exact match selector:</strong>
-				<code>[attribute="value"]</code>
-				— matches elements whose attribute value matches exactly.
-				Great for targeting specific input types, file formats, or custom data attributes.
-			</li>
-
-			<li>
-				<strong>Substring matchers:</strong>
-				<ul>
-					<li><code>[^="prefix"]</code> — starts with (protocols, external links)</li>
-					<li><code>[$="suffix"]</code> — ends with (file extensions)</li>
-					<li><code>[*="content"]</code> — contains (naming patterns, utility classes)</li>
-				</ul>
-				These allow you to match partial attribute values, which is extremely useful for links, file types,
-				icon systems, and naming conventions.
-			</li>
-		</ul>
-
-		<p>
-			<br> Below are live examples of each selector type in action, styling without using classes or javascript.<br>
+		<h1>Text Properties & Font-Relative Units</h1>
+		<p class="intro">
+			For years, common typographic problems like balanced headings, drop caps, and multi-line truncation required
+			manual hacks and the utilization of scripts, like javascript. Modern CSS now solves all three natively and pairs
+			them with font-relative units that size layout by the font itself instead of guessed pixel values.
 		</p>
 
-		<section>
-			<h2>Presence & Exact Match</h2>
-			<p>
-				<strong>Presence selector:</strong> <code>[disabled]</code> matches any element that simply has the
-				attribute.<br>
-				<strong>Exact match:</strong> <code>[type="email"]</code> matches elements whose attribute value matches
-				exactly.
-			</p>
-
-			<input type="text" placeholder="Normal text input">
-			<input type="email" placeholder="Email input">
-			<br>
-			<button>Normal Button</button>
-			<button disabled>Disabled Button</button>
+		<section id="font-size-control">
+			<h2>Adjust Font Size</h2>
+			<input type="range" id="fontSizeSlider" min="12" max="21" value="18">
+			<label for="fontSizeSlider"><span id="fontSizeValue">18px</span></label>
 		</section>
 
-		<section>
-			<h2>Substring Matchers</h2>
-			<p>
-				These selectors match parts of attribute values:<br>
-				<code>^=</code> starts with • <code>$=</code> ends with • <code>*=</code> contains •
-				<code>starts with::before</code>
+		<section id="balance-pretty">
+			<h2>Balanced & Pretty Text Wrapping</h2>
+			<p class="explain">
+				<code>text-wrap: balance</code> creates visually balanced headings by distributing words across lines. This is
+				widely supported in modern browsers, but is computationally intensive and cannot be used on properties more than
+				6 lines long. For this reason, it is best used in asides, headings, and other short text blocks.
+				<br>
+				<code>text-wrap: pretty</code> improves body copy by avoiding widows, orphans, and awkward breaks by balancing
+				the last three lines. This in effect is the balance property but only applied to the end of a paragraph, making
+				it much less demanding and useful for all types of text. However, support for this codex is still rolling out,
+				and it should be use with mindfulness.
 			</p>
 
-			<a href="https://google.com">External Link</a>
-			<a href="/local/page.html">Internal Link</a>
-			<a href="files/report.pdf">PDF File</a>
-			<a href="mailto:test@example.com">Email Me</a>
+			<h3 class="balanced-heading">
+				This is a long heading demonstrating balanced wrapping for multi-line titles. Because it is widely supported,
+				this should appear roughly evenly across nearly all browsers.
+			</h3>
+
+			<p class="pretty-body">
+				This paragraph uses <code>text-wrap: pretty</code> to avoid unpleasant line breaks and create smoother reading
+				flow across multiple lines of text. Since this sin't as widely supported, it is more likely to fallback to
+				default rendering. Fortunately, if its not supported, it will naturally fallback to regular text wrapping, which
+				usually looks fine, if a bit uneven.
+			</p>
 		</section>
 
-		<section>
-			<h2>Contains Selector (*=)</h2>
-			<p>
-				The <code>[class*="grid"]</code> selector matches any element whose class attribute contains the substring
-				"grid". This allows styling based on naming patterns.
+		<section id="drop-caps">
+			<h2>Drop Caps with initial-letter</h2>
+			<p class="explain">
+				<code>initial-letter</code> applied to <code>::first-letter</code> creates a drop cap by raising the first
+				letter across multiple lines, mirroring print media. You can set how many lines tall the letter is, and
+				optionally, how many lines it sinks below the first line.
 			</p>
 
-			<div class="demo-grid-container">
-				<div class="grid-item">Item 1</div>
-				<div class="grid-item">Item 2</div>
-				<div class="grid-item">Item 3</div>
+			<p class="dropcap">
+				The quick brown fox jumped over the lazy dog.
+			</p>
+			<p><em>Notice how this text automatically shifts to accommodate the cool dropcap letter?</em></p>
+
+			<p class="support-note">
+				Safari ships <code>-webkit-initial-letter</code>, Chrome and Edge support the unprefixed property, and Firefox
+				does not support it at all yet. Ensure the paragraph still reads normally when the drop cap does not render, and
+				include both declarations to support maximum compatibility, such as in the following code block:
+			</p>
+			<pre><code>p::first-letter {
+  -webkit-initial-letter: 3;
+  initial-letter: 3;
+}</code></pre>
+		</section>
+
+		<section id="line-clamp">
+			<h2>Clamping Text to a Line Count</h2>
+			<p class="explain">
+				Truncating a card description to a fixed number of lines uses a four-declaration pattern:
+			</p>
+
+			<pre><code>.card-description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}</code></pre>
+
+			<div class="clamped-card">
+				<h3>Mountain Ridge Trail</h3>
+				<p class="clamp">
+					A demanding ascent that rewards hikers with sweeping views across three valleys. The trail climbs steadily
+					through pine forest before breaking above the treeline, where exposed granite switchbacks lead to a
+					windswept summit. Bring layers and start early to beat the afternoon weather that rolls in off the western
+					slopes during summer months.
+				</p>
+			</div>
+
+			<p class="support-note">
+				All four declarations are required: <code>-webkit-box</code> and its vertical orientation establish the context,
+				<code>-webkit-line-clamp</code> sets the line count, and <code>overflow: hidden</code> applies the ellipsis.
+				The prefixed version remains the reliable choice across browsers.
+			</p>
+		</section>
+
+
+		<section id="ch-measure">
+			<h2>The <code>ch</code> Unit & Line Length</h2>
+			<p class="explain">
+				<code>ch</code> is based on the width of the "0" glyph. In proportional fonts it approximates measure,
+				while in monospace fonts it equals exact character count. When using it in conjunction with
+				<code>max-width</code>, you can set approximately how many characters wide a line should be.
+			</p>
+
+			<p class="measure-demo">
+				This paragraph is constrained to <strong>65ch</strong>, a classic readable line length for body text.
+				Resize the page or change the font size to see how the measure adapts. Generally, a line of text should always
+				be set to between <strong>45-70ch</strong> wide. This is because if the line width is too short, your eye has to
+				jump a lot, while if the line is too long, your eye will lose track of which line to jump back to.
+				<strong>65ch</strong> is the classic value, balancing readability with preventing text from running
+				unnecessarily long, though dense text or text with large fonts may want to be a bit smaller (commonly
+				<strong>60ch</strong>). Both <strong>65ch</strong> and <strong>60ch</strong> are a good value for most use
+				cases, while smaller values might be used with particularly large text, long text bodies, or asides.
+			</p>
+
+			<p class="support-note">
+				The <code>ch</code> unit has universal browser support and is especially reliable for code blocks and
+				terminal-style layouts where monospace fonts make ch equal to exact character count.
+			</p>
+		</section>
+
+		<section id="ex-unit">
+			<h2>The <code>ex</code> Unit</h2>
+			<p class="explain">
+				<code>ex</code> equals the x-height of the current font, the height of a lowercase x. While not used often, it
+				can be useful when you need to size or align elements to the lowercase letterforms rather than the full font
+				size, such as matching an inline icon to the visual height of surrounding text.
+			</p>
+
+			<div class="ex-box">
+				This box uses <code>padding: 2ex</code> so its interior spacing scales with the font's x-height.
 			</div>
 		</section>
 
-		<section>
-			<h2>Whitespace Word Match (~=)</h2>
-			<p>
-				The <code>[class~="active"]</code> selector matches when the class attribute contains the word "active" as a
-				space‑separated token.
+		<section id="vertical-rhythm">
+			<h2>Vertical Rhythm with <code>lh</code> and <code>rlh</code></h2>
+			<p class="explain">
+				<code>lh</code> equals the computed line height of the current element, and <code>rlh</code> equals the
+				line height of the root element. Spacing blocks by these units keeps margins aligned with the baseline grid.
 			</p>
 
-			<p class="note active">This paragraph has the word "active" in its class list.</p>
-			<p class="note inactive">This paragraph does not.</p>
-		</section>
+			<div class="rhythm-demo">
+				<h3 class="rhythm-heading">Root Rhythm Heading</h3>
+				<p>Each paragraph in this block uses <code>margin-block: 1lh</code> to maintain rhythm.</p>
+				<p>Resize the font to see how spacing scales with the text itself.</p>
+				<p>Using <code>margin-block-start: 2rlh</code> on the heading ties it to the root rhythm instead.</p>
+			</div>
 
-		<section>
-			<h2>Language Prefix Selector (|=)</h2>
-			<p>
-				The <code>[|=]</code> selector matches exact values or values followed by a hyphen. This can be used anywhere,
-				but is most often used for languages. <code>[lang|="en"]</code> selector matches <code>lang="en"</code> and
-				<code>lang="en-US"</code>. This is useful for localization, language‑specific styling, or adjusting typographic
-				conventions. The following three paragraphs use lang="en-US", lang="fr", and lang="ja" respectively:
-			</p><br>
-			<p lang="en-US">This text should use <q>English-style quotes</q>.</p>
-			<p lang="fr">Ce texte devrait utiliser <q>des guillemets français</q>.</p>
-			<p lang="ja">このテキストは <q>日本語の引用符</q> を使用します。</p>
-		</section>
-
-		<section>
-			<h2>Data Attributes</h2>
-			<p>
-				Data attributes allow you to store custom information on elements. CSS can style based on these values using
-				selectors like <code>[data-theme="warning"]</code> — no JavaScript required.
+			<p class="support-note">
+				Use <code>lh</code> to space relative to an element's own text, and <code>rlh</code> to align everything
+				to a shared root rhythm. Both units are supported in current Chrome, Edge, Firefox, and Safari.
 			</p>
-
-			<div class="card" data-theme="success">Success Card</div>
-			<div class="card" data-theme="warning">Warning Card</div>
-			<div class="card" data-theme="info">Info Card</div>
-		</section>
-
-		<section>
-			<h2>Case-Insensitive Matching</h2>
-			<p>
-				Adding the <code>i</code> flag makes the match case‑insensitive:
-				<code>[data-state="open" i]</code> matches "open", "OPEN", "Open", etc.
-			</p>
-
-			<strong>Case-Insensitive (i)</strong>
-			<div data-state="OPEN">OPEN</div>
-			<div data-state="open">open</div>
-			<div data-state="Open">Open</div>
-			<br>
-			<strong>Case-Sensitive (default)</strong>
-			<div data-state="SHUT">SHUT (no match)</div>
-			<div data-state="shut">shut (no match)</div>
-			<div data-state="Shut">Shut (matches)</div>
-		</section>
-
-		<section>
-			<h2>Specificity</h2>
-			<p>
-				Attribute selectors have the same specificity as classes. For example,
-				<code>button[data-variant="danger"]</code> can override a base button style.
-			</p>
-
-			<button class="btn" data-variant="danger">Danger Button</button>
 		</section>
 	</main>
-
 </body>
