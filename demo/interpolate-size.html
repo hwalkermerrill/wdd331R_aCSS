@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<!-- META DATA -->
+	<meta charset="utf-8">
+	<meta name="description" content="interpolate-size Demo">
+	<meta name="author" content="Harrison Merrill">
+	<meta name="slogan" content="Postprocessing the Cascade">
+	<meta name="theme-color" content="#005633">
+	<!-- <meta http-equiv="refresh" content="300"> -->
+
+	<title>Harrison Merrill - Practice Site</title>
+
+	<!-- This tells MS Edge users to use Edge instead of IE -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<!-- TELLS PHONES NOT TO LIE ABOUT THEIR WIDTH-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- This loads the "Amiri", "Cabin Sketch", "Trade Winds", and "Indiana Jones" fonts while browsing this HTML-->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cabin+Sketch&family=Trade+Winds" rel="stylesheet">
+	<link href="https://fonts.cdnfonts.com/css/indiana-jonas" rel="stylesheet">
+
+	<!-- STYLE SHEETS -->
+	<link href="../dist/styles.css" rel="stylesheet">
+	<link href="css/interpolate-size.css" rel="stylesheet">
+
+	<!-- SCRIPT HERE -->
+	<script src="../js/theme-preference.js"></script>
+</head>
+
+<body>
+	<!-- HEADER HERE -->
+	<header>
+		<details class="theme-menu">
+			<summary class="theme-control">
+				<span class="visually-hidden">Color scheme</span>
+			</summary>
+			<div class="theme-extra" role="group" aria-label="Choose color scheme">
+				<label class="theme-control theme-pick" data-theme-pick="light">
+					<input name="theme-preference" type="radio" value="light">
+					<span aria-hidden="true">&#9788;&#65039;</span>
+					<span class="visually-hidden">Light</span>
+				</label>
+				<label class="theme-control theme-pick" data-theme-pick="system">
+					<input name="theme-preference" type="radio" value="system" checked>
+					<span aria-hidden="true">&#9881;&#65039;</span>
+					<span class="visually-hidden">System default</span>
+				</label>
+				<label class="theme-control theme-pick" data-theme-pick="dark">
+					<input name="theme-preference" type="radio" value="dark">
+					<span aria-hidden="true">&#127766;</span>
+					<span class="visually-hidden">Dark</span>
+				</label>
+			</div>
+		</details>
+		<div class="slogan">
+			<h2>Harrison Merrill - Practice Site</h2>
+			<strong>Postprocessing the Cascade</strong>
+		</div>
+	</header>
+
+	<!-- NAV HERE -->
+	<nav class="site-nav">
+		<h2>Assignments:</h2>
+		<ul>
+			<li><a href="../index.html">Home</a></li>
+			<li><a href="./attributeSelectors.html">Attribute Selectors</a></li>
+			<li><a href="../unit-2/part-and-slotted/index.html">::part() and ::slotted()</a></li>
+			<li><a href="./contrastColor.html">Contrast Color</a></li>
+			<li><a href="./displayContents.html">Display Contents</a></li>
+			<li><a href="./containerQuery.html">Container Queries</a></li>
+			<li><a href="./textProperties.html">Text Properties</a></li>
+			<li><a href="./interpolate-size.html" class="active">Interpolate Size</a></li>
+		</ul>
+	</nav>
+
+	<!-- CONTENT HERE -->
+	<main class="clearfix" id="maincontent">
+		<h1>interpolate-size</h1>
+		<p class="intro">
+			Animating an element from a fixed height to auto has been impossible in CSS for decades. The browser cannot
+			interpolate between a concrete value and a keyword it has not yet computed.
+			<code>interpolate-size: allow-keywords</code> changes that, enabling smooth height transitions on accordions,
+			disclosures, and any element that needs to expand to fit its content.
+		</p>
+		<br>
+		<section class="accordion">
+			<details>
+				<summary>What is interpolate-size?</summary>
+				<div class="panel">
+					<p>
+						<code>interpolate-size</code> allows CSS to animate between a fixed height and
+						<code>height: auto</code>, something that was impossible for decades, as the browser simply could not
+						resolve size keywords to concrete values. Browsers had no midpoint to interpolate. Some developers used to
+						animate max-height to a large arbitrary value as a workaround, but that caused the element to reach its
+						final size before the transition ended, making the easing feel wrong, as well as clamping content if the max
+						value was ever bypassed. That method is outdated. A javascript approach works, but adds overhead and
+						complexity to something that should be handled by pure CSS.
+					</p>
+				</div>
+			</details>
+
+			<details>
+				<summary>How does interpolate-size work?</summary>
+				<div class="panel">
+					<p>
+						Setting <code>interpolate-size: allow-keywords</code> on <code>:root</code> opts the entire page into
+						keyword interpolation. By adding that single line, the browser will treatt size keywords like auto, min,
+						max, ect. as animatable endpoints. Applying it to <code>:root</code> is recommended, which can be done on
+						your base elements.css file. Correct implementation typically looks like the following:
+					<pre><code>
+:root {
+	interpolate-size: allow-keywords;
+}
+</code></pre>
+					</p>
+				</div>
+			</details>
+
+			<details>
+				<summary>Usage Pattern</summary>
+				<div class="panel badOverflow">
+					<p>
+						With <code>interpolate-size: allow-keywords</code> set on <code>:root</code>, a height transition set to
+						<code>auto</code> works exactly as expected. The <code>overflow: hidden</code> is required to clip the
+						content during transition, as without it the content would become suddenly fully visible during animation.
+						This panel is intentionally broken, using <code>overflow: visible;</code> instead to demonstrate that
+						failure.
+					</p>
+					<p>Additionally, for accessibility, you should always opt-in to the users preferences for reducing-motion. A
+						good format for a block of code utilizing interpolated transitions might look something like this:</p>
+					<pre><code>
+.panel {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.35s ease;
+}
+details[open] .panel {
+    height: auto;
+}
+@media (prefers-reduced-motion: reduce) {
+    .panel {
+        transition: none;
+    }
+}
+</code></pre>
+				</div>
+			</details>
+			<details>
+				<summary>Browser Support</summary>
+				<div class="fallbackDemo">
+					<p>
+						This one intentionally doesn't work, showing what it looks like on a browser that doesn't support it.
+						The interpolate-size progressive enhancement is fully supported in Edge and Chrome, but not yet supported in
+						firefox or safari, but it should be treated as an easy addition that enhances HTML wherever its supported
+						and works natively without JavaScript. In unsupported browsers, it fails gracefully, by just not animating.
+						However, If you need it to animate anyway, you can force it to animate by using the following javascript:
+					<pre><code>
+if (!CSS.supports('interpolate-size', 'allow-keywords')) {
+  document.querySelectorAll('details').forEach((details) => {
+    const panel = details.querySelector('.panel');
+
+    details.addEventListener('toggle', () => {
+      panel.style.height = details.open
+        ? panel.scrollHeight + 'px'
+        : '0';
+    });
+  });
+}
+</code></pre>
+					</p>
+				</div>
+			</details>
+		</section>
+	</main>
+
+	<script>
+		if (!CSS.supports('interpolate-size', 'allow-keywords')) {
+			document.querySelectorAll('details').forEach((details) => {
+				const panel = details.querySelector('.panel');
+
+				details.addEventListener('toggle', () => {
+					panel.style.height = details.open
+						? panel.scrollHeight + 'px'
+						: '0';
+				});
+			});
+		}
+	</script>
+</body>
