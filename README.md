@@ -50,6 +50,7 @@ wdd331R_aCSS
 - [Display: Contents](demo/displayContents.html)
 - [Container Queries](demo/containerQuery.html)
 - [Text Properties](demo/textProperties.html)
+- [interpolate-size](demo/interpolate-size.html)
 
 ## CSS
 

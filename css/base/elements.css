@@ -2,6 +2,11 @@
    No classes here, only bare HTML element selectors.
    Reference tokens with var(). */
 
+:root {
+	interpolate-size: allow-keywords;
+	accent-color: var(--color-accent);
+}
+
 body {
 	font-family: var(--font-family-sans);
 	font-size: var(--font-size-body);
@@ -81,4 +86,10 @@ pre code {
 	overflow-x: auto;
 	font-family: var(--font-family-mono);
 	font-size: 0.9em;
+}
+
+textarea {
+	field-sizing: content;
+	min-height: 3lh;
+	max-height: 10lh;
 }
