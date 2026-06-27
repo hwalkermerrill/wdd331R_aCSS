@@ -42,6 +42,49 @@ I have similarly not yet used the github copilot extension's code completion for
 @import url("components/header.css") layer(components);
 @import url("components/nav.css") layer(components);
 @import url("components/effects.css") layer(components);
+@import url("components/panel.css") layer(components);
 
 /* Utilities */
 @import url("utilities/utilities.css") layer(utilities);
+
+/* Overrides */
+@media print {
+	/* Hide on Print */
+	:where(nav, footer, .site-header, .no-print, button, aside) {
+		display: none;
+	}
+	/* Handle Page Breaks */
+	:where(figure, blockquote, pre, .card) {
+		break-inside: avoid;
+	}
+	:where(h1, h2) {
+		/* break-before: page; */
+		break-after: avoid;
+	}
+	p {
+		orphans: 3;
+		widows: 3;
+	}
+
+	/* Handle Text */
+	body {
+		font-family: Georgia, serif;
+		font-size: 12pt;
+		line-height: 1.4;
+		max-width: 45em;
+		margin: 0 auto;
+		color: #000;
+		background: #fff;
+	}
+
+	/* Handle links */
+	a[href]::after {
+		content: " (" attr(href) ")";
+		font-size: 0.9em;
+		color: #555;
+	}
+	a[href^="/"]::after,
+	a[href^="#"]::after {
+		content: none;
+	}
+}
