@@ -1,0 +1,67 @@
+.contact-form {
+	max-width: 40rem;
+	margin: var(--space-xl) auto;
+	padding: var(--space-lg);
+	background: var(--color-text-light);
+	border-radius: var(--border-radius);
+	box-shadow: var(--box-shadow);
+	accent-color: var(--color-accent);
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-lg);
+}
+
+.contact-form .form-field {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-sm);
+}
+
+.contact-form label {
+	font-family: var(--font-secondary);
+	font-size: var(--font-size-lg);
+	color: var(--color-primary);
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+	padding: var(--space-sm) var(--space-md);
+	border-radius: var(--border-radius);
+	border: 2px solid var(--color-primary);
+	background-color: var(--color-background);
+	font-family: var(--font-body);
+	font-size: var(--font-size-base);
+	color: var(--color-text);
+	transition:
+		border-color 0.2s ease,
+		background-color 0.2s ease;
+}
+
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible {
+	outline: 3px solid var(--color-accent);
+	outline-offset: 2px;
+	background-color: var(--color-text-light);
+}
+
+/* Checkbox alignment */
+.contact-form .checkbox-inline {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--space-md);
+}
+
+.checkbox-inline input[type="checkbox"] {
+	margin: 0;
+}
+
+/* Textarea auto-grow (progressive enhancement) */
+textarea {
+	field-sizing: content;
+	min-height: 4rem;
+	max-height: 20rem;
+	resize: vertical;
+}
