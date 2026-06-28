@@ -9,3 +9,10 @@
 	column-count: 2;
 	column-gap: 2rem;
 }
+
+@media print {
+	/* Hide on Print */
+	:where(header) {
+		display: none;
+	}
+}

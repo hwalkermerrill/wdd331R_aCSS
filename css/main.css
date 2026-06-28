@@ -52,7 +52,7 @@ I have similarly not yet used the github copilot extension's code completion for
 /* Overrides */
 @media print {
 	/* Hide on Print */
-	:where(nav, footer, .site-header, .no-print, button, aside) {
+	:where(nav, footer, .site-header, .theme-menu, .no-print, button, aside) {
 		display: none;
 	}
 	/* Handle Page Breaks */
@@ -63,7 +63,6 @@ I have similarly not yet used the github copilot extension's code completion for
 		/* break-before: page; */
 		break-after: avoid;
 		font-family: "Trade Winds", serif;
-		color: #000;
 		background-image: none;
 	}
 	:where(em, ul) {
