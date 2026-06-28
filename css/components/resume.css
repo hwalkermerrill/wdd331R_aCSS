@@ -3,3 +3,9 @@
 	color: var(--color-primary);
 	background-image: none;
 }
+
+.multicolumn ul {
+	display: block;
+	column-count: 2;
+	column-gap: 2rem;
+}
