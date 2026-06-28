@@ -57,8 +57,14 @@ I have similarly not yet used the github copilot extension's code completion for
 	:where(figure, blockquote, pre, .card) {
 		break-inside: avoid;
 	}
-	:where(h1, h2) {
+	:where(h1, h2, h3) {
 		/* break-before: page; */
+		break-after: avoid;
+		font-family: "Trade Winds", serif;
+		color: #000;
+		background-image: none;
+	}
+	:where(em, ul) {
 		break-after: avoid;
 	}
 	p {
