@@ -49,7 +49,7 @@ I have similarly not yet used the github copilot extension's code completion for
 /* Utilities */
 @import url("utilities/utilities.css") layer(utilities);
 
-/* Overrides */
+/* Media Override Adjustments */
 @media print {
 	/* Hide on Print */
 	:where(nav, footer, .site-header, .theme-menu, .no-print, button, aside) {
