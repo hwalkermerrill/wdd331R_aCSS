@@ -78,21 +78,4 @@
 		transparent 40%,
 		oklch(0.1 0 0 / 0.6) 100%
 	);
-
-	/* Legacy names for backwards compatibility */
-	--font-body: var(--font-family-sans);
-	--font-secondary: var(--font-family-serif);
-	--font-tertiary: var(--font-family-head);
-	--font-size-base: var(--font-size-md);
-	--font-size-header: var(--font-size-heading-md);
-	--font-size-header-lg: var(--font-size-heading-lg);
-	--text-sm: var(--font-size-sm);
-	--text-base: var(--font-size-base);
-	--text-lg: var(--font-size-md);
-	--text-xl: var(--font-size-lg);
-	--space-xs: var(--spacing-xs);
-	--space-sm: var(--spacing-sm);
-	--space-md: var(--spacing-md);
-	--space-lg: var(--spacing-lg);
-	--space-xl: var(--spacing-xl);
 }
