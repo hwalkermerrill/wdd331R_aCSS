@@ -6,6 +6,6 @@ header {
 
 header .slogan h2 {
 	margin-bottom: var(--spacing-sm);
-	font-family: var(--font-secondary);
+	font-family: var(--font-family-serif);
 	color: var(--color-primary);
 }

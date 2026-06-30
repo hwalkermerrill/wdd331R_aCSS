@@ -3,16 +3,16 @@
    Reference tokens with var(). */
 
 body {
-  font-family: var(--font-body);
-  line-height: var(--line-height);
-  color: var(--color-text);
-  background-color: var(--color-background);
+	font-family: var(--font-body);
+	line-height: var(--line-height);
+	color: var(--color-text);
+	background-color: var(--color-background);
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-secondary);
-  line-height: var(--line-height);
-  color: var(--color-primary);
+:with(h1, h2, h3, h4, h5, h6) {
+	font-family: var(--font-secondary);
+	line-height: var(--line-height);
+	color: var(--color-primary);
 }
 
 nav {
@@ -22,12 +22,12 @@ nav {
 }
 
 a {
-  color: var(--color-link);
-		&:hover {
-  color: var(--color-accent);
+	color: var(--color-link);
+	&:hover {
+		color: var(--color-accent);
 	}
 }
 
 p {
-  padding: var(--space-sm);
+	padding: var(--space-sm);
 }

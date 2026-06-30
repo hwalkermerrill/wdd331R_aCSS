@@ -56,41 +56,21 @@
 		oklch(0.9 0.04 95 / 0) 40%
 	);
 
-	/* ---- Legacy Colors ---- */
-	--color-primary: var(--primary-600);
-	--color-primary-light: var(--primary-300);
-	--color-primary-hover: var(--primary-700);
-	--color-accent: var(--accent-500);
-	--color-link: var(--accent-500);
-	--color-background: var(--color-bg);
-	--color-background-light: var(--primary-200);
-	--color-background-dark: var(--primary-800);
-	--color-disabled: var(--color-text-muted);
-	--color-text-light: var(--header-text);
-	--color-text-muted: var(--color-text-muted);
-	--color-surface: var(--color-surface);
-	--color-border: var(--color-border);
-	--color-border-dark: var(--color-border-strong);
-}
+	/* ---- Indiana Light-Dark ---- */
+	--indy-stroke: light-dark(oklch(0.22 0.03 40), oklch(0.3 0.02 40));
+	--color-indiana-gradient: light-dark(
+		var(--color-indiana-gradient-light),
+		var(--color-indiana-gradient-dark)
+	);
 
-/* User chose dark */
-html:has(input[name="theme-preference"][value="dark"]:checked) {
-	color-scheme: dark;
-}
-/* User chose system and OS is dark */
-@media (prefers-color-scheme: dark) {
-	html:has(input[name="theme-preference"][value="system"]:checked) {
-		color-scheme: dark;
-	}
-}
-
-:root,
-html {
 	/* ---- Semantic tokens ---- */
+	--color-primary: var(--primary-600);
+	--color-link: var(--accent-500);
 	--color-bg: light-dark(var(--seed-bg), oklch(0.18 0.02 260));
 	--color-surface: light-dark(var(--seed-surface), oklch(0.22 0.03 260));
 	--color-text: light-dark(var(--seed-text), oklch(0.88 0.02 260));
 	--color-text-muted: light-dark(var(--seed-text-muted), oklch(0.68 0.03 250));
+	--color-disabled: var(--color-text-muted);
 	--color-accent: light-dark(var(--seed-accent), oklch(0.62 0.15 68));
 	--color-accent-hover: light-dark(
 		var(--seed-accent-hover),
@@ -104,21 +84,11 @@ html {
 		oklch(0.38 0.02 260)
 	);
 
-	/* Tint the native checkboxes, radios, and range sliders */
-	accent-color: var(--color-accent);
-
 	/* ---- Header chrome ---- */
 	--header-bg: var(--color-accent);
 	--header-text: light-dark(#ffffff, #f0f4f8);
 
-	/* ---- Indiana Light-Dark ---- */
-	--indy-stroke: light-dark(oklch(0.22 0.03 40), oklch(0.3 0.02 40));
-	--color-indiana-gradient: light-dark(
-		var(--color-indiana-gradient-light),
-		var(--color-indiana-gradient-dark)
-	);
-
-	/* ---- Theme toggle (consumed by theme-toggle.css) ---- */
+	/* ---- Theme toggle ---- */
 	--theme-toggle-bg: color-mix(
 		in srgb,
 		var(--header-text) 20%,
@@ -152,6 +122,22 @@ html {
 		oklch(0.25 0.05 40 / 0.55),
 		oklch(0.18 0.04 40 / 0.75)
 	);
+}
+
+html {
+	/* Tint the native checkboxes, radios, and range sliders */
+	accent-color: var(--color-accent);
+}
+
+/* User chose dark */
+html:has(input[name="theme-preference"][value="dark"]:checked) {
+	color-scheme: dark;
+}
+/* User chose system and OS is dark */
+@media (prefers-color-scheme: dark) {
+	html:has(input[name="theme-preference"][value="system"]:checked) {
+		color-scheme: dark;
+	}
 }
 
 /* --- @Support contrast-color() --- */
