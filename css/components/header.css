@@ -1,5 +1,6 @@
 header {
 	padding: var(--spacing-md);
+	padding-top: env(safe-area-inset-top, var(--spacing-md));
 	background-color: var(--color-accent);
 	color: var(--color-primary);
 }
@@ -7,5 +8,12 @@ header {
 header .slogan h2 {
 	margin-bottom: var(--spacing-sm);
 	font-family: var(--font-family-serif);
+	color: var(--color-primary);
+}
+
+footer {
+	padding: var(--spacing-md);
+	padding-bottom: env(safe-area-inset-top, var(--spacing-md));
+	background-color: var(--color-accent);
 	color: var(--color-primary);
 }

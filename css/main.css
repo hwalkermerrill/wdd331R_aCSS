@@ -91,6 +91,20 @@ I have similarly not yet used the github copilot extension's code completion for
 }
 
 /* Media Override Adjustments */
+@media (prefers-contrast: more) {
+	:root {
+		--color-border: #000;
+		--color-text-muted: #1a1a1a;
+	}
+}
+
+@media (pointer: coarse) {
+	:with(button, a, input, select) {
+		min-height: 44px;
+		min-width: 44px;
+	}
+}
+
 @media print {
 	/* Hide on Print */
 	:where(nav, footer, .site-header, .theme-menu, .no-print, button, aside) {
