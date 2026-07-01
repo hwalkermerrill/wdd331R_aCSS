@@ -7,6 +7,7 @@
 	accent-color: var(--color-accent);
 }
 
+/* Content */
 body {
 	font-family: var(--font-family-sans);
 	font-size: var(--font-size-body);
@@ -15,6 +16,11 @@ body {
 	background-color: var(--color-bg);
 }
 
+p {
+	padding: var(--spacing-sm);
+}
+
+/* Headings */
 h1 {
 	font-size: var(--font-size-display);
 }
@@ -55,28 +61,47 @@ h2 {
 	text-wrap: balance;
 }
 
+/* Navigation */
 nav {
 	font-family: var(--font-family-serif);
 	text-decoration: none;
 	font-size: var(--font-size-lg);
 }
 
+/* Links */
 a {
 	color: var(--color-link);
 	&:hover {
-		color: var(--color-accent);
+		color: var(--color-link-hover);
 	}
 }
 
-p {
-	padding: var(--spacing-sm);
+a[href$=".pdf"] {
+	color: var(--color-link-pdf);
+	&:hover {
+		color: var(--color-link-pdf-hover);
+	}
 }
 
-/* Add faint outline to images, even transparent images */
-/* img {
-	filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.9));
-} */
+/* Attribute Selectors */
+[disabled] {
+	cursor: not-allowed;
+	opacity: var(--opacity-disabled);
+}
 
+[lang|="en"] {
+	quotes: "“" "”" "‘" "’";
+}
+
+[lang="fr"] {
+	quotes: "« " " »" "‹ " " ›";
+}
+
+[lang="ja"] {
+	quotes: "「" "」" "『" "』";
+}
+
+/* Blocks */
 pre code {
 	display: block;
 	padding: 1em;
