@@ -31,3 +31,28 @@
 	white-space: nowrap;
 	border: 0;
 }
+
+/* Holographic Effects */
+.holo-flash {
+	background-image: var(--color-metallic-holo);
+	background-size: 300% 300%;
+	background-position: 50% 0%;
+	background-repeat: no-repeat;
+}
+
+.holo-flash-chromatic {
+	background-image: var(--color-chromatic-holo);
+	background-size: 300% 300%;
+	background-position: 50% 0%;
+	background-repeat: no-repeat;
+}
+
+.holo-flash:hover,
+.holo-flash-chromatic:hover {
+	animation: holo-sweep 1.2s ease-out;
+}
+
+.no-flash {
+	background-image: none;
+	animation: none;
+}

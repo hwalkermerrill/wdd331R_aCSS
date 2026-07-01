@@ -9,6 +9,10 @@
 	--seed-accent: oklch(0.55 0.2 68);
 	--seed-accent-hover: color-mix(in oklch, var(--seed-accent) 80%, black);
 	--seed-primary: oklch(0.45 0.12 162);
+	--seed-soft-vis: oklch(0.56 0.14 245);
+	--seed-high-vis: magenta;
+	--seed-adobe: oklch(0.62 0.27 29);
+	--seed-adobe-hover: color-mix(in oklch, var(--seed-link-pdf) 80%, black);
 	--seed-link: var(--seed-accent);
 	--seed-link-hover: var(--seed-accent-hover);
 	--seed-border: #e2e8f0;
@@ -32,6 +36,7 @@
 	--primary-800: color-mix(in oklch, var(--seed-primary) 40%, black);
 
 	/* ---- Color Gradients ---- */
+
 	--color-indiana-gradient-light: linear-gradient(
 		to bottom,
 		oklch(0.45 0.15 30) 0%,
@@ -55,6 +60,29 @@
 		oklch(0.95 0.05 95 / 0.35) 0%,
 		oklch(0.9 0.04 95 / 0) 40%
 	);
+	--color-metallic-holo: linear-gradient(
+		135deg,
+		oklch(0.98 0.03 95 / 0.08) 16%,
+		oklch(0.98 0.03 95 / 0) 20%,
+		oklch(0.98 0.05 95 / 0.35) 26%,
+		oklch(1 0 95 / 0.9) 28%,
+		oklch(1 0 95 / 0.75) 29%,
+		oklch(0.98 0.05 95 / 0.35) 30%,
+		oklch(0.98 0.03 95 / 0.15) 34%,
+		oklch(0.98 0.03 95 / 0) 38%
+	);
+	--color-chromatic-holo: linear-gradient(
+		135deg,
+		oklch(0.95 0.15 20 / 0.1) 16%,
+		oklch(0.95 0.15 20 / 0.2) 20%,
+		oklch(0.95 0.2 40 / 0.45) 24%,
+		oklch(0.95 0.2 80 / 0.55) 28%,
+		oklch(0.9 0.18 95 / 0.75) 29%,
+		oklch(0.95 0.2 80 / 0.55) 30%,
+		oklch(0.95 0.2 40 / 0.45) 34%,
+		oklch(0.95 0.15 20 / 0.15) 36%,
+		oklch(0.95 0.15 20 / 0) 40%
+	);
 
 	/* ---- Indiana Light-Dark ---- */
 	--indy-stroke: light-dark(oklch(0.22 0.03 40), oklch(0.3 0.02 40));
@@ -65,7 +93,6 @@
 
 	/* ---- Semantic tokens ---- */
 	--color-primary: var(--primary-600);
-	--color-link: var(--accent-500);
 	--color-bg: light-dark(var(--seed-bg), oklch(0.18 0.02 260));
 	--color-surface: light-dark(var(--seed-surface), oklch(0.22 0.03 260));
 	--color-text: light-dark(var(--seed-text), oklch(0.88 0.02 260));
@@ -76,8 +103,12 @@
 		var(--seed-accent-hover),
 		oklch(0.68 0.18 68)
 	);
+	--color-soft: var(--seed-soft-vis);
+	--color-vis: var(--seed-high-vis);
 	--color-link: light-dark(var(--seed-link), oklch(0.65 0.16 68));
 	--color-link-hover: light-dark(var(--seed-link-hover), oklch(0.72 0.18 68));
+	--color-link-pdf: var(--seed-adobe);
+	--color-link-pdf-hover: var(--seed-adobe-hover);
 	--color-border: light-dark(var(--seed-border), oklch(0.32 0.02 260));
 	--color-border-strong: light-dark(
 		var(--seed-border-strong),
@@ -147,5 +178,18 @@ html:has(input[name="theme-preference"][value="dark"]:checked) {
 		--header-text: contrast-color(var(--header-bg));
 		--theme-toggle-text: contrast-color(var(--theme-toggle-bg));
 		/* --color-text: contrast-color(var(--seed-text)); */
+	}
+}
+
+/* --- Holo Sweep --- */
+@keyframes holo-sweep {
+	0% {
+		--holo-sweep: 0%;
+	}
+	50% {
+		--holo-sweep: 100%;
+	}
+	100% {
+		--holo-sweep: 0%;
 	}
 }

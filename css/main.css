@@ -49,6 +49,47 @@ I have similarly not yet used the github copilot extension's code completion for
 /* Utilities */
 @import url("utilities/utilities.css") layer(utilities);
 
+/* @Property Registrations */
+@property --holo-sweep {
+	syntax: "<percentage>";
+	inherits: false;
+	initial-value: 0%;
+}
+
+/* @Keyframe Blocks */
+@keyframes danger-shake {
+	0% {
+		transform: translateX(0);
+	}
+	20% {
+		transform: translateX(-4px);
+	}
+	40% {
+		transform: translateX(4px);
+	}
+	60% {
+		transform: translateX(-4px);
+	}
+	80% {
+		transform: translateX(4px);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}
+
+@keyframes holo-sweep {
+	0% {
+		background-position: 50% 0%;
+	}
+	50% {
+		background-position: -50% 0%;
+	}
+	100% {
+		background-position: 50% 0%;
+	}
+}
+
 /* Media Override Adjustments */
 @media print {
 	/* Hide on Print */
