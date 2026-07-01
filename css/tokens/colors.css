@@ -62,17 +62,26 @@
 	);
 	--color-metallic-holo: linear-gradient(
 		135deg,
-		oklch(0.98 0.03 95 / 0) calc(var(--holo-sweep) - 20%),
-		oklch(0.98 0.05 95 / 0.35) var(--holo-sweep),
-		oklch(0.95 0.03 95 / 0) calc(var(--holo-sweep) + 20%)
+		oklch(0.98 0.03 95 / 0.08) 16%,
+		oklch(0.98 0.03 95 / 0) 20%,
+		oklch(0.98 0.05 95 / 0.35) 26%,
+		oklch(1 0 95 / 0.9) 28%,
+		oklch(1 0 95 / 0.75) 29%,
+		oklch(0.98 0.05 95 / 0.35) 30%,
+		oklch(0.98 0.03 95 / 0.15) 34%,
+		oklch(0.98 0.03 95 / 0) 38%
 	);
 	--color-chromatic-holo: linear-gradient(
 		135deg,
-		oklch(0.95 0.15 20 / 0) calc(var(--holo-sweep) - 25%),
-		oklch(0.95 0.2 40 / 0.45) calc(var(--holo-sweep) - 10%),
-		oklch(0.95 0.2 80 / 0.55) var(--holo-sweep),
-		oklch(0.95 0.2 40 / 0.45) calc(var(--holo-sweep) + 10%),
-		oklch(0.95 0.15 20 / 0) calc(var(--holo-sweep) + 25%)
+		oklch(0.95 0.15 20 / 0.1) 16%,
+		oklch(0.95 0.15 20 / 0.2) 20%,
+		oklch(0.95 0.2 40 / 0.45) 24%,
+		oklch(0.95 0.2 80 / 0.55) 28%,
+		oklch(0.9 0.18 95 / 0.75) 29%,
+		oklch(0.95 0.2 80 / 0.55) 30%,
+		oklch(0.95 0.2 40 / 0.45) 34%,
+		oklch(0.95 0.15 20 / 0.15) 36%,
+		oklch(0.95 0.15 20 / 0) 40%
 	);
 
 	/* ---- Indiana Light-Dark ---- */

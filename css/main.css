@@ -50,7 +50,7 @@ I have similarly not yet used the github copilot extension's code completion for
 @import url("utilities/utilities.css") layer(utilities);
 
 /* @Property Registrations */
-@property --highlight-flash {
+@property --holo-sweep {
 	syntax: "<percentage>";
 	inherits: false;
 	initial-value: 0%;
@@ -75,6 +75,18 @@ I have similarly not yet used the github copilot extension's code completion for
 	}
 	100% {
 		transform: translateX(0);
+	}
+}
+
+@keyframes holo-sweep {
+	0% {
+		background-position: 50% 0%;
+	}
+	50% {
+		background-position: -50% 0%;
+	}
+	100% {
+		background-position: 50% 0%;
 	}
 }
 

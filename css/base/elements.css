@@ -111,6 +111,8 @@ pre code {
 	overflow-x: auto;
 	font-family: var(--font-family-mono);
 	font-size: 0.9em;
+	tab-size: 2;
+	-moz-tab-size: 2;
 }
 
 textarea {

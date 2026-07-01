@@ -10,14 +10,17 @@
 	cursor: pointer;
 	background-color: var(--color-primary);
 	color: var(--header-text);
-	transition: background-color 0.2s ease;
+	transition:
+		background-color 0.2s ease,
+		background-position 0.8s ease-out;
 	background-image: var(--color-metallic-holo);
-	background-size: 200% 200%;
+	background-size: 300% 300%;
+	background-position: 50% 0%;
 	background-repeat: no-repeat;
 
 	/* Native nesting for pseudo-classes */
 	&:hover {
-		background-color: var(--color-accent);
+		background-color: var(--accent-400);
 		animation: holo-sweep 1.2s ease-out;
 	}
 
