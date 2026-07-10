@@ -203,6 +203,7 @@ nav a {
 @media (prefers-reduced-motion: reduce) {
 	nav a,
 	.nav-cta,
+	.btn,
 	.btn-primary,
 	.btn-secondary,
 	.btn-ghost,
