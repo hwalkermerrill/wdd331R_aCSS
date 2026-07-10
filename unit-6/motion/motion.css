@@ -1,0 +1,260 @@
+/* motion.css
+   Motion, transitions, and animations for the Activity Dashboard.
+   All transitions use explicit properties (no `transition: all`).
+*/
+
+/* Formatting fixes and adjustments */
+.card-tag {
+	font-family: var(--font-family-sans);
+	width: 100%;
+	padding: var(--spacing-xs);
+}
+
+/* Navigation link motion */
+nav a {
+	border-radius: var(--radius-md);
+	padding: var(--spacing-xs) var(--spacing-sm);
+	color: var(--color-text);
+	text-decoration: none;
+	transition:
+		color 0.25s ease-out,
+		background-color 0.25s ease-out,
+		transform 0.25s ease-out;
+
+	&:hover,
+	&:focus-visible {
+		background-color: var(--color-accent-hover);
+		box-shadow: var(--shadow-md);
+		color: var(--color-primary);
+		transform: translateY(-2px);
+		transition:
+			background-color 0.15s ease-in,
+			color 0.15s ease-in,
+			transform 0.15s ease-in;
+	}
+}
+
+.nav-cta {
+	color: var(--color-primary);
+	transition:
+		color 0.25s ease-out,
+		background-color 0.25s ease-out,
+		transform 0.25s ease-out,
+		box-shadow 0.25s ease-out;
+
+	&:hover,
+	&:focus-visible {
+		color: var(--color-soft);
+		transform: translateY(-3px);
+		box-shadow: var(--shadow-md);
+		transition:
+			background-color 0.15s ease-in,
+			transform 0.15s ease-in,
+			box-shadow 0.15s ease-in;
+	}
+}
+
+/* Button Motion, reusing existing .btn motion where possible */
+.btn-primary {
+	transition:
+		transform 0.25s ease-out,
+		box-shadow 0.25s ease-out;
+
+	&:hover,
+	&:focus-visible {
+		transform: translateY(-3px);
+		box-shadow: var(--shadow-lg);
+		transition:
+			transform 0.15s ease-in,
+			box-shadow 0.15s ease-in;
+	}
+}
+
+.btn-secondary {
+	background-color: var(--color-surface);
+	color: var(--color-text);
+	border: 1px solid var(--color-border);
+	transition:
+		background-color 0.25s ease-out,
+		border-color 0.25s ease-out,
+		transform 0.25s ease-out,
+		box-shadow 0.25s ease-out;
+
+	&:hover,
+	&:focus-visible {
+		background-color: var(--color-primary);
+		color: var(--color-surface);
+		border-color: var(--color-primary);
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-md);
+		transition:
+			background-color 0.15s ease-in,
+			border-color 0.15s ease-in,
+			transform 0.15s ease-in,
+			box-shadow 0.15s ease-in;
+	}
+}
+
+.btn-ghost {
+	background-color: transparent;
+	color: var(--color-link);
+	border: 1px solid transparent;
+	transition:
+		color 0.25s ease-out,
+		border-color 0.25s ease-out,
+		transform 0.25s ease-out;
+
+	&:hover,
+	&:focus-visible {
+		color: var(--color-link-hover);
+		border-color: var(--color-border);
+		transform: translateY(-1px);
+		transition:
+			color 0.15s ease-in,
+			border-color 0.15s ease-in,
+			transform 0.15s ease-in;
+	}
+}
+
+/* Card Motion */
+.card {
+	transition:
+		transform 0.3s ease-out,
+		box-shadow 0.3s ease-out;
+
+	&:hover {
+		transform: scale(1.05);
+		box-shadow: var(--shadow-md);
+		transition:
+			transform 0.15s ease-in,
+			box-shadow 0.15s ease-in;
+	}
+}
+
+/* Card link motion */
+.card-link {
+	color: var(--color-link);
+	text-decoration: none;
+	position: relative;
+	transition:
+		color 0.25s ease-out,
+		transform 0.25s ease-out;
+
+	&::after {
+		content: "";
+		position: absolute;
+		left: 0;
+		bottom: -0.1rem;
+		width: 0%;
+		height: 2px;
+		background-color: var(--color-link);
+		transition:
+			width 0.25s ease-out,
+			background-color 0.25s ease-out;
+	}
+
+	&:hover,
+	&:focus-visible {
+		color: var(--color-link-hover);
+		transform: translateX(2px);
+		transition:
+			color 0.15s ease-in,
+			transform 0.15s ease-in;
+
+		&::after {
+			width: 100%;
+			background-color: var(--color-link-hover);
+			transition:
+				width 0.15s ease-in,
+				background-color 0.15s ease-in;
+		}
+	}
+}
+
+/* Status Badge */
+.status-badge {
+	display: inline-block;
+	color: var(--color-soft);
+	padding: var(--spacing-xs) var(--spacing-sm);
+	border-radius: var(--radius-md);
+	animation-name: status-pulse;
+	animation-duration: 1.8s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	will-change: transform, opacity;
+}
+
+/* Keyframes */
+@keyframes status-pulse {
+	from {
+		transform: scale(1);
+		opacity: 1;
+	}
+	to {
+		transform: scale(1.12);
+		opacity: 0.9;
+	}
+}
+
+/* @media Overrides */
+@media (prefers-reduced-motion: reduce) {
+	nav a,
+	.nav-cta,
+	.btn-primary,
+	.btn-secondary,
+	.btn-ghost,
+	.card,
+	.card-link {
+		transition: none;
+		transform: none;
+	}
+
+	.status-badge {
+		animation: none;
+		opacity: 1;
+		/* Reduced alternative: one-time subtle fade-in */
+		animation-name: status-fade-in;
+		animation-duration: 0.8s;
+		animation-timing-function: ease-out;
+		animation-iteration-count: 1;
+		animation-direction: normal;
+	}
+
+	@keyframes status-fade-in {
+		from {
+			opacity: 0.7;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+}
+
+/* Transitions API feature detection and media transitions */
+@supports (view-transition-name: none) {
+	/* Treat main content as a view-transition root */
+	main {
+		view-transition-name: dashboard;
+	}
+
+	/* Cards participate in transitions */
+	.card {
+		view-transition-name: card;
+	}
+
+	/* Basic transition styling */
+	::view-transition-old(dashboard),
+	::view-transition-new(dashboard) {
+		animation: dashboard-crossfade 0.3s ease-out;
+	}
+
+	@keyframes dashboard-crossfade {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+}
