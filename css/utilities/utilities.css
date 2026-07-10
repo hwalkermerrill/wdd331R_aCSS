@@ -56,3 +56,9 @@
 	background-image: none;
 	animation: none;
 }
+
+@media (prefers-reduced-motion: reduce) {
+	.holo-flash,
+	.holo-flash-chromatic {
+		animation: none;
+	}
