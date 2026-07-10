@@ -81,115 +81,197 @@
 
 	<!-- CONTENT HERE -->
 	<main class="clearfix" id="maincontent">
-		<h1>interpolate-size</h1>
-		<p class="intro">
-			Animating an element from a fixed height to auto has been impossible in CSS for decades. The browser cannot
-			interpolate between a concrete value and a keyword it has not yet computed.
-			<code>interpolate-size: allow-keywords</code> changes that, enabling smooth height transitions on accordions,
-			disclosures, and any element that needs to expand to fit its content.
-		</p>
-		<br>
-		<section class="accordion">
-			<details>
-				<summary>What is interpolate-size?</summary>
-				<div class="panel">
-					<p>
-						<code>interpolate-size</code> allows CSS to animate between a fixed height and
-						<code>height: auto</code>, something that was impossible for decades, as the browser simply could not
-						resolve size keywords to concrete values. Browsers had no midpoint to interpolate. Some developers used to
-						animate max-height to a large arbitrary value as a workaround, but that caused the element to reach its
-						final size before the transition ended, making the easing feel wrong, as well as clamping content if the max
-						value was ever bypassed. That method is outdated. A javascript approach works, but adds overhead and
-						complexity to something that should be handled by pure CSS.
-					</p>
-				</div>
-			</details>
+		<section class="vt-intro">
+			<h1>View Transitions API Demo</h1>
+			<p class="intro">
+				This demo shows a list-to-detail interaction using the View Transitions API.
+				Click a project card to transition into its detail view, then use the back button
+				to return to the list. The DOM updates normally inside the callback—no manual cloning
+				or positioning is required.
+			</p>
+		</section>
 
-			<details>
-				<summary>How does interpolate-size work?</summary>
-				<div class="panel">
-					<p>
-						Setting <code>interpolate-size: allow-keywords</code> on <code>:root</code> opts the entire page into
-						keyword interpolation. By adding that single line, the browser will treatt size keywords like auto, min,
-						max, ect. as animatable endpoints. Applying it to <code>:root</code> is recommended, which can be done on
-						your base elements.css file. Correct implementation typically looks like the following:
-					<pre><code>
-:root {
-	interpolate-size: allow-keywords;
-}
-</code></pre>
-					</p>
-				</div>
-			</details>
+		<section class="vt-layout">
+			<div class="vt-list" data-state="list">
+				<h2>Projects</h2>
+				<div class="card-grid">
+					<article class="card vt-card" data-id="tokens">
+						<div class="card-header">
+							<h3 class="vt-title">Design Tokens</h3>
+						</div>
+						<p>Token-first architecture for color, spacing, and type with dark mode support.</p>
+						<button class="btn btn-ghost vt-open" type="button">View details</button>
+					</article>
 
-			<details>
-				<summary>Usage Pattern</summary>
-				<div class="panel badOverflow">
-					<p>
-						With <code>interpolate-size: allow-keywords</code> set on <code>:root</code>, a height transition set to
-						<code>auto</code> works exactly as expected. The <code>overflow: hidden</code> is required to clip the
-						content during transition, as without it the content would become suddenly fully visible during animation.
-						This panel is intentionally broken, using <code>overflow: visible;</code> instead to demonstrate that
-						failure.
-					</p>
-					<p>Additionally, for accessibility, you should always opt-in to the users preferences for reducing-motion. A
-						good format for a block of code utilizing interpolated transitions might look something like this:</p>
-					<pre><code>
-.panel {
-    height: 0;
-    overflow: hidden;
-    transition: height 0.35s ease;
-}
-details[open] .panel {
-    height: auto;
-}
-@media (prefers-reduced-motion: reduce) {
-    .panel {
-        transition: none;
-    }
-}
-</code></pre>
-				</div>
-			</details>
-			<details>
-				<summary>Browser Support</summary>
-				<div class="fallbackDemo">
-					<p>
-						This one intentionally doesn't work, showing what it looks like on a browser that doesn't support it.
-						The interpolate-size progressive enhancement is fully supported in Edge and Chrome, but not yet supported in
-						firefox or safari, but it should be treated as an easy addition that enhances HTML wherever its supported
-						and works natively without JavaScript. In unsupported browsers, it fails gracefully, by just not animating.
-						However, If you need it to animate anyway, you can force it to animate by using the following javascript:
-					<pre><code>
-if (!CSS.supports('interpolate-size', 'allow-keywords')) {
-  document.querySelectorAll('details').forEach((details) => {
-    const panel = details.querySelector('.panel');
+					<article class="card vt-card" data-id="grid">
+						<div class="card-header">
+							<h3 class="vt-title">Grid Layouts</h3>
+						</div>
+						<p>Editorial layouts with named grid areas and responsive auto-fit card grids.</p>
+						<button class="btn btn-ghost vt-open" type="button">View details</button>
+					</article>
 
-    details.addEventListener('toggle', () => {
-      panel.style.height = details.open
-        ? panel.scrollHeight + 'px'
-        : '0';
-    });
-  });
-}
-</code></pre>
-					</p>
+					<article class="card vt-card" data-id="motion">
+						<div class="card-header">
+							<h3 class="vt-title">Motion</h3>
+						</div>
+						<p>Transitions, keyframes, and reduced-motion support applied across the portfolio.</p>
+						<button class="btn btn-ghost vt-open" type="button">View details</button>
+					</article>
 				</div>
-			</details>
+			</div>
+
+			<div class="vt-detail" data-state="detail" hidden>
+				<button class="btn btn-secondary vt-back" type="button">← Back to list</button>
+				<article class="card vt-detail-card">
+					<div class="card-header">
+						<h2 class="vt-detail-title">Project Title</h2>
+						<span class="card-tag card-tag--active">Detail View</span>
+					</div>
+					<p class="vt-detail-body">
+						Select a project from the list to see its details here. This panel demonstrates
+						the snapshot-and-animate model: the DOM changes normally, and the browser animates
+						between the before and after states.
+					</p>
+				</article>
+			</div>
 		</section>
 	</main>
 
 	<script>
-		if (!CSS.supports('interpolate-size', 'allow-keywords')) {
-			document.querySelectorAll('details').forEach((details) => {
-				const panel = details.querySelector('.panel');
+		(() => {
+			const supportsViewTransitions = 'startViewTransition' in document;
+			const prefersReducedMotion = window.matchMedia &&
+				window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-				details.addEventListener('toggle', () => {
-					panel.style.height = details.open
-						? panel.scrollHeight + 'px'
-						: '0';
+			const list = document.querySelector('.vt-list');
+			const detail = document.querySelector('.vt-detail');
+			const detailTitle = document.querySelector('.vt-detail-title');
+			const detailBody = document.querySelector('.vt-detail-body');
+
+			const projectData = {
+				tokens: {
+					title: 'Design Tokens',
+					body: 'In the detail view, we can explain how tokens unify color, spacing, and type across the portfolio, and how they support dark mode and motion.'
+				},
+				grid: {
+					title: 'Grid Layouts',
+					body: 'Here we describe the grid system, named areas, and how auto-fit card grids adapt without breakpoints.'
+				},
+				motion: {
+					title: 'Motion',
+					body: 'This detail view explains transitions, keyframes, reduced-motion support, and how motion is used purposefully rather than decoratively.'
+				}
+			};
+
+			function showDetail(id, clickedCard, button) {
+				const data = projectData[id];
+				if (!data) return;
+
+				// Freeze both the clicked button and the clicked card
+				button.classList.add('vt-freeze');
+				clickedCard.classList.add('vt-freeze');
+
+				// Clear all previous names
+				document.querySelectorAll('.vt-title').forEach(el => {
+					el.style.viewTransitionName = '';
+				});
+				document.querySelectorAll('.vt-card').forEach(el => {
+					el.style.viewTransitionName = '';
+				});
+				detail.querySelector('.vt-detail-card').style.viewTransitionName = '';
+
+				// Assign names for morph
+				const titleEl = clickedCard.querySelector('.vt-title');
+				titleEl.style.viewTransitionName = 'project-title';
+				detailTitle.style.viewTransitionName = 'project-title';
+
+				clickedCard.style.viewTransitionName = 'active-card';
+				detail.querySelector('.vt-detail-card').style.viewTransitionName = 'active-card';
+
+				const updateDOM = () => {
+					// Update detail content
+					detailTitle.textContent = data.title;
+					detailBody.textContent = data.body;
+
+					// Swap views
+					list.hidden = true;
+					detail.hidden = false;
+
+					// IMPORTANT: do NOT clear viewTransitionName or unfreeze here
+				};
+
+				if (!supportsViewTransitions || prefersReducedMotion) {
+					updateDOM();
+					// Non-transition path: safe to clear immediately
+					titleEl.style.viewTransitionName = '';
+					detailTitle.style.viewTransitionName = '';
+					clickedCard.style.viewTransitionName = '';
+					detail.querySelector('.vt-detail-card').style.viewTransitionName = '';
+					button.classList.remove('vt-freeze');
+					clickedCard.classList.remove('vt-freeze');
+					return;
+				}
+
+				const transition = document.startViewTransition(updateDOM);
+
+				// Clear names and unfreeze AFTER the transition finishes
+				transition.finished.then(() => {
+					titleEl.style.viewTransitionName = '';
+					detailTitle.style.viewTransitionName = '';
+					clickedCard.style.viewTransitionName = '';
+					detail.querySelector('.vt-detail-card').style.viewTransitionName = '';
+
+					button.classList.remove('vt-freeze');
+					clickedCard.classList.remove('vt-freeze');
+				});
+			}
+
+			function showList() {
+				// Clear all names
+				document.querySelectorAll('.vt-title').forEach(el => {
+					el.style.viewTransitionName = '';
+				});
+				document.querySelectorAll('.vt-card').forEach(el => {
+					el.style.viewTransitionName = '';
+				});
+				detail.querySelector('.vt-detail-card').style.viewTransitionName = '';
+
+				const updateDOM = () => {
+					detail.hidden = true;
+					list.hidden = false;
+				};
+
+				if (!supportsViewTransitions || prefersReducedMotion) {
+					updateDOM();
+					return;
+				}
+
+				document.startViewTransition(updateDOM);
+			}
+
+			document.querySelectorAll('.vt-open').forEach(button => {
+				button.addEventListener('click', (event) => {
+					const card = event.currentTarget.closest('.vt-card');
+					const id = card?.dataset.id;
+					if (!id) return;
+
+					// Freeze both before starting the transition
+					button.classList.add('vt-freeze');
+					card.classList.add('vt-freeze');
+
+					showDetail(id, card, button);
 				});
 			});
-		}
+
+			const backButton = document.querySelector('.vt-back');
+			if (backButton) {
+				backButton.addEventListener('click', () => {
+					showList();
+				});
+			}
+		})();
 	</script>
 </body>
+
+</html>

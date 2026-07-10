@@ -1,0 +1,169 @@
+/* view-transitions.css
+   Styling and motion for the View Transitions API demo.
+   Uses tokens from dist/styles.css and prefers-reduced-motion handling.
+*/
+
+/* Layout */
+.vt-intro {
+	max-width: var(--layout-container-medium);
+	margin: 0 auto var(--spacing-lg);
+	padding: var(--spacing-md);
+}
+
+.vt-intro h1 {
+	font-size: var(--font-size-display);
+	margin-bottom: var(--spacing-sm);
+}
+
+.vt-intro .intro {
+	font-size: var(--font-size-body);
+	color: var(--color-text-muted);
+}
+
+.vt-layout {
+	max-width: var(--layout-container-large);
+	margin: 0 auto var(--spacing-xl);
+	padding: var(--spacing-md);
+	display: grid;
+	gap: var(--spacing-lg);
+}
+
+/* List and detail panels */
+.vt-list,
+.vt-detail {
+	background-color: var(--color-surface);
+	border-radius: var(--radius-lg);
+	box-shadow: var(--shadow-md);
+	padding: var(--spacing-lg);
+}
+
+.vt-list h2 {
+	font-size: var(--font-size-heading-md);
+	margin-bottom: var(--spacing-md);
+}
+
+.vt-detail .vt-back {
+	margin-bottom: var(--spacing-md);
+}
+
+/* Cards reuse existing card styles; add subtle hover */
+.vt-card {
+	cursor: pointer;
+	transition: none;
+}
+
+.vt-card:hover {
+	transform: none;
+	box-shadow: var(--shadow-lg);
+	transition: none;
+}
+
+/* Detail card */
+.vt-detail-card {
+	transition:
+		transform 0.25s ease-out,
+		box-shadow 0.25s ease-out;
+}
+
+.vt-detail-card:hover {
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-md);
+	transition:
+		transform 0.15s ease-in,
+		box-shadow 0.15s ease-in;
+}
+
+/* Freeze transitions during view transitions */
+.vt-layout .vt-freeze,
+.vt-layout .vt-freeze * {
+	transition: none;
+	animation: none;
+}
+
+/* Named element styling for morph */
+.vt-detail-title {
+	font-size: var(--font-size-heading-lg);
+}
+
+/* View Transition styling */
+@supports (view-transition-name: none) {
+	/* Main content participates in transitions */
+	/* #maincontent {
+		view-transition-name: app-view;
+	} */
+
+	/* Default full-page crossfade
+	::view-transition-old(app-view),
+	::view-transition-new(app-view) {
+		animation: app-crossfade 0.35s ease-out;
+	}
+
+	@keyframes app-crossfade {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	} */
+
+	/* Named element morph for project title */
+	::view-transition-old(project-title),
+	::view-transition-new(project-title) {
+		animation: title-morph 0.12s ease-out;
+	}
+
+	@keyframes title-morph {
+		from {
+			opacity: 0.6;
+			transform: scale(0.96);
+		}
+		to {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
+
+	/* Card morph */
+	/* ::view-transition-old(active-card),
+	::view-transition-new(active-card) {
+		animation: card-morph 0.45s ease-out;
+	}
+
+	@keyframes card-morph {
+		from {
+			opacity: 0.6;
+			transform: scale(0.95);
+		}
+		to {
+			opacity: 1;
+			transform: scale(1);
+		}
+	} */
+}
+
+/* prefers-reduced-motion: drastically shorten transitions */
+@media (prefers-reduced-motion: reduce) {
+	@supports (view-transition-name: none) {
+		/* ::view-transition-old(app-view),
+		::view-transition-new(app-view), */
+		::view-transition-old(project-title),
+		::view-transition-new(project-title) {
+			/* ::view-transition-old(active-card),
+		::view-transition-new(active-card) { */
+			animation-duration: 0.05s;
+			animation-timing-function: linear;
+		}
+	}
+
+	.vt-card,
+	.vt-detail-card {
+		transition: none;
+		transform: none;
+	}
+
+	.btn {
+		transition: none;
+		animation: none;
+	}
+}
