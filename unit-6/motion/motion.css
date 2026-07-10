@@ -19,7 +19,8 @@ nav a {
 	transition:
 		color 0.25s ease-out,
 		background-color 0.25s ease-out,
-		transform 0.25s ease-out;
+		transform 0.25s ease-out,
+		box-shadow 0.25s ease-out;
 
 	&:hover,
 	&:focus-visible {
@@ -30,7 +31,8 @@ nav a {
 		transition:
 			background-color 0.15s ease-in,
 			color 0.15s ease-in,
-			transform 0.15s ease-in;
+			transform 0.15s ease-in,
+			box-shadow 0.15s ease-in;
 	}
 }
 
