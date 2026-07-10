@@ -61,3 +61,10 @@ button[data-variant="danger"] {
 		animation: danger-shake 0.4s ease-in-out;
 	}
 }
+
+@media (prefers-reduced-motion: reduce) {
+	.btn {
+		transition: none;
+		animation: none;
+	}
+}
