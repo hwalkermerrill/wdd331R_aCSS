@@ -43,6 +43,7 @@ wdd331R_aCSS
 - [Grid Layouts](unit-4/grid-layouts/cards.html)
 - [Container Demo](unit-4/advanced/container-demo.html)
 - [Sticky Demo](unit-4/advanced/sticky-demo.html)
+- [Motion Demo](unit-6/motion/index.html)
 
 ## Demo Pages
 
