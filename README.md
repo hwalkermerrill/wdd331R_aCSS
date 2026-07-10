@@ -54,6 +54,7 @@ wdd331R_aCSS
 - [Container Queries](demo/containerQuery.html)
 - [Text Properties](demo/textProperties.html)
 - [interpolate-size](demo/interpolate-size.html)
+- [View Transitions API](demo/viewTransitionsApi.html)
 
 ## CSS
 
