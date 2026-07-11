@@ -45,6 +45,7 @@ I have similarly not yet used the github copilot extension's code completion for
 @import url("components/panel.css") layer(components);
 @import url("components/resume.css") layer(components);
 @import url("components/contact.css") layer(components);
+@import url("components/icons.css") layer(components);
 
 /* Utilities */
 @import url("utilities/utilities.css") layer(utilities);
