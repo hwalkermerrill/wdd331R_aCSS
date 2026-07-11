@@ -47,19 +47,36 @@
 }
 
 /* Cards reuse existing card styles; add subtle hover */
+.card-grid {
+	display: grid;
+	gap: var(--spacing-md);
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
 .vt-card {
 	cursor: pointer;
-	transition: none;
+	background-color: var(--color-surface);
+	border-radius: var(--radius-md);
+	padding: var(--spacing-md);
+	box-shadow: var(--shadow-sm);
+	transition: box-shadow 0.15s ease-out;
 }
 
 .vt-card:hover {
-	transform: none;
 	box-shadow: var(--shadow-lg);
-	transition: none;
+}
+
+.vt-card .vt-title {
+	font-size: var(--font-size-heading-sm);
+	margin-bottom: var(--spacing-sm);
 }
 
 /* Detail card */
 .vt-detail-card {
+	background-color: var(--color-surface);
+	border-radius: var(--radius-md);
+	padding: var(--spacing-lg);
+	box-shadow: var(--shadow-md);
 	transition:
 		transform 0.25s ease-out,
 		box-shadow 0.25s ease-out;
@@ -73,13 +90,6 @@
 		box-shadow 0.15s ease-in;
 }
 
-/* Freeze transitions during view transitions */
-.vt-layout .vt-freeze,
-.vt-layout .vt-freeze * {
-	transition: none;
-	animation: none;
-}
-
 /* Named element styling for morph */
 .vt-detail-title {
 	font-size: var(--font-size-heading-lg);
@@ -87,29 +97,9 @@
 
 /* View Transition styling */
 @supports (view-transition-name: none) {
-	/* Main content participates in transitions */
-	/* #maincontent {
-		view-transition-name: app-view;
-	} */
-
-	/* Default full-page crossfade
-	::view-transition-old(app-view),
-	::view-transition-new(app-view) {
-		animation: app-crossfade 0.35s ease-out;
-	}
-
-	@keyframes app-crossfade {
-		from {
-			opacity: 0;
-		}
-		to {
-			opacity: 1;
-		}
-	} */
-
-	/* Named element morph for project title */
-	::view-transition-old(project-title),
-	::view-transition-new(project-title) {
+	/* Named element morph for topic title */
+	::view-transition-old(topic-title),
+	::view-transition-new(topic-title) {
 		animation: title-morph 0.12s ease-out;
 	}
 
@@ -124,33 +114,29 @@
 		}
 	}
 
-	/* Card morph */
-	/* ::view-transition-old(active-card),
-	::view-transition-new(active-card) {
-		animation: card-morph 0.45s ease-out;
-	}
+	/* Card morph intentionally disabled to avoid slow fade-out */
+	/* ::view-transition-old(topic-card),
+    ::view-transition-new(topic-card) {
+        animation: card-morph 0.22s ease-out;
+    }
 
-	@keyframes card-morph {
-		from {
-			opacity: 0.6;
-			transform: scale(0.95);
-		}
-		to {
-			opacity: 1;
-			transform: scale(1);
-		}
-	} */
+    @keyframes card-morph {
+        from {
+            opacity: 0.6;
+            transform: scale(0.97);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    } */
 }
 
 /* prefers-reduced-motion: drastically shorten transitions */
 @media (prefers-reduced-motion: reduce) {
 	@supports (view-transition-name: none) {
-		/* ::view-transition-old(app-view),
-		::view-transition-new(app-view), */
-		::view-transition-old(project-title),
-		::view-transition-new(project-title) {
-			/* ::view-transition-old(active-card),
-		::view-transition-new(active-card) { */
+		::view-transition-old(topic-title),
+		::view-transition-new(topic-title) {
 			animation-duration: 0.05s;
 			animation-timing-function: linear;
 		}

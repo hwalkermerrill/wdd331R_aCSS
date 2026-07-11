@@ -84,192 +84,356 @@
 		<section class="vt-intro">
 			<h1>View Transitions API Demo</h1>
 			<p class="intro">
-				This demo shows a list-to-detail interaction using the View Transitions API.
-				Click a project card to transition into its detail view, then use the back button
-				to return to the list. The DOM updates normally inside the callback—no manual cloning
-				or positioning is required.
+				This demo shows a list-to-detail interaction using the View Transitions API. Each card teaches a core concept:
+				how the API works, the minimal pattern, named elements and morphs, customizing animations, cross-document
+				transitions, limitations and compatibility, and reduced motion. Click a card to see the detailed explanation
+				and example code for that topic.
 			</p>
 		</section>
 
 		<section class="vt-layout">
+
+			<!-- LIST VIEW -->
 			<div class="vt-list" data-state="list">
-				<h2>Projects</h2>
+				<h2>Topics</h2>
+
 				<div class="card-grid">
-					<article class="card vt-card" data-id="tokens">
-						<div class="card-header">
-							<h3 class="vt-title">Design Tokens</h3>
-						</div>
-						<p>Token-first architecture for color, spacing, and type with dark mode support.</p>
+
+					<article class="card vt-card" data-id="mechanism">
+						<h3 class="vt-title">Core Mechanism</h3>
+						<p>
+							How the snapshot-and-animate model works: the browser captures the page before and after your DOM
+							update and animates between those two states.
+						</p>
 						<button class="btn btn-ghost vt-open" type="button">View details</button>
 					</article>
 
-					<article class="card vt-card" data-id="grid">
-						<div class="card-header">
-							<h3 class="vt-title">Grid Layouts</h3>
-						</div>
-						<p>Editorial layouts with named grid areas and responsive auto-fit card grids.</p>
+					<article class="card vt-card" data-id="minimal">
+						<h3 class="vt-title">Minimal Pattern</h3>
+						<p>
+							The smallest possible View Transition: wrap a normal DOM update in
+							<code>document. startViewTransition()</code> to turn an instant swap into a smooth crossfade.
+						</p>
 						<button class="btn btn-ghost vt-open" type="button">View details</button>
 					</article>
 
-					<article class="card vt-card" data-id="motion">
-						<div class="card-header">
-							<h3 class="vt-title">Motion</h3>
-						</div>
-						<p>Transitions, keyframes, and reduced-motion support applied across the portfolio.</p>
+					<article class="card vt-card" data-id="named">
+						<h3 class="vt-title">Named Elements & Morphs</h3>
+						<p>
+							Use <code>view-transition-name</code> on matching elements before and after the update so the
+							browser can morph a card into a detail view instead of just crossfading.
+						</p>
 						<button class="btn btn-ghost vt-open" type="button">View details</button>
 					</article>
+
+					<article class="card vt-card" data-id="custom">
+						<h3 class="vt-title">Customizing the Animation</h3>
+						<p>
+							Override the default crossfade by targeting the View Transition pseudo-elements and applying your
+							own keyframes for specific named elements.
+						</p>
+						<button class="btn btn-ghost vt-open" type="button">View details</button>
+					</article>
+
+					<article class="card vt-card" data-id="crossdoc">
+						<h3 class="vt-title">Cross-Document Transitions</h3>
+						<p>
+							Animate full page navigations between separate HTML files using the <code>@view-transition</code>
+							at-rule and <code>navigation: auto</code>.
+						</p>
+						<button class="btn btn-ghost vt-open" type="button">View details</button>
+					</article>
+
+					<article class="card vt-card" data-id="limits">
+						<h3 class="vt-title">Limitations & Compatibility</h3>
+						<p>
+							Honest constraints of the API: unique names, no nested transitions, iframe behavior, stacking
+							context changes, and browser support differences.
+						</p>
+						<button class="btn btn-ghost vt-open" type="button">View details</button>
+					</article>
+
+					<article class="card vt-card" data-id="reduced">
+						<h3 class="vt-title">Reduced Motion</h3>
+						<p>
+							Respect <code>prefers-reduced-motion</code> by shortening or effectively disabling animations on
+							the View Transition pseudo-elements while still letting the DOM update complete.
+						</p>
+						<button class="btn btn-ghost vt-open" type="button">View details</button>
+					</article>
+
 				</div>
 			</div>
 
+			<!-- DETAIL VIEW -->
 			<div class="vt-detail" data-state="detail" hidden>
 				<button class="btn btn-secondary vt-back" type="button">← Back to list</button>
+
 				<article class="card vt-detail-card">
-					<div class="card-header">
-						<h2 class="vt-detail-title">Project Title</h2>
-						<span class="card-tag card-tag--active">Detail View</span>
+					<h2 class="vt-detail-title">Topic Title</h2>
+					<div class="vt-detail-body">
+						<p>Select a topic to view its details.</p>
 					</div>
-					<p class="vt-detail-body">
-						Select a project from the list to see its details here. This panel demonstrates
-						the snapshot-and-animate model: the DOM changes normally, and the browser animates
-						between the before and after states.
-					</p>
 				</article>
 			</div>
+
 		</section>
 	</main>
 
 	<script>
 		(() => {
-			const supportsViewTransitions = 'startViewTransition' in document;
-			const prefersReducedMotion = window.matchMedia &&
-				window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
+			const supports = 'startViewTransition' in document;
 			const list = document.querySelector('.vt-list');
 			const detail = document.querySelector('.vt-detail');
 			const detailTitle = document.querySelector('.vt-detail-title');
 			const detailBody = document.querySelector('.vt-detail-body');
+			const detailCard = document.querySelector('.vt-detail-card');
 
-			const projectData = {
-				tokens: {
-					title: 'Design Tokens',
-					body: 'In the detail view, we can explain how tokens unify color, spacing, and type across the portfolio, and how they support dark mode and motion.'
+			/* Teaching Content */
+			const topics = {
+				mechanism: {
+					title: 'Core Mechanism',
+					body: `
+<p>The View Transitions API uses a snapshot-and-animate model. When you call
+<code>document.startViewTransition()</code> and pass it a callback that updates the DOM, the browser:</p>
+<pre><code>
+// 1. Captures a screenshot of the current page state before the callback runs.
+// 2. Runs your callback, applying your DOM changes.
+// 3. Captures a screenshot of the new page state after the callback.
+// 4. Animates between the two screenshots using generated pseudo-elements.
+</code></pre>
+<p>Those pseudo-elements form a tree rooted at <code>::view-transition</code>, with
+<code>::view-transition-old</code> and <code>::view-transition-new</code> representing the before and after
+snapshots. By default, the entire page crossfades as a single unit, but you can opt individual elements into
+named transitions using <code>view-transition-name</code> to enable morph effects.</p>
+            `
 				},
-				grid: {
-					title: 'Grid Layouts',
-					body: 'Here we describe the grid system, named areas, and how auto-fit card grids adapt without breakpoints.'
+
+				minimal: {
+					title: 'Minimal Pattern',
+					body: `
+<p>The simplest possible view transition wraps a normal DOM update in
+<code>document.startViewTransition()</code>. Without view transitions, you might write:</p>
+<pre><code>
+// Without view transitions: instant swap
+function showDetail() {
+  list.hidden = true;
+  detail.hidden = false;
+}
+</code></pre>
+<p>With view transitions, you wrap the same update:</p>
+<pre><code>
+// With view transitions: animated crossfade
+function showDetail() {
+  document.startViewTransition(() => {
+    list.hidden = true;
+    detail.hidden = false;
+  });
+}
+</code></pre>
+<p>The browser supplies a default crossfade on the root pseudo-elements. To support browsers that do not
+implement the API, use feature detection and fall back to the unwrapped update:</p>
+<pre><code>
+function showDetail() {
+  const update = () => {
+    list.hidden = true;
+    detail.hidden = false;
+  };
+  if (document.startViewTransition) {
+    document.startViewTransition(update);
+  } else {
+    update();
+  }
+}
+</code></pre>
+            `
 				},
-				motion: {
-					title: 'Motion',
-					body: 'This detail view explains transitions, keyframes, reduced-motion support, and how motion is used purposefully rather than decoratively.'
+
+				named: {
+					title: 'Named Elements & Morphs',
+					body: `
+<p>The real power of the API comes from giving specific elements a <code>view-transition-name</code>. When an
+element has a name before the transition and an element with the same name exists after the transition, the
+browser treats them as the same logical element and animates between their positions and sizes. This produces
+the morph effect: a card shrinks or expands into a detail panel instead of just crossfading.</p>
+<pre><code>
+/* Name the card in the list view */
+.card.is-selected {
+  view-transition-name: active-card;
+}
+
+/* Name the matching container in the detail view */
+.detail-header {
+  view-transition-name: active-card;
+}
+</code></pre>
+<p>In JavaScript, a common pattern is to assign the name dynamically just before calling
+<code>document.startViewTransition()</code> and clear it inside the callback:</p>
+<pre><code>
+function showDetail(cardEl) {
+  // Apply the name just before the transition starts
+  cardEl.style.viewTransitionName = 'active-card';
+  document.startViewTransition(() => {
+    // Swap the views
+    cardEl.closest('.list-view').hidden = true;
+    document.querySelector('.detail-view').hidden = false;
+    // Clear the name after DOM update so it doesn't persist
+    cardEl.style.viewTransitionName = '';
+  });
+}
+</code></pre>
+<p>Names must be unique on the page at any given moment. Two elements with the same name at the same time
+cause the transition to skip for both of them.</p>
+            `
+				},
+
+				custom: {
+					title: 'Customizing the Animation',
+					body: `
+<p>The default crossfade is a good starting point, but you can override it with any CSS animation by targeting
+the View Transition pseudo-elements directly. Each named group gets its own
+<code>::view-transition-old(name)</code> and <code>::view-transition-new(name)</code> pair that you can style
+independently.</p>
+<pre><code>
+/* Override the default crossfade for the root */
+::view-transition-old(root) {
+  animation: 200ms ease-in both fade-out;
+}
+::view-transition-new(root) {
+  animation: 300ms ease-out both fade-in;
+}
+
+/* Custom slide for a named element */
+::view-transition-old(active-card) {
+  animation: 300ms ease-in both slide-out-left;
+}
+::view-transition-new(active-card) {
+  animation: 300ms ease-out both slide-in-right;
+}
+
+@keyframes fade-out {
+  to { opacity: 0; }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+}
+</code></pre>
+<p>For morphs between differently sized elements, the browser handles position and size interpolation
+automatically inside <code>::view-transition-group(name)</code>, so you rarely need to style the group directly
+unless you want to change the easing of the geometric interpolation.</p>
+            `
+				},
+
+				crossdoc: {
+					title: 'Cross-Document Transitions',
+					body: `
+<p>Same-document transitions require JavaScript to call <code>document.startViewTransition()</code>. Cross-document
+transitions work across full page navigations between separate HTML files with no JavaScript required. You opt
+both the outgoing and incoming documents in using the <code>@view-transition</code> at-rule:</p>
+<pre><code>
+/* Add to both pages that should animate between each other */
+@view-transition {
+  navigation: auto;
+}
+</code></pre>
+<p>With both pages opted in, navigating between them produces a crossfade by default. Named elements work
+exactly as they do in same-document transitions: give an element on the list page and a matching element on
+the detail page the same <code>view-transition-name</code> and the browser morphs between them across the
+navigation.</p>
+<p>Cross-document transitions are currently supported only in Chrome 126+ and Edge 126+. Unsupported browsers
+simply navigate normally with no animation.</p>
+            `
+				},
+
+				limits: {
+					title: 'Limitations & Compatibility',
+					body: `
+<p>The View Transitions API is well-designed, but a few constraints are worth knowing before you rely on it
+heavily:</p>
+<ul>
+  <li><strong>Names must be unique.</strong> Two elements with the same <code>view-transition-name</code> on the page at the same time causes both to be excluded from the named transition.</li>
+  <li><strong>Transitions cannot be nested.</strong> Calling <code>document.startViewTransition()</code> while a transition is already running skips the previous one. If your UI allows rapid interactions, debounce or queue them.</li>
+  <li><strong>iframes are excluded.</strong> Content inside iframes does not participate in view transitions on the parent document.</li>
+  <li><strong>Named elements get their own stacking context.</strong> <code>view-transition-name</code> creates a new stacking context on the element, similar to <code>isolation: isolate</code>, which can affect how content composites.</li>
+  <li><strong>Same-document transitions are JavaScript-first.</strong> There is no pure CSS way to trigger a same-document view transition; if JavaScript is unavailable, the swap happens without animation.</li>
+  <li><strong>Browser support.</strong> Same-document transitions are supported in modern Chrome, Edge, Safari, and Firefox; cross-document transitions are Chrome/Edge only at the time of writing.</li>
+</ul>
+            `
+				},
+
+				reduced: {
+					title: 'Reduced Motion',
+					body: `
+<p>View transitions are animations, so they should respect <code>prefers-reduced-motion</code>. You can target the
+View Transition pseudo-elements directly in a media query and set <code>animation-duration</code> to a near-zero
+value to effectively disable the visual transition while still allowing the DOM update to complete correctly.</p>
+<pre><code>
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0.01ms !important;
+  }
+}
+</code></pre>
+<p>Setting duration to zero exactly can cause edge cases in some browsers where the transition callback does not
+resolve cleanly. Using a very small non-zero duration keeps the transition technically active but
+imperceptibly fast, which avoids those edge cases while still respecting the user preference.</p>
+            `
 				}
 			};
 
-			function showDetail(id, clickedCard, button) {
-				const data = projectData[id];
-				if (!data) return;
+			/* Show Detail */
+			function showDetail(id, card) {
+				const topic = topics[id];
+				if (!topic) return;
 
-				// Freeze both the clicked button and the clicked card
-				button.classList.add('vt-freeze');
-				clickedCard.classList.add('vt-freeze');
-
-				// Clear all previous names
-				document.querySelectorAll('.vt-title').forEach(el => {
-					el.style.viewTransitionName = '';
-				});
-				document.querySelectorAll('.vt-card').forEach(el => {
-					el.style.viewTransitionName = '';
-				});
-				detail.querySelector('.vt-detail-card').style.viewTransitionName = '';
+				const titleEl = card.querySelector('.vt-title');
 
 				// Assign names for morph
-				const titleEl = clickedCard.querySelector('.vt-title');
-				titleEl.style.viewTransitionName = 'project-title';
-				detailTitle.style.viewTransitionName = 'project-title';
+				titleEl.style.viewTransitionName = 'topic-title';
+				detailTitle.style.viewTransitionName = 'topic-title';
 
-				clickedCard.style.viewTransitionName = 'active-card';
-				detail.querySelector('.vt-detail-card').style.viewTransitionName = 'active-card';
+				card.style.viewTransitionName = 'topic-card';
+				detailCard.style.viewTransitionName = 'topic-card';
 
-				const updateDOM = () => {
-					// Update detail content
-					detailTitle.textContent = data.title;
-					detailBody.textContent = data.body;
+				const update = () => {
+					detailTitle.textContent = topic.title;
+					detailBody.innerHTML = topic.body;
 
-					// Swap views
 					list.hidden = true;
 					detail.hidden = false;
 
-					// IMPORTANT: do NOT clear viewTransitionName or unfreeze here
-				};
-
-				if (!supportsViewTransitions || prefersReducedMotion) {
-					updateDOM();
-					// Non-transition path: safe to clear immediately
+					// Clear names after DOM update
 					titleEl.style.viewTransitionName = '';
 					detailTitle.style.viewTransitionName = '';
-					clickedCard.style.viewTransitionName = '';
-					detail.querySelector('.vt-detail-card').style.viewTransitionName = '';
-					button.classList.remove('vt-freeze');
-					clickedCard.classList.remove('vt-freeze');
+					card.style.viewTransitionName = '';
+					detailCard.style.viewTransitionName = '';
+				};
+
+				if (!supports) {
+					update();
 					return;
 				}
 
-				const transition = document.startViewTransition(updateDOM);
-
-				// Clear names and unfreeze AFTER the transition finishes
-				transition.finished.then(() => {
-					titleEl.style.viewTransitionName = '';
-					detailTitle.style.viewTransitionName = '';
-					clickedCard.style.viewTransitionName = '';
-					detail.querySelector('.vt-detail-card').style.viewTransitionName = '';
-
-					button.classList.remove('vt-freeze');
-					clickedCard.classList.remove('vt-freeze');
-				});
+				document.startViewTransition(update);
 			}
 
+			/* Show List */
 			function showList() {
-				// Clear all names
-				document.querySelectorAll('.vt-title').forEach(el => {
-					el.style.viewTransitionName = '';
-				});
-				document.querySelectorAll('.vt-card').forEach(el => {
-					el.style.viewTransitionName = '';
-				});
-				detail.querySelector('.vt-detail-card').style.viewTransitionName = '';
-
-				const updateDOM = () => {
-					detail.hidden = true;
-					list.hidden = false;
-				};
-
-				if (!supportsViewTransitions || prefersReducedMotion) {
-					updateDOM();
-					return;
-				}
-
-				document.startViewTransition(updateDOM);
+				list.hidden = false;
+				detail.hidden = true;
 			}
 
-			document.querySelectorAll('.vt-open').forEach(button => {
-				button.addEventListener('click', (event) => {
-					const card = event.currentTarget.closest('.vt-card');
-					const id = card?.dataset.id;
-					if (!id) return;
-
-					// Freeze both before starting the transition
-					button.classList.add('vt-freeze');
-					card.classList.add('vt-freeze');
-
-					showDetail(id, card, button);
+			/* Event Listeners */
+			document.querySelectorAll('.vt-open').forEach(btn => {
+				btn.addEventListener('click', e => {
+					const card = e.currentTarget.closest('.card.vt-card');
+					showDetail(card.dataset.id, card);
 				});
 			});
 
-			const backButton = document.querySelector('.vt-back');
-			if (backButton) {
-				backButton.addEventListener('click', () => {
-					showList();
-				});
-			}
+			document.querySelector('.vt-back').addEventListener('click', showList);
 		})();
 	</script>
 </body>
