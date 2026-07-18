@@ -4,4 +4,19 @@
 	height: 1em;
 	vertical-align: -0.125em;
 	flex-shrink: 0;
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 2;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+.icon[data-size="sm"] {
+	width: var(--icon-size-sm);
+	height: var(--icon-size-sm);
+}
+
+.icon[data-size="md"] {
+	width: var(--icon-size-md);
+	height: var(--icon-size-md);
 }
