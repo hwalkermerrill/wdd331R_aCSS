@@ -9,7 +9,7 @@ body {
 
 main {
 	flex: 1;
-	max-width: 64rem;
+	max-width: 80rem; /* Bumped this up to 1280px */
 	width: 100%;
 	margin-inline: auto;
 	padding-inline: var(--spacing-md, 1rem);
