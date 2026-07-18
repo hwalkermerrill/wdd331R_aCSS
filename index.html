@@ -9,7 +9,6 @@
 	<meta name="slogan" content="Postprocessing the Cascade">
 	<meta name="theme-color" content="#005633">
 	<meta name="color-scheme" content="light dark">
-	<!-- <meta http-equiv="refresh" content="300"> -->
 
 	<title>Harrison Merrill - Practice Site</title>
 
@@ -29,11 +28,61 @@
 
 	<!-- SCRIPT HERE -->
 	<script src="js/theme-preference.js"></script>
+	<!-- <script src="js/return-top.js" defer></script> -->
 </head>
 
 <body>
+
+	<!-- SVG HERE-->
+	<!-- This sprite is hidden and contains all icon symbols. Replace placeholder paths later. -->
+	<svg xmlns="http://www.w3.org/2000/svg" style="display:none;" aria-hidden="true">
+		<!-- Decorative nav icons -->
+		<symbol id="icon-home" viewBox="0 0 24 24">
+			<!-- COMMENT: Placeholder path; replace with Lucide path -->
+			<path d="M3 12l9-9 9 9" />
+			<path d="M9 21V9h6v12" />
+		</symbol>
+
+		<symbol id="icon-file-text" viewBox="0 0 24 24">
+			<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+			<path d="M14 2v6h6" />
+		</symbol>
+
+		<symbol id="icon-mail" viewBox="0 0 24 24">
+			<path d="M4 4h16v16H4z" />
+			<path d="M22 6l-10 7L2 6" />
+		</symbol>
+
+		<symbol id="icon-github" viewBox="0 0 24 24">
+			<circle cx="12" cy="12" r="10" />
+		</symbol>
+
+		<symbol id="icon-linkedin" viewBox="0 0 24 24">
+			<rect x="2" y="2" width="20" height="20" rx="2" />
+		</symbol>
+
+		<!-- Informative icon -->
+		<symbol id="icon-map-pin" viewBox="0 0 24 24">
+			<path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z" />
+			<circle cx="12" cy="9" r="2.5" />
+		</symbol>
+	</svg>
+
 	<!-- HEADER HERE -->
 	<header>
+
+		<figure class="logo">
+			<a href="/index.html">
+				<img src="images/profile-pic.jpg" alt="Profile Picture of Harrison Merrill">
+			</a>
+		</figure>
+
+		<div class="slogan">
+			<h2>Harrison Merrill - Practice Site</h2>
+			<strong>WDD 331R Advanced CSS - Postprocessing the Cascade</strong>
+		</div>
+
+		<!-- Theme toggle to allow users to manually switch between light-dark -->
 		<details class="theme-menu">
 			<summary class="theme-control">
 				<span class="visually-hidden">Color scheme</span>
@@ -56,57 +105,208 @@
 				</label>
 			</div>
 		</details>
-		<div class="slogan">
-			<h2>Harrison Merrill - Practice Site</h2>
-			<strong>WDD 331R Advanced CSS - Postprocessing the Cascade</strong>
-		</div>
 	</header>
 
 	<!-- NAV HERE -->
 	<nav class="site-nav">
-		<h2>Assignments:</h2>
+		<h2>Primary Navigation:</h2>
 		<ul>
-			<li><a href="index.html" class="active">Home</a></li>
-			<li><a href="unit-1/custom-properties/index.html"> Custom Properties and Nesting</a></li>
-			<li><a href="unit-2/layered-components/index.html"> Layered Components</a></li>
-			<li><a href="unit-3/visual-effects/index.html">Visual Effects</a></li>
-			<li><a href="unit-4/grid-layouts/editorial.html"> Editorial Layout</a></li>
-			<li><a href="unit-4/grid-layouts/cards.html"> Card Grid</a></li>
-			<li><a href="unit-4/advanced/container-demo.html"> Container Demo</a></li>
-			<li><a href="unit-4/advanced/sticky-demo.html"> Sticky Demo</a></li>
-			<li><a href="unit-6/motion/index.html">Motion Demo</a></li>
+			<li><a href="index.html" class="active">
+					<svg class="icon" aria-hidden="true" focusable="false">
+						<use href="#icon-home"></use>
+					</svg> Home </a>
+			</li>
+
+			<li><a href="resume.html">
+					<svg class="icon" aria-hidden="true" focusable="false">
+						<use href="#icon-file-text"></use>
+					</svg> Resume </a>
+			</li>
+
+			<li><a href="contact.html">
+					<svg class="icon" aria-hidden="true" focusable="false">
+						<use href="#icon-mail"></use>
+					</svg> Contact </a>
+			</li>
 		</ul>
 	</nav>
 
+	<!-- Hero Div -->
+	<div class="hero-div">
+		<figure>
+			<picture>
+				<source srcset="images/hero-virtue-in-radiance.webp" type="image/webp">
+				<img src="images/hero-virtue-in-radiance.jpg" alt="Japanese Mural for Gundam 22 Memorial">
+			</picture>
+			<figcaption>
+				Mural painted by my friend Sean Jones for the Gundam 22 Memorial, Yokota Air Base 2023
+			</figcaption>
+		</figure>
+	</div>
+
 	<!-- CONTENT HERE -->
 	<main class="clearfix" id="maincontent">
-		<h1>Konbanwa!</h1>
-		<p>My name is Harrison Merrill, and I'm a senior at BYU-I studying applied technology with an emphasis in web
-			development. I live in the future (by about 14 hours) - specifically, I live in Okinawa Japan with my wife, two
-			boys (ages 6 and 2), and dogs. My wife works for the US Air Force as a maintainer (mechanic) for C-130J's, and we
-			have previously lived in Tachikawa and Tokyo, Japan, doing the same work, meaning we have lived in Japan for
-			almost 8 consecutive years (and I admit that I am still functionally illiterate).</p>
-		<p>When I need to relax and do something that isn't family, community, or beach oriented, I spend my time painting
-			miniature figurines, cooking, and playing various types of video, board, and tabletop games. </p>
 
+		<!-- Introductory Bio -->
 		<section>
-			<br>
-			<em>Want to Know More About Me?</em>
-			<p><a href="resume.html">View My Resume</a> | or | <a href="contact.html">Contact Me</a></p>
+			<h1>Konbanwa!</h1>
+			<p>My name is Harrison Merrill, and I'm a senior at BYU-I studying software development technology with an
+				emphasis in web development. I live in the future (by about 14 hours) - specifically, I live in Okinawa Japan
+				with my wife, two boys (ages 6 and 2), and dogs. My wife works for the US Air Force as a maintainer (mechanic)
+				for C-130J's, and we have previously lived in Tachikawa, Tokyo, Japan, doing the same work, meaning we have
+				lived in Japan for 8 consecutive years (and I admit that I am still functionally illiterate).</p>
+			<p>I also volunteer as a key support liaison for the 1stSOAMXS, and as the branch activity committee chair, both
+				of which mostly involve me cooking for and feeding large groups of people. When groups get over a certain size,
+				that almost always means smoking several pork butts, brisket, hot dogs, and mac & cheese, or otherwise making
+				hawaiian style food, but for smaller groups I lean heavily on asian-pacific, italian, mexican, and french
+				cooking styles. When I need to relax and do something that isn't school, family, community, or beach oriented, I
+				spend my time learning new recipes and cooking techniques, painting miniature figurines, watching films, and
+				playing various types of video, board, and tabletop games.</p>
+		</section>
+
+		<section class="u-text-center">
+			<p><em>Want to Know More About Me? <br></em>
+				<a href="resume.html" class="btn">
+					<svg class="icon" aria-hidden="true" focusable="false">
+						<use href="#icon-file-text"></use>
+					</svg> View My Resume </a> | or |
+				<a href="contact.html" class="btn">
+					<svg class="icon" aria-hidden="true" focusable="false">
+						<use href="#icon-mail"></use>
+					</svg> Contact Me Directly</a>
+			</p>
 		</section>
 
 		<section>
-			<h2>Teaching Demo Assignments</h2>
-			<ul>
-				<li><a href="demo/attributeSelectors.html">Attribute Selectors</a></li>
-				<li><a href="unit-2/part-and-slotted/index.html">::part() and ::slotted()</a></li>
-				<li><a href="demo/contrastColor.html">Contrast Color</a></li>
-				<li><a href="demo/displayContents.html">Display Contents</a></li>
-				<li><a href="demo/containerQuery.html">Container Queries</a></li>
-				<li><a href="demo/textProperties.html">Text Properties</a></li>
-				<li><a href="demo/interpolate-size.html">Interpolate Size</a></li>
-				<li><a href="demo/viewTransitionsApi.html">View Transitions API</a></li>
-			</ul>
+			<h2>Class Assignments and Teaching Demos</h2>
+			<p>Each unit of this class consisted of multiple assignments, refactors, and teaching demos, where we demonstrated
+				our understanding of various advanced CSS concepts and taught various concepts to members of our team. While
+				some assignments had more support than others, with varying amounts of scaffolding or restrictions on our CSS
+				and HTML code, they all allow for a certain degree of creativity. Meanwhile, the teaching demos were entirely
+				reliant on our own creativity and approach to design and showcase, with an accompanying teaching video recorded
+				for each.</p>
+			<br>
+
+			<div class="cards-wide">
+				<article class="card">
+					<h3>Unit 1: Foundations and the Modern CSS Landscape</h3>
+					<p>This unit focused on CSS fundamentals, setting up the GitHub portfolio, and learning about the cascade,
+						responsive design, preprocessors, modern CSS features, custom properties, CSS math functions, and native
+						nesting.</p>
+					<p>Follow the link below to view my:</p>
+					<ul>
+						<li><a href="unit-1/custom-properties/index.html">Custom Properties & Nesting Assignment</a></li>
+					</ul>
+				</article>
+
+				<article class="card">
+					<h3>Unit 2: Cascade Control, Architecture, and Tooling</h3>
+					<p>This unit introduced file architecture patterns for CSS, including css layering, import, and token usage,
+						as well as exploring modern selectors and build tools to bundle and optimize our stylesheets.</p>
+					<p>Follow the links below to view my:</p>
+					<ul>
+						<li><a href="demo/attributeSelectors.html">Attribute Selectors Demo</a></li>
+						<li><a href="unit-2/part-and-slotted/index.html">::part() and ::slotted() Demo</a></li>
+						<li><a href="unit-2/layered-components/index.html">Layered Components Assignment</a></li>
+					</ul>
+				</article>
+
+				<article class="card">
+					<h3>Unit 3: Color, Theming, and Visual Effects</h3>
+					<p>This unit focused on visual polish, including modern color functions, layers, shadows, gradients, filters,
+						and backdrop effects, as well as building automatic support for light and dark modes.</p>
+					<p>Follow the links below to view my:</p>
+					<ul>
+						<li><a href="demo/contrastColor.html">Contrast Color Function Demo</a></li>
+						<li><a href="unit-3/visual-effects/index.html">Visual Effects Assignment</a></li>
+					</ul>
+				</article>
+
+				<article class="card">
+					<h3>Unit 4: Layout Mastery</h3>
+					<p>This unit taught us to master CSS Grid with named areas, overlapping tracks, and auto-fit patterns, and
+						then moved on to subgrid alignment, container queries, advanced flex techniques, and sticky positioning.</p>
+					<p>Follow the links below to view my:</p>
+					<ul>
+						<li><a href="demo/displayContents.html">Display Contents Demo</a></li>
+						<li><a href="demo/containerQuery.html">Container Queries Demo</a></li>
+						<li><a href="unit-4/grid-layouts/editorial.html">Editorial Layout Assignment</a></li>
+						<li><a href="unit-4/grid-layouts/cards.html">Card Grid Assignment</a></li>
+						<li><a href="unit-4/advanced/container-demo.html">Container Demo Assignment</a></li>
+						<li><a href="unit-4/advanced/sticky-demo.html">Sticky Demo Assignment</a></li>
+					</ul>
+				</article>
+
+				<article class="card">
+					<h3>Unit 5: Typography, Print, and Forms</h3>
+					<p>This unit focused on polishing details, including establishing a modular type scale with fluid sizing,
+						loading web fonts efficiently, writing print stylesheets to produce clean documents, and styling forms with
+						token discipline.</p>
+					<p>Follow the links below to view my:</p>
+					<ul>
+						<li><a href="demo/textProperties.html">Text Properties Demo</a></li>
+						<li><a href="demo/interpolate-size.html">Interpolate Size Demo</a></li>
+					</ul>
+
+				</article>
+
+				<article class="card">
+					<h3>Unit 6: Motion, SVG, and Portfolio Polish</h3>
+					<p>This unit rounded out our CSS toolkit with animation and SVG skills, including the building of SVG sprites
+						and learning responsible animation with reduced-motion support. It was also our portfolio ramp as we built
+						out our final portfolio for presentation and grading. While some of this portfolio was established in
+						earlier units, it was all finished here, including this homepage, and the resume and contact pages.</p>
+					<p>Follow the links below to view my:</p>
+					<ul>
+						<li><a href="demo/viewTransitionsApi.html">View Transitions API Demo</a></li>
+						<li><a href="unit-6/motion/index.html">Motion Demo Assignment</a></li>
+						<li><a href="resume.html">Resume</a></li>
+						<li><a href="contact.html">Contact Page</a></li>
+					</ul>
+				</article>
+			</div>
 		</section>
 	</main>
+
+	<!-- FOOTER HERE -->
+	<footer>
+		<!-- Icon-only links -->
+		<!-- COMMENT: aria-label added for accessibility -->
+		<a href="mailto:hwalkermerrill@gmail.com" aria-label="Email">
+			<svg class="icon" aria-hidden="true" focusable="false">
+				<use href="#icon-mail"></use>
+			</svg>
+		</a>
+
+		<a href="https://github.com/" aria-label="GitHub Profile">
+			<svg class="icon" aria-hidden="true" focusable="false">
+				<use href="#icon-github"></use>
+			</svg>
+		</a>
+
+		<a href="https://linkedin.com/" aria-label="LinkedIn Profile">
+			<svg class="icon" aria-hidden="true" focusable="false">
+				<use href="#icon-linkedin"></use>
+			</svg>
+		</a>
+
+		<!-- Informative icon -->
+		<svg class="icon" role="img" aria-labelledby="location-title">
+			<title id="location-title">Location: Okinawa, Japan</title>
+			<use href="#icon-map-pin"></use>
+		</svg>
+
+		<!-- Copyright -->
+		<p>&copy; <span id="longDate"></span> &bull; Harrison Merrill &bull; All rights reserved &bull;</p>
+	</footer>
+
+	<!-- RETURN TO TOP BUTTON -->
+	<!-- COMMENT: Will be styled and scripted later -->
+	<button id="returnTopBtn" title="Go to top" aria-label="Return to top">
+		<svg class="icon" aria-hidden="true" focusable="false">
+			<use href="#icon-arrow-up"></use>
+		</svg>
+	</button>
 </body>
+
+</html>
