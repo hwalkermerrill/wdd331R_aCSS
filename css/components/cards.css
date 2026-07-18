@@ -27,7 +27,6 @@
 .cards-wide {
 	display: grid;
 	gap: clamp(var(--spacing-sm), 2vw, var(--spacing-lg));
-	cursor: pointer;
 }
 
 .card {
@@ -60,12 +59,11 @@
 	}
 
 	ul {
-		list-style-position: outside;
 		margin-left: var(--spacing-lg);
-	}
 
-	li::marker {
-		margin-left: var(--spacing-md);
+		&.svg-bullet {
+			list-style-type: none;
+		}
 	}
 }
 
