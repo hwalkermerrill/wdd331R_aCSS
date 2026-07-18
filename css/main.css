@@ -36,6 +36,7 @@ I have similarly not yet used the github copilot extension's code completion for
 
 /* Components */
 @import url("components/theme-toggle.css") layer(components);
+@import url(components/hero.css) layer(components);
 @import url("components/buttons.css") layer(components);
 @import url("components/cards.css") layer(components);
 @import url("components/forms.css") layer(components);
