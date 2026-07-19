@@ -120,7 +120,15 @@ I have similarly not yet used the github copilot extension's code completion for
 
 @media print {
 	/* Hide on Print */
-	:where(nav, footer, .site-header, .theme-menu, .no-print, button, aside) {
+
+	header,
+	nav,
+	footer,
+	.site-header,
+	.theme-menu,
+	.no-print,
+	button,
+	aside {
 		display: none;
 	}
 	/* Handle Page Breaks */
