@@ -1,3 +1,7 @@
+.resume {
+	max-width: 64rem;
+}
+
 .resume :where(h1, h2, h3) {
 	font-family: "Trade Winds", serif;
 	color: var(--color-primary);
