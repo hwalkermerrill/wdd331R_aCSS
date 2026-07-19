@@ -3,7 +3,27 @@
 
 <head>
 	<meta charset="UTF-8">
+	<meta name="description" content="display: contents API Demo">
+	<meta name="author" content="Harrison Merrill">
+	<meta name="slogan" content="Postprocessing the Cascade">
+	<meta name="theme-color" content="#005633">
+
 	<title>display: contents demo</title>
+
+	<!-- This tells MS Edge users to use Edge instead of IE -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<!-- TELLS PHONES NOT TO LIE ABOUT THEIR WIDTH-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- This loads the "Amiri", "Cabin Sketch", "Trade Winds", and "Indiana Jones" fonts while browsing this HTML-->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cabin+Sketch&family=Trade+Winds" rel="stylesheet">
+	<link href="https://fonts.cdnfonts.com/css/indiana-jonas" rel="stylesheet">
+
+	<!-- STYLE SHEETS -->
+	<link href="../dist/styles.css" rel="stylesheet">
 	<style>
 		/* Normal wrapper: takes up space, has background & border */
 		.wrapper-box {
@@ -80,73 +100,243 @@
 			border: 1px solid #4a90e2;
 		}
 	</style>
+
+	<!-- SCRIPT HERE -->
+	<script src="../js/theme-preference.js"></script>
+	<script src="../js/utilities.js"></script>
 </head>
 
 <body>
-	<h2>Normal wrapper (display: block)</h2>
-	<div class="wrapper-box">
-		<div class="item">Item A</div>
-		<div class="item">Item B</div>
-	</div>
 
-	<h2>Wrapper with display: contents</h2>
-	<!-- This wrapper won't create its own box;
-		children behave as if they were direct siblings -->
-	<div class="wrapper-contents">
-		<div class="item">Item C</div>
-		<div class="item">Item D</div>
-	</div>
+	<!-- SVG HERE-->
+	<svg xmlns="http://www.w3.org/2000/svg" style="display:none;" aria-hidden="true">
 
-	<h2>Safe use of display: contents</h2>
-	<p>The wrapper disappears, but its children still lay out normally.</p>
+		<!-- Home -->
+		<symbol id="icon-home" viewBox="0 0 24 24">
+			<path d="M3 11l9-8 9 8" />
+			<path d="M5 12v9h5v-6h4v6h5v-9" />
+		</symbol>
 
-	<div class="safe-wrapper">
-		<div class="item">Item A</div>
-		<div class="item">Item B</div>
-	</div>
+		<!-- Document (assignments) -->
+		<symbol id="icon-file-text" viewBox="0 0 24 24">
+			<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+			<path d="M14 2v6h6" />
+			<path d="M8 13h8" />
+			<path d="M8 17h5" />
+		</symbol>
 
-	<hr>
+		<!-- Mickey Mouse ears (teaching demos) -->
+		<symbol id="icon-mickey" viewBox="0 0 24 24">
+			<circle cx="8" cy="8" r="4" />
+			<circle cx="16" cy="8" r="4" />
+			<circle cx="12" cy="14" r="6" />
+		</symbol>
 
-	<h2>Unsafe: interactive element</h2>
-	<p>Buttons lose their focus box and accessibility tree position.</p>
+		<!-- Mail -->
+		<symbol id="icon-mail" viewBox="0 0 24 24">
+			<rect x="3" y="5" width="18" height="14" rx="2" />
+			<path d="M3 7l9 6 9-6" />
+		</symbol>
 
-	<button class="bad-button">
-		<span>Click Me</span>
-	</button>
+		<!-- GitHub -->
+		<symbol id="icon-github" viewBox="0 0 24 24">
+			<path d="M12 2a10 10 0 0 0-3.16 19.49
+				c.5.09.68-.22.68-.48v-1.7
+				c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.12-1.47-1.12-1.47-.92-.63.07-.62.07-.62 1.02.07 1.55 1.06 1.55 1.06.9 1.54 2.37 1.1 2.95.84a2.2 2.2 0 0 1 .66-1.38
+				c-2.22-.25-4.56-1.11-4.56-4.94a3.86 3.86 0 0 1 1.03-2.68 3.6 3.6 0 0 1 .1-2.65s.84-.27 2.75 1.02
+				a9.4 9.4 0 0 1 5 0c1.9-1.29 2.74-1.02 2.74-1.02a3.6 3.6 0 0 1 .1 2.65 3.86 3.86 0 0 1 1.03 2.68c0 3.84-2.34 4.69-4.57 4.94a2.4 2.4 0 0 1 .69 1.86v2.76c0 .27.18.58.69.48
+				A10 10 0 0 0 12 2z" />
+		</symbol>
 
-	<hr>
+		<!-- LinkedIn -->
+		<symbol id="icon-linkedin" viewBox="0 0 24 24">
+			<rect x="3" y="3" width="18" height="18" rx="2" />
+			<path d="M8 17v-6" />
+			<path d="M8 9V7" />
+			<path d="M12 17v-4.5a2.5 2.5 0 0 1 5 0V17" />
+		</symbol>
 
-	<h2>Unsafe: landmark element</h2>
-	<p>Landmarks like &lt;nav&gt; vanish from the accessibility tree.</p>
+		<!-- Map pin -->
+		<symbol id="icon-map-pin" viewBox="0 0 24 24">
+			<path d="M12 21s-6-5.33-6-10a6 6 0 1 1 12 0c0 4.67-6 10-6 10z" />
+			<circle cx="12" cy="11" r="2.5" />
+		</symbol>
 
-	<nav class="bad-nav">
-		<a href="#">Home</a> |
-		<a href="#">About</a>
+		<!-- Arrow Up (return-to-top) -->
+		<symbol id="icon-arrow-up" viewBox="0 0 24 24">
+			<path d="M12 19V5" />
+			<path d="M5 12l7-7 7 7" />
+		</symbol>
+	</svg>
+
+	<!-- HEADER HERE -->
+	<header>
+
+		<figure class="logo">
+			<a href="../index.html">
+				<img src="../images/profile-pic.jpg" alt="Profile Picture of Harrison Merrill">
+			</a>
+		</figure>
+
+		<div class="slogan">
+			<h2>Harrison Merrill - Practice Site</h2>
+			<strong>WDD 331R Advanced CSS - Postprocessing the Cascade</strong>
+		</div>
+
+		<!-- Theme toggle to allow users to manually switch between light-dark -->
+		<details class="theme-menu">
+			<summary class="theme-control">
+				<span class="visually-hidden">Color scheme</span>
+			</summary>
+			<div class="theme-extra" role="group" aria-label="Choose color scheme">
+				<label class="theme-control theme-pick" data-theme-pick="light">
+					<input name="theme-preference" type="radio" value="light">
+					<span aria-hidden="true">&#9788;&#65039;</span>
+					<span class="visually-hidden">Light</span>
+				</label>
+				<label class="theme-control theme-pick" data-theme-pick="system">
+					<input name="theme-preference" type="radio" value="system" checked>
+					<span aria-hidden="true">&#9881;&#65039;</span>
+					<span class="visually-hidden">System default</span>
+				</label>
+				<label class="theme-control theme-pick" data-theme-pick="dark">
+					<input name="theme-preference" type="radio" value="dark">
+					<span aria-hidden="true">&#127766;</span>
+					<span class="visually-hidden">Dark</span>
+				</label>
+			</div>
+		</details>
+	</header>
+
+	<!-- NAV HERE -->
+	<nav class="site-nav">
+		<h2>Demos:</h2>
+		<ul>
+			<li><a href="../index.html">
+					<svg class="icon" aria-hidden="true" focusable="false">
+						<use href="#icon-home"></use>
+					</svg> Home </a>
+			</li>
+			<li><a href="./attributeSelectors.html">Attribute Selectors</a></li>
+			<li><a href="../unit-2/part-and-slotted/index.html">::part() and ::slotted()</a></li>
+			<li><a href="./contrastColor.html">Contrast Color</a></li>
+			<li><a href="./displayContents.html" class="active">Display Contents</a></li>
+			<li><a href="./containerQuery.html">Container Queries</a></li>
+			<li><a href="./textProperties.html">Text Properties</a></li>
+			<li><a href="./interpolate-size.html">Interpolate Size</a></li>
+			<li><a href="./viewTransitionsApi.html">View Transitions</a></li>
+		</ul>
 	</nav>
 
-	<hr>
-
-	<h2>Unsafe: ARIA role or label</h2>
-	<p>ARIA roles break because the element no longer generates a box.</p>
-
-	<div class="bad-role" role="region" aria-label="Important Section">
-		<p>This region becomes inaccessible.</p>
-	</div>
-
-	<h2>Subgrid Example</h2>
-	<p>The child grid inherits the parent's column structure.</p>
-
-	<div class="parent">
-		<div class="box">Parent Col 1</div>
-		<div class="box">Parent Col 2</div>
-		<div class="box">Parent Col 3</div>
-
-		<div class="child">
-			<div class="box">Child aligns to Col 1</div>
-			<div class="box">Child aligns to Col 2</div>
-			<div class="box">Child aligns to Col 3</div>
+	<!-- CONTENT HERE -->
+	<main class="clearfix" id="maincontent">
+		<h2>Normal wrapper (display: block)</h2>
+		<div class="wrapper-box">
+			<div class="item">Item A</div>
+			<div class="item">Item B</div>
 		</div>
-	</div>
+
+		<h2>Wrapper with display: contents</h2>
+		<!-- This wrapper won't create its own box;
+		children behave as if they were direct siblings -->
+		<div class="wrapper-contents">
+			<div class="item">Item C</div>
+			<div class="item">Item D</div>
+		</div>
+
+		<h2>Safe use of display: contents</h2>
+		<p>The wrapper disappears, but its children still lay out normally.</p>
+
+		<div class="safe-wrapper">
+			<div class="item">Item A</div>
+			<div class="item">Item B</div>
+		</div>
+
+		<hr>
+
+		<h2>Unsafe: interactive element</h2>
+		<p>Buttons lose their focus box and accessibility tree position.</p>
+
+		<button class="bad-button">
+			<span>Click Me</span>
+		</button>
+
+		<hr>
+
+		<h2>Unsafe: landmark element</h2>
+		<p>Landmarks like &lt;nav&gt; vanish from the accessibility tree.</p>
+
+		<nav class="bad-nav">
+			<a href="#">Home</a> |
+			<a href="#">About</a>
+		</nav>
+
+		<hr>
+
+		<h2>Unsafe: ARIA role or label</h2>
+		<p>ARIA roles break because the element no longer generates a box.</p>
+
+		<div class="bad-role" role="region" aria-label="Important Section">
+			<p>This region becomes inaccessible.</p>
+		</div>
+
+		<h2>Subgrid Example</h2>
+		<p>The child grid inherits the parent's column structure.</p>
+
+		<div class="parent">
+			<div class="box">Parent Col 1</div>
+			<div class="box">Parent Col 2</div>
+			<div class="box">Parent Col 3</div>
+
+			<div class="child">
+				<div class="box">Child aligns to Col 1</div>
+				<div class="box">Child aligns to Col 2</div>
+				<div class="box">Child aligns to Col 3</div>
+			</div>
+		</div>
+	</main>
+
+	<!-- FOOTER HERE -->
+	<footer>
+		<!-- Icon-only links -->
+		<a href="mailto:hwalkermerrill@gmail.com" aria-label="Email">
+			<svg class="icon" aria-hidden="true">
+				<use href="#icon-mail"></use>
+			</svg>
+		</a>
+
+		<a href="https://github.com/hwalkermerrill/" aria-label="GitHub Profile">
+			<svg class="icon" aria-hidden="true">
+				<use href="#icon-github"></use>
+			</svg>
+		</a>
+
+		<a href="https://linkedin.com/in/harrison-merrill-774113362/" aria-label="LinkedIn Profile">
+			<svg class="icon" aria-hidden="true">
+				<use href="#icon-linkedin"></use>
+			</svg>
+		</a>
+
+		<a href="https://www.google.com/maps/place/Okinawa,+Japan/" aria-label="Location: Okinawa, Japan">
+			<svg class="icon" aria-hidden="true" focusable="false">
+				<use href="#icon-map-pin"></use>
+			</svg>
+		</a>
+
+		<!-- Copyright -->
+		<p>&copy; <span id="longDate"></span> &bull; Harrison Merrill &bull; All rights reserved &bull;</p>
+	</footer>
+
+	<!-- RETURN TO TOP BUTTON -->
+	<button onclick="topFunction()" id="returnTopBtn" title="Return to top" aria-label="Return to top">
+		<svg class="icon" aria-hidden="true" focusable="false">
+			<use href="#icon-arrow-up"></use>
+		</svg>Return to Top
+	</button>
+
+	<script>
+		writeLongDate();
+	</script>
 </body>
 
 </html>
