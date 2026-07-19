@@ -113,3 +113,20 @@
 	/* backdrop-filter: blur(12px) saturate(1.4); */
 	pointer-events: none;
 }
+
+/* @Media Blocks */
+@media (prefers-reduced-motion: reduce) {
+	:where(.card, .card-footer a, .card-tag) {
+		transition: none;
+	}
+
+	:where(.cards *, .card *, .card-footer *) {
+		transition: none;
+		transform: none;
+	}
+
+	.card:hover:not(.no-hover) {
+		transform: none;
+		box-shadow: var(--shadow-md);
+	}
+}
